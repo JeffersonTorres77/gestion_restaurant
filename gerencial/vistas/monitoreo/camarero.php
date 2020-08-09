@@ -2,7 +2,6 @@
     const AREA = '<?php echo AREA_GERENCIAL; ?>';
     const MODULO = "monitoreo";
     const ARCHIVO = "camarero";
-    const KEY = '<?php echo Sesion::getKey(); ?>';
 </script>
 
 <style>

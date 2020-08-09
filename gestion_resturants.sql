@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-08-2020 a las 03:38:10
+-- Tiempo de generación: 09-08-2020 a las 14:35:36
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -615,17 +615,18 @@ CREATE TABLE `usuarios` (
   `aux_1` text COLLATE utf8_spanish_ci,
   `aux_2` text COLLATE utf8_spanish_ci,
   `aux_3` text COLLATE utf8_spanish_ci,
-  `fecha_registro` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+  `fecha_registro` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_modificacion` varchar(20) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idUsuario`, `idRestaurant`, `usuario`, `clave`, `nombre`, `documento`, `idRol`, `direccion`, `telefono`, `correo`, `foto`, `activo`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
-(1, 1, 'admin', 'admin', 'Jefferson Torres', 'V25409904', 1, '', '', '', 'usuario-admin.jpg', 1, NULL, NULL, NULL, '2020-06-11 15-1-45'),
-(2, 2, 'katthyg', 'katthyg', 'Katiuska Gonzalez', 'V22764050', 3, 'En una casa de nuevo', '04262889861', 'katthyg@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-06-11 1-15-30'),
-(3, 1, '123', '123', '123123', '123123', 1, '', '', '', NULL, 1, NULL, NULL, NULL, '2020-08-02 7:30:58');
+INSERT INTO `usuarios` (`idUsuario`, `idRestaurant`, `usuario`, `clave`, `nombre`, `documento`, `idRol`, `direccion`, `telefono`, `correo`, `foto`, `activo`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`, `fecha_modificacion`) VALUES
+(1, 1, 'admin', 'admin', 'Jefferson Torres', 'V25409904', 1, '', '', 'jefersonugas@gmail.com', 'usuario-admin.jpg', 1, NULL, NULL, NULL, '2020-06-11 15-1-45', '2020-08-09 8:17:59'),
+(2, 2, 'katthyg', 'katthyg', 'Katiuska Gonzalez', 'V22764050', 3, 'En una casa de nuevo', '04262889861', 'jeffersonjtorresu@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-06-11 1-15-30', '2020-06-11 1-15-30'),
+(3, 1, 'test', '123', 'Test User', '000000', 2, 'Por alli', '04241738615', 'test@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-08-02 7:30:58', '2020-08-09 8:29:57');
 
 --
 -- Índices para tablas volcadas

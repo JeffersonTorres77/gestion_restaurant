@@ -142,6 +142,8 @@ var AJAX = (function () {
                         objeto.antes();
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
+                        if (errorThrown == "")
+                            errorThrown = "404";
                         console.error(errorThrown);
                         objeto.error(errorThrown);
                     },

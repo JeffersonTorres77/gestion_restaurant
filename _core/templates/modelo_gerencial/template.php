@@ -50,6 +50,8 @@ class Template
                         
                         echo 'const AREA_ADMIN = "'.AREA_ADMIN.'";';
                         echo 'const AREA_GERENCIAL = "'.AREA_GERENCIAL.'";';
+
+                        echo 'const KEY = "'.Sesion::getKey().'";';
                         
                         if(AUDITORIA) echo 'const AUDITORIA = true;';
                         else echo 'const AUDITORIA = false;';

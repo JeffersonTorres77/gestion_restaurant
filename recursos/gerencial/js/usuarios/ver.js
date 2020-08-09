@@ -3,20 +3,19 @@
  *	
  *
 ================================================================================*/
-var idFormPersonal = "form-personal";
-var idFormCuenta = "form-cuenta";
+var form = document.getElementById("form-datos");
 
 /*================================================================================
  *
  *	
  *
 ================================================================================*/
-document.getElementById("input-cuenta-activo-aux").onchange = function()
+document.getElementById("input-activo-aux").onchange = function()
 {
-    if( document.getElementById("input-cuenta-activo-aux").checked ) {
-        document.getElementById("input-cuenta-activo").value = "1";
+    if( document.getElementById("input-activo-aux").checked ) {
+        document.getElementById("input-activo").value = "1";
     } else {
-        document.getElementById("input-cuenta-activo").value = "0";
+        document.getElementById("input-activo").value = "0";
     }
 }
 
@@ -25,18 +24,14 @@ document.getElementById("input-cuenta-activo-aux").onchange = function()
  *	
  *
 ================================================================================*/
-function LimpiarPersonal()
+function GuardarDatos()
 {
-    document.getElementById(idFormPersonal).reset();
-}
+    if(Formulario.Validar(form.id) == false) return;
 
-function GuardarPersonal()
-{
     /**
      * Parametros
      */
     var url = `${HOST_GERENCIAL_AJAX}Usuarios/CRUD/`;
-    var form = document.getElementById(idFormPersonal);
     var data = new FormData(form);
     data.append("accion", "MODIFICAR");
 
@@ -57,54 +52,7 @@ function GuardarPersonal()
         },
         ok: function(cuerpo)
         {
-            Formulario.Sync(idFormPersonal);
-            Loader.Ocultar();
-            Alerta.Success("Usuario modificado exitosamente.");
-        }
-    });
-}
-
-/*================================================================================
- *
- *	
- *
-================================================================================*/
-function LimpiarCuenta()
-{
-    document.getElementById(idFormCuenta).reset();
-}
-
-function GuardarCuenta()
-{
-    /**
-     * Parametros
-     */
-    var url = `${HOST_GERENCIAL_AJAX}Usuarios/CRUD/`;
-    var form = document.getElementById(idFormCuenta);
-    var data = new FormData(form);
-    data.append("accion", "MODIFICAR");
-
-    /**
-     * Enviamos la petición
-     */
-    AJAX.Enviar({
-        url: url,
-        data: data,
-        antes: function()
-        {
-            Loader.Mostrar();
-        },
-        error: function(mensaje)
-        {
-            Loader.Ocultar();
-            Alerta.Danger(mensaje);
-        },
-        ok: function(cuerpo)
-        {
-            document.getElementById("input-cuenta-clave").value = "";
-            Formulario.Sync(idFormCuenta);
-            Loader.Ocultar();
-            Alerta.Success("Usuario modificado exitosamente.");
+            location.reload();
         }
     });
 }

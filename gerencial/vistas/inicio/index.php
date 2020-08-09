@@ -3,32 +3,6 @@
     $idRol = $objUsuario->getRol()->getId();
 ?>
 
-<?php
-    $objRestaurant = Sesion::getRestaurant();
-    $activo = $objRestaurant->getServicio();
-    $alertClass = ($activo) ? 'alert alert-success' : 'alert alert-danger';
-    $alertText = ($activo) ? 'Servicio activo' : 'Servicio no activo';
-    $btnClass = ($activo) ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success';
-?>
-<div class="m-2 p-2">
-    <div class="<?php echo $alertClass ?> mb-0">
-        <?php echo $alertText ?>
-
-        <?php
-            if($objUsuario->getRol()->getResponsable())
-            {
-                ?>
-                    <div class="position-absolute p-2" style="top: 0px; right: 0px;">
-                        <button class="<?php echo $btnClass ?>" onclick="CambiarServicio()">
-                            <i class="fas fa-power-off"></i>
-                        </button>
-                    </div>
-                <?php
-            }
-        ?>
-    </div>
-</div>
-
 <div class="m-2 p-2">
     <div class="">
         <div class="card card-header bg-primary text-white mb-3" style="background: #5C8AE5 !important;">

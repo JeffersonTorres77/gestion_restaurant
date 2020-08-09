@@ -17,6 +17,24 @@
     </div>
 
     <div class="text-right p-2 opciones-contenedor">
+        <?php
+            if(Sesion::getUsuario()->getRol()->getResponsable())
+            {
+                $servicioActivo = Sesion::getRestaurant()->getServicio();
+                $textButtonServicio = ($servicioActivo) ? 'Servicio activo' : 'Servicio no activo';
+                $backgroundButtonServicio = ($servicioActivo) ? 'bg-success' : 'bg-danger';
+
+                ?>
+                    <div class="opciones">
+                        <button class="btn btn-sm order-1 order-lg-0 <?php echo $backgroundButtonServicio; ?>" onclick="CambiarServicio()">
+                            <i class="fas fa-power-off mr-1"></i>
+                            <?php echo $textButtonServicio; ?>
+                        </button>
+                    </div>
+                <?php
+            }
+        ?>
+
         <div class="opciones" onclick="MenuLateral()">
             <button class="btn btn-sm order-1 order-lg-0">
                 <i class="fas fa-bars"></i>

@@ -119,6 +119,7 @@ class AJAX
                 objeto.antes();
             },
             error: (jqXHR, textStatus, errorThrown) => {
+                if(errorThrown == "") errorThrown = "404";
                 console.error(errorThrown);
                 objeto.error(errorThrown);
             },

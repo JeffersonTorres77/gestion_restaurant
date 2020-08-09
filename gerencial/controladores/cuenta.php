@@ -44,6 +44,17 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function datos()
     {
-        
+        $this->Vista("cuenta/datos");
+        $this->Javascript("cuenta/datos");   
+    }
+
+    /*============================================================================
+	 *
+	 *	
+	 *
+    ============================================================================*/
+    public function modificar()
+    {
+        $this->AJAX("cuenta/modificar");
     }
 }

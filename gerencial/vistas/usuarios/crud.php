@@ -109,7 +109,7 @@ switch($accion)
             $par['ordenar_tipo'] = $order_type;
 
             $usuarios = UsuariosModel::Listado( $condicional, $par );
-            $total_filas = UsuariosModel::Total();
+            $total_filas = UsuariosModel::Total( $condicional );
         }
 
         /**
@@ -156,7 +156,7 @@ switch($accion)
         $nombre = Input::POST("nombre");
         $direccion = Input::POST("direccion", FALSE);
         $telefono = Input::POST("telefono", FALSE);
-        $correo = Input::POST("correo", FALSE);
+        $correo = Input::POST("correo");
         $usuario = Input::POST("usuario");
         $idRol = Input::POST("rol");
         $clave = Input::POST("clave");
@@ -215,6 +215,8 @@ switch($accion)
         $direccion = Input::POST("direccion", FALSE);
         $telefono = Input::POST("telefono", FALSE);
         $correo = Input::POST("correo", FALSE);
+        $idRol = Input::POST("acceso", FALSE);
+        $activo = Input::POST("activo", FALSE);
 
         /**
          * Imagen
@@ -244,23 +246,26 @@ switch($accion)
         /**
          * Otros datos
          */
-        if($documento !== FALSE) {
+        if($documento !== FALSE)
+        {
             if($documento == "") throw new Exception("El campo <b>documento</b> es obligatorio.");
             $objUsuario->setDocumento( $documento );
         }
 
-        if($nombre !== FALSE) {
+        if($nombre !== FALSE)
+        {
             if($nombre == "") throw new Exception("El campo <b>nombre</b> es obligatorio.");
             $objUsuario->setNombre( $nombre );
         }
 
+        if($correo !== FALSE)
+        {
+            if($correo == "") throw new Exception("El campo <b>correo</b> es obligatorio.");
+            $objUsuario->setCorreo( $correo );
+        }
+
         if($direccion !== FALSE) $objUsuario->setDireccion( $direccion );
         if($telefono !== FALSE) $objUsuario->setTelefono( $telefono );
-        if($correo !== FALSE) $objUsuario->setCorreo( $correo );
-        
-        $clave = Input::POST("clave", FALSE);
-        $idRol = Input::POST("idRol", FALSE);
-        $activo = Input::POST("activo", FALSE);
 
         if($usuario !== FALSE && $usuario != $objUsuario->getUsuario()) {
             if($usuario == "") throw new Exception("EL usuario no puede quedar vacio.");
@@ -273,10 +278,6 @@ switch($accion)
             if($objUsuario->getId() == Sesion::getUsuario()->getId()) {
                 Sesion::Crear($idRestaurant, $objUsuario->getId());
             }
-        }
-
-        if($clave !== FALSE && $clave != "") {
-            $objUsuario->setClave( $clave );
         }
 
         if($idRol !== FALSE) {

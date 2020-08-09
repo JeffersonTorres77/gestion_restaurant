@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 function MenuLateral() {
     if (document.body.className == "sb-nav-fixed sb-sidenav-toggled") {
         document.body.className = "sb-nav-fixed";
@@ -7,6 +10,9 @@ function MenuLateral() {
     }
 }
 
+/**
+ * 
+ */
 function CerrarSesion() {
     var url = HOST_GERENCIAL_AJAX + "Salir/";
     var data = new FormData();
@@ -29,6 +35,49 @@ function CerrarSesion() {
         ok: function(cuerpo)
         {
             location.href = HOST_GERENCIAL + "Login/";
+        }
+    });
+}
+
+/**
+ * 
+ */
+function CambiarServicio()
+{
+    var msj = "¿Esta seguro que desea modificar el servicio?";
+    var r = confirm(msj);
+    if(r == false) return;
+
+    /**
+     * Variables
+     */
+    var url = `${WEBSOCKET_URL}Servicio/Cambio/`;
+    var data = new FormData();
+    data.append("key", KEY);
+
+    /**
+     * Enviamos la petición
+     */
+    AJAX.api({
+        url: url,
+        data: data,
+
+        antes: function ()
+        {
+            Loader.Mostrar();
+        },
+
+        error: function (mensaje)
+        {
+            if(mensaje == "404") mensaje = "Servicio WebSocket no disponible.";
+            console.error(mensaje);
+            Loader.Ocultar();
+            Alerta.Danger(mensaje);
+        },
+
+        ok: function (cuerpo)
+        {            
+            location.reload();
         }
     });
 }

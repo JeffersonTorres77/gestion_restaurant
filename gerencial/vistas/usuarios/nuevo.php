@@ -43,7 +43,7 @@
                     <div class="col-12 col-md-9">
                         <div class="form-group">
                             <label for="input-nuevo-correo">Correo electronico:</label>
-                            <input type="email" class="form-control" id="input-nuevo-correo" name="correo">
+                            <input type="email" required class="form-control" id="input-nuevo-correo" name="correo">
                         </div>
                     </div>
                 </div>

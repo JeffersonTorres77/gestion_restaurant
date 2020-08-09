@@ -29,6 +29,7 @@ class UsuarioModel
     private $aux_2;
     private $aux_3;
     private $fecha_registro;
+    private $fecha_modificacion;
     
 	/*============================================================================
 	 *
@@ -106,6 +107,10 @@ class UsuarioModel
     public function getFechaRegistro() {
         return $this->fecha_registro;
     }
+
+    public function getFechaModificacion() {
+        return $this->fecha_modificacion;
+    }
     
 	/*============================================================================
 	 *
@@ -141,6 +146,7 @@ class UsuarioModel
         $this->aux_2 = $datos[0]['aux_2'];
         $this->aux_3 = $datos[0]['aux_3'];
         $this->fecha_registro = $datos[0]['fecha_registro'];
+        $this->fecha_modificacion = $datos[0]['fecha_modificacion'];
     }
     
 	/*============================================================================
@@ -229,10 +235,13 @@ class UsuarioModel
     ============================================================================*/
     public function set($columna, $valor)
     {
-        $query = "UPDATE usuarios SET {$columna} = '{$valor}' WHERE idUsuario = '{$this->id}'";
+        $fecha_modificacion = Time::get();
+        $query = "UPDATE usuarios SET {$columna} = '{$valor}', fecha_modificacion = '{$fecha_modificacion}' WHERE idUsuario = '{$this->id}'";
         $resp = Conexion::getMysql()->Ejecutar($query);
         if($resp === FALSE) {
             throw new Exception("Ocurrio un error al intentar modificar '{$columna}' en el usuario.");
         }
+
+        $this->fecha_modificacion = $fecha_modificacion;
     }
 }
