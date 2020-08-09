@@ -122,6 +122,25 @@ class UsuariosModel
         $cantidad = (int) $datos[0]['cantidad'];
         return $cantidad;
     }
+
+    /*============================================================================
+	 *
+	 *	
+	 *
+	============================================================================*/
+    public static function BuscarPorCorreo($correo)
+    {
+        $correo = Filtro::General($correo);
+
+        $query = "SELECT * FROM usuarios WHERE correo = '{$correo}'";
+        $datos = Conexion::getMysql()->Consultar($query);
+        if(sizeof($datos) <= 0) {
+            throw new Exception("Correo <b>{$correo}</b> no encontrado.");
+        }
+
+        $objUsuario = new UsuarioModel($datos[0]['idUsuario']);
+        return $objUsuario;
+    }
     
 	/*============================================================================
 	 *

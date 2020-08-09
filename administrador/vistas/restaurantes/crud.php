@@ -50,6 +50,14 @@ switch($accion)
         if($clave_gerente != $clave2_gerente) {
             throw new Exception("Las contraseñas tienen que ser iguales.");
         }
+
+        if($correo_restaurant == "") {
+            throw new Exception("Debe ingresar el correo del restaurant.");
+        }
+
+        if($correo_gerente == "") {
+            throw new Exception("Debe ingresar el correo del gerente.");
+        }
         
         /**
          * Registramos al restaurant

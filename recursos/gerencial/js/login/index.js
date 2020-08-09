@@ -115,3 +115,31 @@ function ValidarLogin() {
     }
     return true;
 }
+
+function EnviarCorreo()
+{
+    var form = document.getElementById("form-recupera");
+    var modal = $("#modal-recuperar-clave");
+
+    var url = HOST_GERENCIAL_AJAX + "Correo/Enviar/";
+    var data = new FormData(form);
+
+    AJAX.Enviar({
+        url: url,
+        data: data,
+
+        antes: function() {
+            Loader.Mostrar();
+        },
+        error: function(mensaje) {
+            Loader.Ocultar();
+            Alerta.Danger(mensaje);
+        },
+        ok: function(data) {
+            Loader.Ocultar();
+            modal.modal('hide');
+            Alerta.Success("Se ha enviado a su correo su contraseña.");
+            form.reset();
+        }
+    });
+}

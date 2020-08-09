@@ -44,7 +44,7 @@
           </div>
           <div class="form-group col-md-9">
             <label for="EmaiRest">Correo Electrónico</label>
-            <input type="email" name="correo-restaurant" class="form-control" id="EmaiRest" placeholder="Ejemplo@dominio.com">
+            <input type="email" name="correo-restaurant" class="form-control" id="EmaiRest" required placeholder="Ejemplo@dominio.com">
             <div class="valid-feedback">Campo LLeno</div>
             <div class="invalid-feedback">Ingrese Correo Electrónico Válido.</div>
           </div>
