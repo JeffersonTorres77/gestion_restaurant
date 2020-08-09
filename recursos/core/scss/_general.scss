@@ -1,0 +1,532 @@
+/*================================================================================
+ *
+ *	Pantall oscura
+ *
+================================================================================*/
+.pantalla-oscura
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1100;
+    /* font-family: Roboto, Arial, sans-serif; */
+}
+
+/*================================================================================
+ *
+ * Widts por defecto en pixeles
+ *
+================================================================================*/
+.w-50px { width: 50px !important; }
+.w-100px { width: 100px !important; }
+.w-150px { width: 150px !important; }
+.w-200px { width: 200px !important; }
+.w-250px { width: 250px !important; }
+.w-300px { width: 300px !important; }
+.w-350px { width: 350px !important; }
+.w-400px { width: 400px !important; }
+.w-450px { width: 450px !important; }
+.w-500px { width: 500px !important; }
+
+.min-w-50px { min-width: 50px !important; }
+.min-w-100px { min-width: 100px !important; }
+.min-w-150px { min-width: 150px !important; }
+.min-w-200px { min-width: 200px !important; }
+.min-w-250px { min-width: 250px !important; }
+.min-w-300px { min-width: 300px !important; }
+.min-w-350px { min-width: 350px !important; }
+.min-w-400px { min-width: 400px !important; }
+.min-w-450px { min-width: 450px !important; }
+.min-w-500px { min-width: 500px !important; }
+
+.max-w-50px { max-width: 50px !important; }
+.max-w-100px { max-width: 100px !important; }
+.max-w-150px { max-width: 150px !important; }
+.max-w-200px { max-width: 200px !important; }
+.max-w-250px { max-width: 250px !important; }
+.max-w-300px { max-width: 300px !important; }
+.max-w-350px { max-width: 350px !important; }
+.max-w-400px { max-width: 400px !important; }
+.max-w-450px { max-width: 450px !important; }
+.max-w-500px { max-width: 500px !important; }
+
+.w-20 { width: 20% !important; }
+
+/*================================================================================
+ *
+ * Ajsute de una clase de bootstrap
+ *
+================================================================================*/
+.modal-footer
+{
+    justify-content: center;
+
+    button
+    {
+        width: 120px;
+    }
+}
+
+.page-link
+{
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-tabs
+{
+    border-bottom: none;
+
+    .list-item .nav-link
+    {
+        font-size: 20px;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+        transition-duration: .2s;
+
+        &.active
+        {
+            border-bottom-color: white;
+        }
+    }
+}
+
+.nav-tabs
+{
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/*================================================================================
+ *
+ * Div posicionado absolutamente a la derecha
+ *
+================================================================================*/
+.div-flotante
+{
+    position: absolute;
+    top: calc(100% + 2px);
+    right: 0px;
+    z-index: 1030;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.opcion-flotante-derecha
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    transition-duration: .2s;
+    cursor: pointer;
+
+    &:hover
+    {
+        background: rgba(0,0,0,0.1);
+    }
+}
+
+/*================================================================================
+ *
+ * 
+ *
+================================================================================*/
+.no-movil
+{
+    @media (max-width: $breakpoint-sm)
+    {
+        display: none;
+    }
+}
+
+.no-table
+{
+    @media (max-width: $breakpoint-md)
+    {
+        display: none;
+    }
+}
+
+/*================================================================================
+ *
+ * 
+ *
+================================================================================*/
+.logo-muestra
+{
+    position: relative;
+    overflow: hidden;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 140px;
+    height: 140px;
+    transition-duration: .2s;
+
+    &:hover
+    {
+        cursor: pointer;
+    }
+
+    &:focus
+    {
+        outline: none;
+    }
+
+    &:active
+    {
+        border-width: 2px;
+    }
+
+    &:hover::before, &:focus::before
+    {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.1);
+    }
+
+    &::after, &::after
+    {
+        font-family: 'Font Awesome 5 Free';
+        content: '\f304';
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+        background: #000000;
+        border-bottom-left-radius: 10px;
+        padding: 5px 7px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    img
+    {
+        user-select: none;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/*================================================================================
+ *
+ * 
+ *
+================================================================================*/
+.foto-usuario-muestra
+{
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    border: none;
+    border-radius: 10px;
+    width: 140px;
+    height: 140px;
+    transition-duration: .2s;
+
+    &:hover
+    {
+        cursor: pointer;
+    }
+
+    &:focus
+    {
+        outline: none;
+    }
+
+    &:active
+    {
+        border-width: 2px;
+    }
+
+    &:hover::before, &:focus::before
+    {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.1);
+    }
+
+    &::after, &::after
+    {
+        font-family: 'Font Awesome 5 Free';
+        content: '\f304';
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+        background: #000000;
+        border-bottom-left-radius: 10px;
+        padding: 5px 7px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    img
+    {
+        user-select: none;
+        width: 100%;
+    }
+}
+
+.usuario-miniatura
+{
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    border: none;
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    transition-duration: .2s;
+
+    img
+    {
+        user-select: none;
+        width: 100%;
+    }
+}
+
+/*================================================================================
+ *
+ * 
+ *
+================================================================================*/
+.foto-plato-muestra
+{
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    border: none;
+    width: 64px;
+    height: 64px;
+    transition-duration: .2s;
+
+    &:hover
+    {
+        cursor: pointer;
+    }
+
+    &:focus
+    {
+        outline: none;
+    }
+
+    &:active
+    {
+        border-width: 2px;
+    }
+
+    &:hover::before, &:focus::before
+    {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.1);
+    }
+
+    &::after, &::after
+    {
+        font-family: 'Font Awesome 5 Free';
+        content: '\f304';
+        font-weight: bold;
+        font-size: 10px;
+        color: white;
+        background: #000000;
+        border-bottom-left-radius: 10px;
+        padding: 5px 7px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    img
+    {
+        user-select: none;
+        object-fit: cover;
+        object-position: center center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.plato-miniatura
+{
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    border: none;
+    border-radius: 0px;
+    width: 38px;
+    height: 38px;
+    transition-duration: .2s;
+
+    img
+    {
+        user-select: none;
+        object-fit: cover;
+        object-position: center center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/*================================================================================
+ *
+ * 
+ *
+================================================================================*/
+.card-especial
+{
+    $tamano: 248px;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    background: $white;
+    transition-duration: .2s;
+    overflow: hidden;
+
+    &:hover
+    {
+        box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
+    }
+
+    img
+    {
+        object-position: center center;
+        width: 100%;
+        height: $tamano;
+        object-fit: cover;
+    }
+
+    .card-body
+    {
+        background: $white;
+    }
+}
+
+.card-especial-sm
+{
+    $tamano: 170px;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    background: $white;
+    transition-duration: .2s;
+    overflow: hidden;
+
+    &:hover
+    {
+        box-shadow: 1px 1px 5px 0 rgba(0,0,0,.5);
+    }
+
+    img
+    {
+        object-position: center center;
+        width: 100%;
+        height: $tamano;
+        object-fit: cover;
+    }
+
+    .card-body
+    {
+        background: $white;
+    }
+}
+
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ *	Titulo
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+.login-titulo
+{
+    text-align: center;
+    font-size: 20px;
+    padding: 8px;
+    background: $admin-header-background;
+    color: $admin-header-logo-color;
+}
+
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ *	modal-img
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+.modal-img
+{
+    width: 100%;
+    height: 248px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid $gray-400;
+
+    img
+    {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+.modal-body
+{
+    overflow-wrap: break-word;
+}
+
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ * 
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+.tarjeta-miniatura-pedido
+{
+    display: inline-flex;
+
+    div:nth-child(1)
+    {
+        margin-right: 5px;
+    }
+}
+
+.imagen-pedido
+{
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    border-radius: 10px;;
+
+    img
+    {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}

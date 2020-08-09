@@ -1,0 +1,52 @@
+@import "ajuste";
+@import "encabezado";
+@import "menu-lateral";
+@import "iconos-index";
+
+.sub-header
+{
+    position: fixed;
+    top: calc( #{$height-header-modelo} - 1px );
+    right: 0px;
+    z-index: 1036;
+    background: $light;
+    border-left: none;
+    border-right: none;
+    transition-duration: .2s;
+}
+
+@media(min-width: 1200px)
+{
+    .sub-header
+    {
+        width: calc( 100% - 225px );
+    }
+
+    .sb-sidenav-toggled
+    {
+        .sub-header
+        {
+            width: 100%;
+        }
+    }
+}
+
+@media(max-width: 1200px)
+{
+    .sub-header
+    {
+        width: 100%;
+    }
+
+    .sb-sidenav-toggled
+    {
+        
+    }
+}
+
+.m-especial
+{
+    margin-top: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

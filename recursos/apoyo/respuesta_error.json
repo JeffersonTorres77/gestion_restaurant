@@ -1,0 +1,15 @@
+{
+    "error":
+    {
+        "status": true,
+        "mensaje": "Mensaje de error"
+    },
+    "cuerpo":
+    {
+        "codigo": "",
+        "mensaje": "",
+        "archivo": "",
+        "linea": "",
+        "trazas": ""
+    }
+}

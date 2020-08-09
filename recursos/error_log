@@ -1,0 +1,69 @@
+[29-Jul-2020 12:02:10 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://127.0.0.1:8989": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://127.0.0.1...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/server2.php(40): React\Socket\Server->__construct('8989', Object(React\EventLoop\StreamSelectLoop))
+#2 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[29-Jul-2020 12:42:45 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[29-Jul-2020 12:44:51 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:22:47 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:22:55 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:23:22 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:23:31 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:23:35 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:23:42 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164
+[30-Jul-2020 02:24:05 America/Caracas] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8686": Address already in use in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8686', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/dinerofr/public_html/restaurante-app/_core/server.php(38): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), '8686')
+#3 {main}
+  thrown in /home/dinerofr/public_html/restaurante-app/_core/APIs/vendor/react/socket/src/TcpServer.php on line 164

@@ -1,0 +1,84 @@
+/*================================================================================
+ *
+ *	
+ *
+================================================================================*/
+.menu-lateral
+{
+    background: $admin-menu-background;
+	border-right: 1px solid $admin-menu-border-color;
+    padding-top: $height-header-modelo !important;
+    font-size: $admin-menu-font-size;
+
+    .panel-usuario
+    {
+        width: 100%;
+        height: auto;
+        margin: 0px;
+        padding: 10px 0px;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        border-bottom: 1px solid $admin-menu-border-color;
+
+        .nombre
+        {
+            font-size: 16px;
+            color: #343a40;
+        }
+
+        .rol
+        {
+            font-size: 14px;
+            color: #6c757d;
+        }
+    }
+        
+    .nav-link
+    {
+        color: $admin-menu-color;
+        cursor: pointer;
+        user-select: none;
+
+        &[aria-expanded=true],
+        &:not(.sub):hover
+        {
+            color: $admin-menu-opcion-color-hover;
+            background: $admin-menu-opcion-background-hover;
+        }
+
+        &[active]:hover,
+        &[active]
+        {
+            color: $admin-menu-opcion-color-active;
+            background: $admin-menu-opcion-background-active;
+        }
+
+        & ~ div
+        {
+            background: rgba(255,255,255,0.1);
+	        transition-duration: .2s;
+        }
+    }
+
+    .nav-link.sub
+    {
+        padding-left: 16px;
+        border-left: 0px solid transparent;
+        outline: none;
+        transition-duration: .2s;
+
+        &:hover
+        {
+            padding-left: 20px;
+            border-width: 4px;
+            border-color: $admin-menu-subopcion-color-hover;
+            color: $admin-menu-subopcion-color-hover;
+        }
+
+        &.active
+        {
+            border-color: $admin-menu-subopcion-color-active;
+            border-width: 4px;
+            color: $admin-menu-subopcion-color-active;
+        }
+    }
+}

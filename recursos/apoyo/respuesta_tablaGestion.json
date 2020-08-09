@@ -1,0 +1,22 @@
+{
+    "error":
+    {
+        "status": false,
+        "mensaje": ""
+    },
+    "cuerpo":
+    {
+        "order_key": "id",
+        "order_type": "ASC / DESC",
+        "pagina": 1,
+        "cantMostrar": 10,
+        "total_filas": 1000,
+        "data":
+        {
+            "0": {},
+            "1": {},
+            "2": {},
+            "3": {}
+        }
+    }
+}

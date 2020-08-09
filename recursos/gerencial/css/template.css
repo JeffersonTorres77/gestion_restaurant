@@ -1,0 +1,407 @@
+@charset "UTF-8";
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ *	Colores
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+/*================================================================================
+ * ENCABEZADO
+================================================================================*/
+/*--------------------------------------------------------------------------------
+ * 
+--------------------------------------------------------------------------------*/
+/*================================================================================
+ * MENU LATERAL
+================================================================================*/
+/*--------------------------------------------------------------------------------
+ * 
+--------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------
+ * 
+--------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------
+ * 
+--------------------------------------------------------------------------------*/
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ *	Puntos de ruptura
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ *	Tamaños
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+/*================================================================================
+ *--------------------------------------------------------------------------------
+ *
+ *	Ajuste del menu lateral
+ *
+ *--------------------------------------------------------------------------------
+================================================================================*/
+.fixed-top, .sb-nav-fixed #layoutSidenav #layoutSidenav_nav, .sb-nav-fixed .sb-topnav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030; }
+
+#layoutSidenav {
+  display: flex; }
+
+#layoutSidenav #layoutSidenav_nav {
+  flex-basis: 225px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease-in-out;
+  z-index: 1038;
+  transform: translateX(-225px); }
+
+#layoutSidenav #layoutSidenav_content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  flex-grow: 1;
+  min-height: calc(100vh - 62px);
+  margin-left: -225px; }
+
+.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+  transform: translateX(0); }
+
+.sb-sidenav-toggled #layoutSidenav #layoutSidenav_content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 1037;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out; }
+
+@media (min-width: 992px) {
+  #layoutSidenav #layoutSidenav_nav {
+    transform: translateX(0); }
+
+  #layoutSidenav #layoutSidenav_content {
+    margin-left: 0;
+    transition: margin 0.15s ease-in-out; }
+
+  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+    transform: translateX(-225px); }
+
+  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
+    margin-left: -225px; }
+
+  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content:before {
+    display: none; } }
+.sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
+  width: 225px;
+  height: 100vh;
+  z-index: 1038; }
+
+.sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
+  padding-top: 62px; }
+
+.sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
+  overflow-y: auto; }
+
+.sb-nav-fixed #layoutSidenav #layoutSidenav_content {
+  padding-left: 225px;
+  top: 62px; }
+
+.sb-sidenav-menu .nav-link .sb-nav-link-icon {
+  margin-right: 0.5rem; }
+
+.sb-sidenav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-wrap: nowrap; }
+
+.sb-sidenav .sb-sidenav-menu {
+  flex-grow: 1; }
+
+.sb-sidenav .sb-sidenav-menu .nav {
+  flex-direction: column;
+  flex-wrap: nowrap; }
+
+.sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
+  padding: 1.75rem 1rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase; }
+
+.sb-sidenav .sb-sidenav-menu .nav .nav-link {
+  display: flex;
+  align-items: center;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  position: relative; }
+
+.sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
+  font-size: 0.9rem; }
+
+.sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-sidenav-collapse-arrow {
+  display: inline-block;
+  margin-left: auto;
+  transition: transform 0.15s ease; }
+
+.sb-sidenav .sb-sidenav-menu .nav .nav-link.collapsed .sb-sidenav-collapse-arrow {
+  transform: rotate(-90deg); }
+
+.sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-nested {
+  margin-left: 1.5rem;
+  flex-direction: column; }
+
+.sb-sidenav .sb-sidenav-footer {
+  padding: 0.75rem;
+  flex-shrink: 0; }
+
+.sb-sidenav-dark {
+  background-color: #212529;
+  color: rgba(255, 255, 255, 0.5); }
+
+.sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
+  color: rgba(255, 255, 255, 0.25); }
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link {
+  color: rgba(255, 255, 255, 0.5); }
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
+  color: rgba(255, 255, 255, 0.25); }
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
+  color: rgba(255, 255, 255, 0.25); }
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
+  color: #fff; }
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
+  color: #fff; }
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+  color: #fff; }
+
+.sb-sidenav-dark .sb-sidenav-footer {
+  background-color: #343a40; }
+
+.sb-sidenav-light {
+  background-color: #f8f9fa;
+  color: #212529; }
+
+.sb-sidenav-light .sb-sidenav-menu .sb-sidenav-menu-heading {
+  color: #adb5bd; }
+
+.sb-sidenav-light .sb-sidenav-menu .nav-link {
+  color: #212529; }
+
+.sb-sidenav-light .sb-sidenav-menu .nav-link .sb-nav-link-icon {
+  color: #adb5bd; }
+
+.sb-sidenav-light .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
+  color: #adb5bd; }
+
+.sb-sidenav-light .sb-sidenav-menu .nav-link:hover {
+  color: #007bff; }
+
+.sb-sidenav-light .sb-sidenav-menu .nav-link.active {
+  color: #007bff; }
+
+.sb-sidenav-light .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+  color: #007bff; }
+
+.sb-sidenav-light .sb-sidenav-footer {
+  background-color: #e9ecef; }
+
+.sb-nav-fixed .sb-topnav {
+  z-index: 1039; }
+
+.sb-topnav {
+  padding-left: 0;
+  height: 62px;
+  z-index: 1039; }
+
+.sb-topnav .navbar-brand {
+  width: 225px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: 0; }
+
+.sb-topnav.navbar-dark #sidebarToggle {
+  color: rgba(255, 255, 255, 0.5); }
+
+.sb-topnav.navbar-light #sidebarToggle {
+  color: #212529; }
+
+/*================================================================================
+ *
+ *	
+ *
+================================================================================*/
+.header {
+  background: #3D5C99;
+  width: 100%;
+  height: 62px !important;
+  box-shadow: 0px 0px 5px 0px black; }
+  .header .logo {
+    padding: 10px;
+    user-select: none; }
+    .header .logo a {
+      cursor: pointer; }
+      .header .logo a:hover label, .header .logo a:focus label {
+        color: #ddd; }
+    .header .logo img {
+      width: 40px;
+      height: auto; }
+    .header .logo label {
+      font-size: 20px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-shadow: 0px 0px 1px black;
+      color: #fff;
+      position: relative;
+      top: 5px;
+      left: 5px;
+      transition-duration: .2s;
+      cursor: pointer; }
+  .header .opciones-contenedor {
+    position: absolute;
+    top: 0px;
+    right: 0px; }
+    .header .opciones-contenedor .opciones {
+      display: inline-block;
+      position: relative; }
+      .header .opciones-contenedor .opciones button {
+        font-size: 16px;
+        color: #fff;
+        padding: 10px 15px; }
+        .header .opciones-contenedor .opciones button:hover, .header .opciones-contenedor .opciones button:focus {
+          color: #ddd;
+          background: rgba(0, 0, 0, 0.1); }
+      .header .opciones-contenedor .opciones .opciones-data-usuario {
+        position: absolute;
+        top: 100%;
+        right: 0px;
+        width: 300px;
+        background: white;
+        overflow: hidden; }
+        .header .opciones-contenedor .opciones .opciones-data-usuario > div > a > div {
+          text-align: left;
+          padding: 10px 15px;
+          color: #323232;
+          cursor: pointer; }
+          .header .opciones-contenedor .opciones .opciones-data-usuario > div > a > div:hover {
+            background: whitesmoke; }
+          .header .opciones-contenedor .opciones .opciones-data-usuario > div > a > div span {
+            margin-left: 5px; }
+
+/*================================================================================
+ *
+ *	
+ *
+================================================================================*/
+.menu-lateral {
+  background: #e9ecef;
+  border-right: 1px solid #dee2e6;
+  padding-top: 62px !important;
+  font-size: 16px; }
+  .menu-lateral .panel-usuario {
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    padding: 10px 0px;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    border-bottom: 1px solid #dee2e6; }
+    .menu-lateral .panel-usuario .nombre {
+      font-size: 16px;
+      color: #343a40; }
+    .menu-lateral .panel-usuario .rol {
+      font-size: 14px;
+      color: #6c757d; }
+  .menu-lateral .nav-link {
+    color: #343a40;
+    cursor: pointer;
+    user-select: none; }
+    .menu-lateral .nav-link[aria-expanded=true], .menu-lateral .nav-link:not(.sub):hover {
+      color: black;
+      background: #dee2e6; }
+    .menu-lateral .nav-link[active]:hover, .menu-lateral .nav-link[active] {
+      color: black;
+      background: #d3d9e0; }
+    .menu-lateral .nav-link ~ div {
+      background: rgba(255, 255, 255, 0.1);
+      transition-duration: .2s; }
+  .menu-lateral .nav-link.sub {
+    padding-left: 16px;
+    border-left: 0px solid transparent;
+    outline: none;
+    transition-duration: .2s; }
+    .menu-lateral .nav-link.sub:hover {
+      padding-left: 20px;
+      border-width: 4px;
+      border-color: #343a40;
+      color: #343a40; }
+    .menu-lateral .nav-link.sub.active {
+      border-color: black;
+      border-width: 4px;
+      color: black; }
+
+/*================================================================================
+ *
+ *	Seccion de ICONOS
+ *
+================================================================================*/
+.wrimagecard {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  position: relative;
+  background: #fff;
+  box-shadow: 12px 15px 20px 0px rgba(46, 61, 73, 0.15);
+  border-radius: 4px;
+  transition: all 0.3s ease; }
+  .wrimagecard .fa {
+    position: relative;
+    font-size: 70px; }
+
+.wrimagecard-topimage_header {
+  padding: 20px;
+  background-color: #5C8AE5 !important; }
+
+a.wrimagecard:hover, .wrimagecard-topimage:hover {
+  box-shadow: 2px 4px 8px 0px rgba(46, 61, 73, 0.2); }
+
+.wrimagecard-topimage a {
+  width: 100%;
+  height: 100%;
+  display: block; }
+
+.wrimagecard-topimage_title {
+  padding: 20px 24px;
+  height: 80px;
+  padding-bottom: 0.75rem;
+  position: relative; }
+
+.wrimagecard-topimage a {
+  border-bottom: none;
+  text-decoration: none;
+  color: #525c65;
+  transition: color 0.3s ease; }
+
+.icon_interfaz {
+  color: white;
+  font-size: 70px; }
+
+.centrar {
+  text-align: center; }
+
+/*# sourceMappingURL=template.css.map */
