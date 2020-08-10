@@ -250,7 +250,7 @@ class ComboModel
 	{
 		if($idCategoria !== FALSE) {
 			$idCategoria = (int) $idCategoria;
-			$query = "SELECT * FROM combos_platos A, platos B WHERE A.idPlato = b.idPlato AND A.idCombo = '{$this->id}' AND B.idCategoria = '{$idCategoria}' ORDER BY B.nombre ASC";
+			$query = "SELECT * FROM combos_platos A, platos B WHERE A.idPlato = B.idPlato AND A.idCombo = '{$this->id}' AND B.idCategoria = '{$idCategoria}' ORDER BY B.nombre ASC";
 		} else {
 			$query = "SELECT * FROM combos_platos WHERE idCombo = '{$this->id}'";
 		}
