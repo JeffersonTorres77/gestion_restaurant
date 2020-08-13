@@ -122,8 +122,8 @@ class PlatosModel
 		//Busca el ID maximo e incrementa en 1
 		$idPlato = Conexion::getMysql()->NextID("platos", "idPlato");
 		$idRestaurant = (int) $idRestaurant;
-		$nombre = Filtro::General(strtoupper($nombre));
-		$descripcion = Filtro::General(strtoupper($descripcion));
+		$nombre = Filtro::General($nombre);
+		$descripcion = Filtro::General($descripcion);
 		$idCategoria = (int) $idCategoria;
 		$precioCosto = $precioCosto;
 		$precioVenta = $precioVenta;

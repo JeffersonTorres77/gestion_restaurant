@@ -6,26 +6,23 @@
 var listaMesas = [];
 var keyMesaActualizar = null;
 
-// IDs Elementos
-var idBotonStatus = "boton-status";
-var idContenedorMesas = "contenedor-mesas";
-var idVer = {
-    modal: "modal-ver",
-    textTitulo: "text-ver-nombreMesa",
-    listaPedido: "lista-pedidos-mesa"
-}
-
 // Elementos
-var botonStatus = document.getElementById(idBotonStatus);
-var contenedorMesas = document.getElementById(idContenedorMesas);
+var botonStatus = document.getElementById("boton-status");
+var contenedorMesas = document.getElementById("contenedor-mesas");
 
 // Extra
 botonStatus.setAttribute("class", "btn btn-sm btn-secondary");
 botonStatus.innerHTML = "Conectando...";
 var ver = {
-    modal: $("#" + idVer.modal),
-    textTitulo: document.getElementById(idVer.textTitulo),
-    listaPedido: document.getElementById(idVer.listaPedido)
+    modal: $("#modal-ver"),
+    modalDialog: document.getElementById('modal-ver-dialog'),
+    modalHeader: document.getElementById('modal-ver-header'),
+    modalTitle: document.getElementById('modal-ver-title'),
+    modalAlarma: document.getElementById('modal-ver-alarma'),
+    tbody: document.getElementById("modal-ver-tbody"),
+    botonFacturar: document.getElementById('boton-facturar'),
+    modalDatos: $('#modal-datos-factura'),
+    formDatos: document.getElementById('form-datos-factura')
 }
 
 /*================================================================================
@@ -107,7 +104,6 @@ socket.on('cambio', () => {
 socket.on('actualizar-todo', function(data)
 {
     listaMesas = data;
-    console.log(data);
     PintarMesas();
     if( keyMesaActualizar != null) {
         ModalConfirmar(keyMesaActualizar);
@@ -184,12 +180,13 @@ function CodigoMesaHTML(keyMesa)
 
             if(esCombo)
             {
-                codePedidos += ComboHTML(datos);
                 for(let pedido of datos.pedidos) {
                     if(pedido.status == 2) {
                         classCardHeader = "bg-warning";
                     }
                 }
+
+                codePedidos += ComboHTML(datos);
             }
             else
             {
@@ -203,7 +200,7 @@ function CodigoMesaHTML(keyMesa)
         if(codePedidos == "")
         {
             codePedidos = `<div class="text-muted p-3" center>
-                Entregado
+                En espera
             </div>`;
         }
     }
@@ -223,6 +220,12 @@ function CodigoMesaHTML(keyMesa)
         }
     }
 
+    var alertaCamarero = (objMesa.solicitar_camarero == false) ? '' : `
+    <div class="py-1 px-2 alert alert-warning mb-0 rounded-0 font-weight-bold border-bottom border-warning" center>
+        <i class="fas fa-bell"></i>
+        Se solicita al camarero
+    </div>`;
+
     mesaHTML += `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
         <div class="card card-mesa sombra" style="cursor: pointer;" tabindex="0" onclick="ModalConfirmar('${keyMesa}')">
             <div class="card-header ${classCardHeader}">
@@ -232,6 +235,7 @@ function CodigoMesaHTML(keyMesa)
             </div>
 
             <div class="card-body p-0">
+                ${alertaCamarero}
                 ${codePedidos}
             </div>
         </div>
@@ -313,92 +317,164 @@ function ComboHTML(datos)
  */
 function ModalConfirmar(keyMesa)
 {
+    /**
+     * 
+     */
     keyMesaActualizar = keyMesa;
     var objMesa = listaMesas[keyMesa];
-    var listaModal = ver.listaPedido;
-    var header = ver.textTitulo.parentElement.parentElement;
-    ver.textTitulo.innerHTML = objMesa.alias;
-    var botonFacturaHabilitado = true;
+    ver.modalTitle.innerHTML = objMesa.alias;
 
-    header.className = "modal-header bg-primary text-white";
-
-    if(objMesa.pedidos.length > 0)
+    /**
+     * 
+     */
+    if(objMesa.solicitar_camarero)
     {
-        listaModal.innerHTML = "";
+        ver.modalAlarma.innerHTML = `<div class="alert alert-warning mb-0">
+            <i class="fas fa-bell"></i>
+            Se solicita al camarero
 
-        var codePedidos = "";
-        for(var objPedido of objMesa.pedidos)
-        {
-            var esCombo = objPedido.esCombo;
-            var datos = objPedido.datos;
-
-            if(esCombo)
-            {
-                var conNota = false;
-                for(var pedido of datos.pedidos) {
-                    if(pedido.nota != "") {
-                        conNota = true;
-                        break;
-                    }
-                }
-
-                codePedidos += ComboModalHTML(
-                    datos.lote, datos.imagen,
-                    datos.nombre, datos.descuento,
-                    datos.status, conNota,
-                    datos.pedidos
-                );
-            }
-            else
-            {
-                var conNota = (datos.nota != "");
-                var nota = (datos.nota == "") ? '<span class="text-muted">(Ninguna)</span>' : datos.nota;
-                var codigoCollapse = `Nota: <b>${nota}</b>`;
-
-                if(datos.status != '3') {
-                    botonFacturaHabilitado = false;
-                }
-
-                codePedidos += PlatoModalHTML(
-                    datos.id, datos.plato.imagen,
-                    datos.plato.nombre, datos.cantidad,
-                    datos.status, conNota, codigoCollapse
-                );
-            }
-        }
-
-        listaModal.innerHTML = codePedidos;
+            <button class="close" onclick="QuitarAlarma(${objMesa.id})">&times;</button>
+        </div>`;
     }
     else
     {
-        botonFacturaHabilitado = false;
+        ver.modalAlarma.innerHTML = "";
+    }
 
-        if(objMesa.status == "CERRADA")
+    /**
+     * 
+     */
+    if(objMesa.pedidos.length > 0)
+    {
+        ver.botonFacturar.style.display = "";
+        ver.botonFacturar.onclick = function(){ ModalDatosFactura(objMesa.id); };
+        ver.modalDialog.className = 'modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl';
+        ver.modalHeader.className = 'modal-header bg-primary text-white border-bottom-0';
+
+        ver.tbody.innerHTML = "";
+        var codeHTML = "";
+        for(var pedido of objMesa.pedidos)
         {
-            header.className = "modal-header bg-danger text-white";
-            listaModal.innerHTML = `<li class="list-group-item">
-                <h5 center class="mb-0 text-muted p-2">
-                    <i class="fas fa-lock"></i> Cerrada
-                </h5>
-            </li>`;
+            var datos = pedido.datos;
+            var esCombo = pedido.esCombo;
+
+            if(esCombo)
+            {
+                for(let pedido of datos.pedidos)
+                {
+                    var checked = (datos.status == "3") ? 'checked' : '';
+                    var monto = pedido.precioUnitario * (1 - (pedido.descuento / 100));
+                    codeHTML += `<tr class="table-${classStatus(datos.status)}" style="cursor: pointer;" onclick="CheckearItem(this)">
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox"
+                                class="custom-control-input"
+                                id="check-pedido-${pedido.idPedido}" ${checked}
+                                idPedido="${pedido.idPedido}"
+                                total="${pedido.precioTotal}">
+                                <label class="custom-control-label" for="check-pedido-${pedido.idPedido}">
+                                    ${datos.nombre} - ${pedido.nombrePlato}
+                                </label>
+                            </div>
+                        </td>
+
+                        <td center>
+                            ${statusText(datos.status)}
+                        </td>
+
+                        <td right>
+                            Bs. ${Formato.Numerico( monto, 2 )}
+                        </td>
+
+                        <td center>
+                            ${pedido.cantidad}
+                        </td>
+
+                        <td right class="font-weight-bold">
+                            Bs. ${Formato.Numerico( pedido.precioTotal, 2 )}
+                        </td>
+                    </tr>`;
+                }
+            }
+            else
+            {
+                var checked = (datos.status == "3") ? 'checked' : '';
+                var monto = datos.precioUnitario * (1 - (datos.descuento / 100));
+                codeHTML += `<tr class="table-${classStatus(datos.status)}" style="cursor: pointer;" onclick="CheckearItem(this)">
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox"
+                            class="custom-control-input"
+                            id="check-pedido-${datos.id}" ${checked}
+                            idPedido="${datos.id}"
+                            total="${datos.precioTotal}">
+                            <label class="custom-control-label" for="check-pedido-${datos.id}">
+                                ${datos.plato.nombre}
+                            </label>
+                        </div>
+                    </td>
+
+                    <td center>
+                        ${statusText(datos.status)}
+                    </td>
+
+                    <td right>
+                        Bs. ${Formato.Numerico( monto, 2 )}
+                    </td>
+
+                    <td center>
+                        ${datos.cantidad}
+                    </td>
+
+                    <td right class="font-weight-bold">
+                        Bs. ${Formato.Numerico( datos.precioTotal, 2 )}
+                    </td>
+                </tr>`;
+            }
         }
-        else
-        {
-            listaModal.innerHTML = `<li class="list-group-item">
-                <h5 center class="mb-0 text-muted p-2">
+
+        ver.tbody.innerHTML = `${codeHTML}
+        <tr>
+            <td colspan="4" class="font-weight-bold" style="font-size: 18px;" right>
+                Total:
+            </td>
+
+            <td right class="font-weight-bold" style="font-size: 18px;" id="campoTotal">
+                ${Formato.Numerico(0, 2)}
+            </td>
+        </tr>`;
+    }
+    else if(objMesa.status == "CERRADA")
+    {
+        ver.botonFacturar.style.display = "none";
+        ver.botonFacturar.onclick = function(){};
+        ver.modalDialog.className = 'modal-dialog modal-dialog-centered modal-dialog-scrollable';
+        ver.modalHeader.className = 'modal-header bg-danger text-white border-bottom-0';
+        ver.tbody.innerHTML = `<tr>
+            <td colspan="100">
+                <h5 class="mb-0 text-muted py-2" center>
+                    <i class="fas fa-lock"></i>
+                    Cerrada
+                </h5>
+            </td>
+        </tr>`;
+    }
+    else
+    {
+        ver.botonFacturar.style.display = "none";
+        ver.botonFacturar.onclick = function(){};
+        ver.modalDialog.className = 'modal-dialog modal-dialog-centered modal-dialog-scrollable';
+        ver.modalHeader.className = 'modal-header border-bottom-0';
+        ver.tbody.innerHTML = `<tr>
+            <td colspan="100">
+                <h5 class="mb-0 text-muted py-2" center>
                     (Vacio)
                 </h5>
-            </li>`;
-        }
+            </td>
+        </tr>`;
     }
 
-    if(botonFacturaHabilitado) {
-        document.getElementById("boton-facturar").disabled = false;
-        document.getElementById("boton-facturar").onclick = function() { Facturar(objMesa.id); }
-    } else {
-        document.getElementById("boton-facturar").disabled = true;
-        document.getElementById("boton-facturar").onclick = function() {}
-    }
+    CalcularFactura();
     ver.modal.modal('show');
 }
 
@@ -406,138 +482,149 @@ ver.modal.on('hidden.bs.modal', function() {
     keyMesaActualizar = null;
 });
 
-const CARPETA_RESTAURANT = HOST + "recursos/restaurantes/";
-
 /**
  * 
- * @param {*} loteCombo 
- * @param {*} imagen 
- * @param {*} nombre 
- * @param {*} descuento 
- * @param {*} idStatus 
- * @param {*} pedidos 
  */
-function ComboModalHTML(loteCombo, imagen, nombre, descuento, idStatus, conNota, pedidos)
+function CalcularFactura()
 {
-    var codeHTML = "";
-
-    var codePlatos = "";
-    for(var pedido of pedidos)
+    var inputs = ver.tbody.getElementsByTagName('input');
+    var totalFactura = 0;
+    for(var input of inputs)
     {
-        var conNota = (pedido.nota != "");
-        var nota = (pedido.nota == "") ? '<span class="text-muted">(Ninguna)</span>' : pedido.nota;
-        var codigoCollapse = `<div> Nota: <b>${nota}</b> </div>`;
-                
-        codePlatos += PlatoModalHTML(
-            pedido.idPedido, pedido.imagenPlato,
-            pedido.nombrePlato, pedido.cantidad,
-            pedido.status, conNota,
-            codigoCollapse);
+        var total = input.getAttribute("total");
+        if(total == undefined) continue;
+        if(isNaN(total)) continue;
+        if(input.checked != true) continue;
+        totalFactura = Number(totalFactura) + Number(total);
     }
-
-    codeHTML = `<div class="list-group-item pt-0 pr-0 hover">
-        <div class="py-2 px-0" style="margin-left: -10px;">
-            ${nombre}
-        </div>
-
-        <div class="list-group">
-            ${codePlatos}
-        </div>
-    </div>`;
-    return codeHTML;
+    
+    var campoTotal = document.getElementById('campoTotal');
+    if(campoTotal == undefined || campoTotal == null) return;
+    campoTotal.innerHTML = Formato.Numerico(totalFactura, 2);
 }
 
 /**
  * 
- * @param {*} idPedido 
- * @param {*} imagen 
- * @param {*} nombre 
- * @param {*} cantidad 
- * @param {*} idStatus 
- * @param {*} nota 
+ * @param {*} element 
  */
-function PlatoModalHTML(idPedido, imagen, nombre, cantidad, idStatus, conNota = false, codigoCollapse = "")
+function CheckearItem(element)
 {
-    imagen = CARPETA_RESTAURANT + imagen;
-    var idCollapse = `collapse-pedido-${idPedido}`;
-    var status = StatusHTML(idStatus);
-    var statusNota = (conNota) ? '<div class="badge badge-warning">Con nota</div>' : '';
-
-    var botones = `<button class="btn btn-sm btn-info mx-1" style="padding: 0.25rem 0.75rem;" data-toggle="collapse" data-target="#${idCollapse}">
-        <i class="fas fa-info"></i>
-    </button>`;
-
-    var classItem = "list-group-item list-group-item-action";
-    if(idStatus == '1')
-    {
-        classItem += " list-group-item-info";
-    }
-    else if(idStatus == '2')
-    {
-        classItem += " list-group-item-warning";
-    }
-
-    var codeHTML = `<div class="${classItem}">
-        <div class="position-relative">
-            <div class="tarjeta-miniatura-pedido">
-                <div>
-                    <div class="imagen-pedido">
-                        <img src="${imagen}" alt="...">
-                    </div>
-                </div>
-
-                <div>
-                    <h6 class="font-weight-bold mb-1">${nombre}</h6>
-                    <div>Cantidad: <b>${cantidad}</b></div>
-                    <div>${status} ${statusNota}</div>
-                </div>
-            </div>
-
-            <div class="position-absolute d-flex align-items-center h-100" style="top: 0px; right: 0px;">
-                ${botones}
-            </div>
-        </div>
-
-        <div class="collapse" id="${idCollapse}">
-            <div class="border rounded mt-2 p-2 bg-light">
-                ${codigoCollapse}
-            </div>
-        </div>
-    </div>`;
-
-    return codeHTML;
+    var input = element.getElementsByTagName('input')[0];
+    var statusActual = input.checked;
+    var statusNuevo = !statusActual;
+    input.checked = statusNuevo
+    CalcularFactura();
 }
 
 /**
  * 
- * @param {*} idStatus 
+ * @param {*} intStatus 
  */
-function StatusHTML(idStatus)
+function statusText(status)
 {
-    var statusHTML = `<div class="badge badge-danger">Error</div>`;
-    switch(idStatus)
+    var salida = "";
+    var intStatus = Number(status);
+
+    switch(intStatus)
     {
-        case ("0", 0):
-            statusHTML = `<div class="badge badge-light">Sin confirmar</div>`;
+        case 1:
+            salida = `<div class="badge badge-primary">En Cocina</div>`;
         break;
 
-        case ("1", 1):
-            statusHTML = `<div class="badge badge-primary">En cocina</div>`;
+        case 2:
+            salida = `<div class="badge badge-warning">Cocinado</div>`;
         break;
 
-        case ("2", 2):
-            statusHTML = `<div class="badge badge-warning">Cocinado</div>`;
-        break;
-
-        case ("3", 3):
-            statusHTML = `<div class="badge badge-success">Entregado</div>`;
+        case 3:
+            salida = `<div class="badge badge-success">Entregado</div>`;
         break;
     }
 
-    return statusHTML;
+    return salida;
 }
 
+/**
+ * 
+ * @param {*} status 
+ */
+function classStatus(status)
+{
+    var salida = "";
+    var intStatus = Number(status);
+
+    switch(intStatus)
+    {
+        case 1:
+            salida = "primary";
+        break;
+
+        case 2:
+            salida = "warning";
+        break;
+
+        case 3:
+            salida = "success";
+        break;
+    }
+
+    return salida;
+}
+
+/**
+ * 
+ * @param {*} idMesa 
+ */
+function QuitarAlarma(idMesa)
+{
+    socket.emit('quitar-alarma', {
+        idMesa: idMesa
+    });
+}
+
+/**
+ * 
+ * @param {*} idMesa 
+ */
+function ModalDatosFactura(idMesa)
+{
+    document.getElementById('boton-facturar-final').onclick = function() { Facturar(idMesa); };
+    ver.modalDatos.modal('show');
+}
+
+/**
+ * 
+ * @param {*} idMesa 
+ */
 function Facturar(idMesa)
 {
-    alert("Facturar a la mesa ID: " + idMesa + "\nEN Desarrollo.");
+    var inputNumeroFactura = document.getElementById('numero_factura');
+    if(inputNumeroFactura.value == "") {
+        alert("Debe introducir el numero de factura.");
+        return;
+    }
+
+    var idsPedidos = [];
+    var inputs = ver.tbody.getElementsByTagName("input");
+    for(var input of inputs)
+    {
+        var idPedido = input.getAttribute("idPedido");
+        if(idPedido == undefined) continue;
+        if(isNaN(idPedido)) continue;
+        if(input.checked != true) continue;
+        idsPedidos.push(idPedido);
+    }
+    
+    socket.emit('facturar', {
+        idMesa: idMesa,
+        idsPedidos: idsPedidos,
+        numero_factura: inputNumeroFactura.value
+    });
+
+    Loader.Mostrar();
+
+    socket.on('cambio', function(data) {
+        Loader.Ocultar();
+        ver.modalDatos.modal('hide');
+        inputNumeroFactura.value = "";
+    });
 }

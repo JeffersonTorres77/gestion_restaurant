@@ -98,7 +98,7 @@ class CategoriaModel
 	 *
     =======================================================================*/
     public function setNombre( $nombre ) {
-        $nombre = Filtro::General(strtoupper($nombre));
+        $nombre = Filtro::General($nombre);
         $this->set("nombre", $nombre);
         $this->nombre = $nombre;
     }

@@ -99,7 +99,7 @@ class CategoriasModel
 	{
 		$idCategoria = Conexion::getMysql()->NextID("categorias", "idCategoria");
 		$idRestaurant = (int) $idRestaurant;
-		$nombre = Filtro::General(strtoupper($nombre));
+		$nombre = Filtro::General($nombre);
 		$idAreaMonitoreo = (int) $idAreaMonitoreo;
 		$fecha_registro = Time::get();
 

@@ -23,13 +23,21 @@
                 $servicioActivo = Sesion::getRestaurant()->getServicio();
                 $textButtonServicio = ($servicioActivo) ? 'Servicio activo' : 'Servicio no activo';
                 $backgroundButtonServicio = ($servicioActivo) ? 'bg-success' : 'bg-danger';
+                $textTooltip = ($servicioActivo) ? 'Servicio de mesas activo para el publico' : 'Servicio de mesas cerrado para el publico';
 
                 ?>
                     <div class="opciones">
-                        <button class="btn btn-sm order-1 order-lg-0 <?php echo $backgroundButtonServicio; ?>" onclick="CambiarServicio()">
-                            <i class="fas fa-power-off mr-1"></i>
-                            <?php echo $textButtonServicio; ?>
-                        </button>
+                        <div class="btn-group">
+                            <button class="btn btn-sm py-1 order-1 order-lg-0
+                                <?php echo $backgroundButtonServicio; ?>"
+                                onclick="CambiarServicio()"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="<?php echo $textTooltip; ?>">
+                                <i class="fas fa-power-off mr-1"></i>
+                                <?php echo $textButtonServicio; ?>
+                            </button>
+                        </div>
                     </div>
                 <?php
             }

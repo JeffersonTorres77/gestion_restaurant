@@ -16,7 +16,7 @@ $categorias = CategoriasModel::Listado($idRestaurant);
             </div>
 
             <h5 class="mb-0">
-                Registrar combo
+                Registrar menu
             </h5>
         </div>
 

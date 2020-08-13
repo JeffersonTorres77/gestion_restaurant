@@ -73,3 +73,76 @@ function MenuLateral()
         document.body.className = "sb-nav-fixed sb-sidenav-toggled";
     }
 }
+
+/**
+ * 
+ */
+function LlamarCamarero()
+{
+    var url = WEBSOCKET_URL + "Camarero/Llamar/";
+    var data = new FormData();
+    data.append("key", KEY);
+
+    AJAX.api({
+        url: url,
+        data: data,
+
+        antes: function() {
+            Loader.Mostrar();
+        },
+        error: function(mensaje) {
+            Loader.Ocultar();
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
+            Alerta.Danger(mensaje);
+        },
+        ok: function(data) {
+            Loader.Ocultar();
+            var llamando = data.status;
+            CambiarColorBotonCamarero(llamando);
+        }
+    });
+}
+
+/**
+ * 
+ */
+ConsultarLLamadoCamarero();
+function ConsultarLLamadoCamarero()
+{
+    var url = WEBSOCKET_URL + "Camarero/Consultar/";
+    var data = new FormData();
+    data.append("key", KEY);
+
+    AJAX.api({
+        url: url,
+        data: data,
+
+        antes: function() {
+        },
+        error: function(mensaje) {
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
+            Alerta.Danger(mensaje);
+        },
+        ok: function(data) {
+            var llamando = data.status;
+            CambiarColorBotonCamarero(llamando);
+        }
+    });
+}
+
+/**
+ * 
+ * @param {*} llamando 
+ */
+function CambiarColorBotonCamarero(llamando)
+{
+    var botonCamarero = document.getElementById('boton-camarero');
+    if(llamando)
+    {
+        botonCamarero.className = "btn btn-sm text-warning";
+    }
+    else
+    {
+        botonCamarero.className = "btn btn-sm";
+    }
+}

@@ -30,13 +30,10 @@
         Acceder
     </button>
 
-    <br>
-    <br>
-
     <!-- Button trigger modal  Nuevo Plato-->
-    <div center>
+    <div right class="mt-2">
         <a href="#modal-recuperar-clave" id="recupera" data-toggle="modal">
-            Recuperar Datos.
+            Recuperar Datos
         </a>
     </div>
     <!-- <div class="text-center" id="boton-nuevopla" data-toggle="modal" data-target="#staticBackdropnuevaCat">
@@ -50,7 +47,7 @@
         <div class="modal-content">
 
             <div class="modal-header text-white bg-primary">
-                <h5 class="modal-title" id="staticBackdropLabel">Recuperar Datos.</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Recuperar Datos</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

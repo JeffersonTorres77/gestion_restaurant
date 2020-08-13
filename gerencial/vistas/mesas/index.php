@@ -1,39 +1,7 @@
 <?php
     $objRestaurant = Sesion::getRestaurant();
-    $servicio = $objRestaurant->getServicio();
 ?>
 <div class="m-2 p-2">
-    <?php
-      if( $servicio )
-      {
-        ?>
-          <div class="alert alert-success">
-            Servicio activo
-
-            <div class="position-absolute p-2" style="top: 0px; right: 0px;">
-              <button class="btn btn-danger btn-sm" onclick="CambiarServicio()">
-                <i class="fas fa-power-off"></i>
-              </button>
-            </div>
-          </div>
-        <?php
-      }
-      else
-      {
-        ?>
-          <div class="alert alert-danger">
-            Servico no activo
-
-            <div class="position-absolute p-2" style="top: 0px; right: 0px;">
-              <button class="btn btn-success btn-sm" onclick="CambiarServicio()">
-                <i class="fas fa-power-off"></i>
-              </button>
-            </div>
-          </div>
-        <?php
-      }
-    ?>
-
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Gestión de Mesas</h5>

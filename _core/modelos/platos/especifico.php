@@ -53,16 +53,7 @@ class PlatoModel
 	}
 
     public function getImagen() {
-        $ruta = DIR_IMG_REST."/".$this->idRestaurant."/".$this->imagen;
-        $link = HOST_IMG_REST."/".$this->idRestaurant."/".$this->imagen;
-        if(file_exists($ruta) && is_File($ruta))
-        {
-            return $link;
-        }
-        else
-        {
-            return HOST.IMG_PLATO_DEFECTO;
-        }
+		return HOST . $this->imagen;
     }
 
 	public function getactivo() {
@@ -148,14 +139,14 @@ class PlatoModel
 	 *	SETTER
 	 *
     =======================================================================*/
-    public function setNombre( $nombre ) {
-        $nombre = Filtro::General(strtoupper($nombre));
+    public function setNombre($nombre) {
+        $nombre = Filtro::General($nombre);
         $this->set("nombre", $nombre);
         $this->nombre = $nombre;
 	}
 
-    public function setDescripcion( $descripcion ) {
-        $descripcion = Filtro::General($descripcion);
+    public function setDescripcion($descripcion) {
+        $descripcion = $descripcion;
         $this->set("descripcion", $descripcion);
         $this->descripcion = $descripcion;
     }
@@ -166,8 +157,8 @@ class PlatoModel
         $this->idCategoria = $idCategoria;
     }
 
-    public function setImagen( $imagen) {
-        $imagen= Filtro::General($imagen);
+    public function setImagen($imagen) {
+        $imagen= "recursos/restaurantes/{$this->idRestaurant}/$imagen";
         $this->set("imagen", $imagen);
         $this->imagen = $imagen;
     }

@@ -47,16 +47,7 @@ class ComboModel
 	}
 
     public function getImagen() {
-        $ruta = DIR_IMG_REST."/".$this->idRestaurant."/".$this->imagen;
-        $link = HOST_IMG_REST."/".$this->idRestaurant."/".$this->imagen;
-        if(file_exists($ruta) && is_File($ruta))
-        {
-            return $link;
-        }
-        else
-        {
-            return HOST.IMG_COMBO_DEFECTO;
-        }
+		return HOST . $this->imagen;
     }
 
 	public function getDescuento() {
@@ -137,13 +128,13 @@ class ComboModel
 	 *
     =======================================================================*/
     public function setNombre( $nombre ) {
-        $nombre = Filtro::General(strtoupper($nombre));
+        $nombre = Filtro::General($nombre);
         $this->set("nombre", $nombre);
         $this->nombre = $nombre;
 	}
 
     public function setImagen( $imagen) {
-        $imagen= Filtro::General($imagen);
+        $imagen= "recursos/restaurantes/{$this->idRestaurant}/$imagen";
         $this->set("imagen", $imagen);
         $this->imagen = $imagen;
     }

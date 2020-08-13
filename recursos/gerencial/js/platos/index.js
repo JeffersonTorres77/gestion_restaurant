@@ -145,6 +145,7 @@ function Agregar()
             modal.modal("hide");
             form.reset();
             Alerta.Success("Nuevo Plato Agregado.");
+            document.getElementById('label-foto-plato-nuevo').getElementsByTagName('img')[0].src = HOST+"recursos/core/img/plato-defecto.png";
         }
     });
 }

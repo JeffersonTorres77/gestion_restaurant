@@ -176,8 +176,12 @@ switch($accion)
             /**
              * Guardamos en la base de datos
              */
-            $objPlato->setImagen( "{$nombreImg}.{$extensionImg}" );
-        }
+            $objPlato->setImagen("{$nombreImg}.{$extensionImg}");
+		}
+		else
+		{
+			$objPlato->setImagen(IMG_PLATO_DEFECTO);
+		}
 
 		Conexion::getMysql()->Commit();
 
@@ -231,7 +235,7 @@ switch($accion)
             /**
              * Guardamos en la base de datos
              */
-            $objPlato->setImagen( "{$nombreImg}.{$extensionImg}" );
+            $objPlato->setImagen("{$nombreImg}.{$extensionImg}");
 		}
 		
 		if($nombre == "") throw new Exception("El campo <b>nombre</b> no puede estar vacio.");

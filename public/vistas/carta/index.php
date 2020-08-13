@@ -64,7 +64,7 @@
 
                     <div class="mb-3">
                         Descripción:<br>
-                        <div id="campo-ver-descripcion" class="p-1"></div>
+                        <div id="campo-ver-descripcion" class="p-2 bg-light border rounded"></div>
                     </div>
                     <div id="campo-ver-precio" class="mb-3 h4 text-primary font-weight-bold"></div>
 

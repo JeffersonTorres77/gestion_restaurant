@@ -33,9 +33,9 @@
                     <h5 class="mb-0"><?php echo $objCombo->getNombre(); ?></h5>
                 </div>
 
-                <div class="card-body py-2 px-3">
+                <div class="card-body py-2 px-3" style="overflow: auto;">
                     <div style="height: 48px;">
-                    <?php echo $objCombo->getDescripcion(); ?>
+                        <?php echo str_replace("\n", "<br>", $objCombo->getDescripcion()); ?>
                     </div>
                 </div>
                 

@@ -167,7 +167,7 @@ function ModalVer(fila)
     img.src = datos.imagen;
     nombre.innerHTML = datos.nombre;
     categoria.innerHTML = datos.categoria.nombre;
-    descripcion.innerHTML = datos.descripcion;
+    descripcion.innerHTML = datos.descripcion.replace(/\n/g, "<br>");
     precio.innerHTML = "BsS. " + Formato.Numerico(datos.precio, 2);
 
     modal.modal("show");

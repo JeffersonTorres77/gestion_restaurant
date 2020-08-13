@@ -108,7 +108,7 @@ class MesaModel
     	$respuesta = Conexion::getMysql()->Ejecutar( $query );
     	if($respuesta === FALSE) {
     		throw new Exception("Ocurrio un error al intentar eliminar la Mesa.");
-    	}
+		}
     }
 
 	/*=======================================================================
@@ -117,7 +117,7 @@ class MesaModel
 	 *
     =======================================================================*/
     public function setAlias( $alias ) {
-        $alias = Filtro::General(strtoupper($alias));
+        $alias = Filtro::General($alias);
         $this->set("alias", $alias);
         $this->alias = $alias;
 	}

@@ -222,6 +222,12 @@ function CodigoMesaHTML(keyMesa)
         }
     }
 
+    var alertaCamarero = (objMesa.solicitar_camarero == false) ? '' : `
+    <div class="py-1 px-2 bg-warning font-weight-bold border-bottom border-warning" center>
+        <i class="fas fa-bell"></i>
+        Se solicita al camarero
+    </div>`;
+
     mesaHTML += `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
         <div class="card card-mesa sombra" style="cursor: pointer;" tabindex="0" onclick="ModalConfirmar('${keyMesa}')">
             <div class="card-header ${classCardHeader}">
@@ -231,6 +237,7 @@ function CodigoMesaHTML(keyMesa)
             </div>
 
             <div class="card-body p-0">
+                ${alertaCamarero}
                 ${codePedidos}
             </div>
         </div>
@@ -323,6 +330,20 @@ function ModalConfirmar(keyMesa)
         listaModal.innerHTML = "";
 
         var codePedidos = "";
+
+        if(objMesa.solicitar_camarero) {
+            codePedidos += `<div onclick="QuitarAlarma('${objMesa.id}')" class="list-group-item list-group-item-action list-group-item-warning position-relative" center>
+                <i class="fas fa-bell"></i>
+                Se solicita al camarero
+
+                <div class="position-absolute p-2" style="top: 0px; right: 0px;">
+                    <button class="btn btn-sm btn-danger">
+                        <i class="fas fa-xs fa-times"></i>
+                    </button>
+                </div>
+            </div>`;
+        }
+
         for(var objPedido of objMesa.pedidos)
         {
             var esCombo = objPedido.esCombo;
@@ -389,8 +410,6 @@ ver.modal.on('hidden.bs.modal', function() {
     keyMesaActualizar = null;
 });
 
-const CARPETA_RESTAURANT = HOST + "recursos/restaurantes/";
-
 /**
  * 
  * @param {*} loteCombo 
@@ -423,7 +442,7 @@ function ComboModalHTML(loteCombo, imagen, nombre, descuento, idStatus, conNota,
             ${nombre}
         </div>
 
-        <div class="list-group">
+        <div class="list-group border rounded">
             ${codePlatos}
         </div>
     </div>`;
@@ -441,7 +460,7 @@ function ComboModalHTML(loteCombo, imagen, nombre, descuento, idStatus, conNota,
  */
 function PlatoModalHTML(idPedido, imagen, nombre, cantidad, idStatus, conNota = false, codigoCollapse = "")
 {
-    imagen = CARPETA_RESTAURANT + imagen;
+    imagen = HOST + imagen;
     var idCollapse = `collapse-pedido-${idPedido}`;
     var status = StatusHTML(idStatus);
     var statusNota = (conNota) ? '<div class="badge badge-warning">Con nota</div>' : '';
@@ -558,3 +577,14 @@ socket.on('exito', function(data) {
 
     keyMesaActualizar = key;
 });
+
+/**
+ * 
+ * @param {*} idMesa 
+ */
+function QuitarAlarma(idMesa)
+{
+    socket.emit('quitar-alarma', {
+        idMesa: idMesa
+    });
+}

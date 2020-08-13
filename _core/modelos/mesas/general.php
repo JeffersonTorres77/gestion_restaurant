@@ -101,7 +101,7 @@ class MesasModel
 		$idMesa = Conexion::getMysql()->NextID("mesas", "idMesa");
 		$idRestaurant = (int) $idRestaurant;
 		$status = "ABIERTA";
-		$alias = Filtro::General(strtoupper($alias));
+		$alias = Filtro::General($alias);
 		$usuario = Filtro::General($usuario);
 		$clave = Filtro::General($clave);
 		$aux_1 = "";

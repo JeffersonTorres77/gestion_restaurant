@@ -15,7 +15,7 @@ class Filtro
 	============================================================================*/
     private static $numeros = "0123456789";
     private static $letras = "abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-    private static $simbolos = ".:,;-_@#¿?¡!()/";
+    private static $simbolos = ".:,;-_@#¿?¡!()/\t\n";
 
 	/*============================================================================
 	 *

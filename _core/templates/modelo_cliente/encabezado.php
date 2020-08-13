@@ -27,7 +27,7 @@
 
     <div class="text-right p-2 opciones-contenedor">
         <div class="opciones">
-            <button class="btn btn-sm order-1 order-lg-0">
+            <button class="btn btn-sm" id="boton-camarero" onclick="LlamarCamarero()">
                 <i class="fas fa-bell"></i>
                 <span class="ml-2">Camarero</span>
             </button>

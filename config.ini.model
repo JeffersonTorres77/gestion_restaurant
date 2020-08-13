@@ -1,6 +1,6 @@
 [Sistema]
 nombre="Gestor Resturant"
-version="0.1.0"
+version="0.2.0"
 fase="DESARROLLO"
 url_base="http://localhost/Gestion_Restaurant/"
 

@@ -16,7 +16,7 @@ $categorias = CategoriasModel::Listado($idRestaurant);
             </div>
 
             <h5 class="mb-0">
-                Modificar combo
+                Modificar menu
             </h5>
         </div>
 

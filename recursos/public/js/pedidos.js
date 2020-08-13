@@ -33,6 +33,7 @@ function ActualizarPedidos()
 
         },
         error: function(mensaje) {
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
             Alerta.Danger(mensaje);
         },
         ok: function(data) {
@@ -75,6 +76,7 @@ function VerPedidos()
         },
         error: function(mensaje) {
             Loader.Ocultar();
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
             Alerta.Danger(mensaje);
         },
         ok: function(data) {
@@ -102,7 +104,7 @@ function VerPedidos()
                 if(esCombo)
                 {
                     var comboActual = datos;
-                    var imagen = CARPETA_RESTAURANT + comboActual.imagen;
+                    var imagen = HOST + comboActual.imagen;
                     var status = StatusHTML(comboActual.status);
                     var statusNota = "";
                     var botonEliminar = false;
@@ -209,7 +211,7 @@ function VerPedidos()
  */
 function PedidoPlatoHTML(keyPedido, imagen, nombre, cantidad, idStatus, idCollapse, nota, botonEliminar = true)
 {
-    imagen = CARPETA_RESTAURANT + imagen;
+    imagen = HOST + imagen;
     var status = StatusHTML(idStatus);
     var statusNota = (nota != "") ? '<div class="badge badge-warning">Con nota</div>' : '';
     nota = (nota == "") ? '<span class="text-muted">(Ninguna)</span>' : nota;
@@ -311,6 +313,7 @@ function EliminarPedidoCliente(keyPedido)
         },
         error: function(mensaje) {
             Loader.Ocultar();
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
             Alerta.Danger(mensaje);
         },
         ok: function(data) {
@@ -344,6 +347,7 @@ function EliminarComboCliente(keyPedido)
         },
         error: function(mensaje) {
             Loader.Ocultar();
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
             Alerta.Danger(mensaje);
         },
         ok: function(data) {
@@ -382,6 +386,7 @@ function ConfirmarTodosLosPedidosMesa()
         },
         error: function(mensaje) {
             Loader.Ocultar();
+            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
             Alerta.Danger(mensaje);
         },
         ok: function(data) {

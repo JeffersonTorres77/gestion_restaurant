@@ -81,3 +81,7 @@ function CambiarServicio()
         }
     });
 }
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

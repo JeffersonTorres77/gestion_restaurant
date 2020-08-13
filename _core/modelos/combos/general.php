@@ -113,7 +113,7 @@ class CombosModel
 		//Busca el ID maximo e incrementa en 1
 		$idCombo = Conexion::getMysql()->NextID("combos", "idCombo");
 		$idRestaurant = (int) $idRestaurant;
-		$nombre = Filtro::General(strtoupper($nombre));
+		$nombre = Filtro::General($nombre);
 		$descripcion = Filtro::General($descripcion);
 		$descuento = Filtro::General($descuento);
 		$activo = (int) TRUE;

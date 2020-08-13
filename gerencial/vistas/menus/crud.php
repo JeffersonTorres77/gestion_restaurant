@@ -216,6 +216,10 @@ switch($accion)
              */
             $objCombo->setImagen( "{$nombreImg}.{$extensionImg}" );
         }
+		else
+		{
+			$objCombo->setImagen(IMG_COMBO_DEFECTO);
+		}
 
 		foreach($categorias as $categoria)
 		{
