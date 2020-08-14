@@ -362,11 +362,17 @@ function ModalConfirmar(keyMesa)
             {
                 for(let pedido of datos.pedidos)
                 {
-                    var checked = (datos.status == "3") ? 'checked' : '';
+                    var checked = (pedido.status == "3") ? 'checked' : '';
                     var monto = pedido.precioUnitario * (1 - (pedido.descuento / 100));
-                    codeHTML += `<tr class="table-${classStatus(datos.status)}" style="cursor: pointer;" onclick="CheckearItem(this)">
-                        <td>
-                            <div class="custom-control custom-checkbox">
+                    codeHTML += `<tr class="table-${classStatus(pedido.status)}" style="cursor: pointer;" onclick="CheckearItem(this, event)">
+                        <td class="text-truncate" style="min-width: 50px;">
+                            <div style="display: inline-block;">
+                                <button class="badge badge-danger border-0 eliminar" onclick="ModalEliminar('${pedido.idPedido}')">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+
+                            <div class="custom-control custom-checkbox" style="display: inline-block;">
                                 <input type="checkbox"
                                 class="custom-control-input"
                                 id="check-pedido-${pedido.idPedido}" ${checked}
@@ -378,19 +384,19 @@ function ModalConfirmar(keyMesa)
                             </div>
                         </td>
 
-                        <td center>
-                            ${statusText(datos.status)}
+                        <td center class="text-truncate" style="min-width: 50px;">
+                            ${statusText(pedido.status)}
                         </td>
 
-                        <td right>
+                        <td right class="text-truncate" style="min-width: 50px;">
                             Bs. ${Formato.Numerico( monto, 2 )}
                         </td>
 
-                        <td center>
+                        <td center class="text-truncate" style="min-width: 50px;">
                             ${pedido.cantidad}
                         </td>
 
-                        <td right class="font-weight-bold">
+                        <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
                             Bs. ${Formato.Numerico( pedido.precioTotal, 2 )}
                         </td>
                     </tr>`;
@@ -400,9 +406,15 @@ function ModalConfirmar(keyMesa)
             {
                 var checked = (datos.status == "3") ? 'checked' : '';
                 var monto = datos.precioUnitario * (1 - (datos.descuento / 100));
-                codeHTML += `<tr class="table-${classStatus(datos.status)}" style="cursor: pointer;" onclick="CheckearItem(this)">
-                    <td>
-                        <div class="custom-control custom-checkbox">
+                codeHTML += `<tr class="table-${classStatus(datos.status)}" style="cursor: pointer;" onclick="CheckearItem(this, event)">
+                    <td class="text-truncate" style="min-width: 50px;">
+                        <div style="display: inline-block;">
+                            <button class="badge badge-danger border-0 eliminar" onclick="ModalEliminar('${datos.id}')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="custom-control custom-checkbox" style="display: inline-block;">
                             <input type="checkbox"
                             class="custom-control-input"
                             id="check-pedido-${datos.id}" ${checked}
@@ -414,19 +426,19 @@ function ModalConfirmar(keyMesa)
                         </div>
                     </td>
 
-                    <td center>
+                    <td center class="text-truncate" style="min-width: 50px;">
                         ${statusText(datos.status)}
                     </td>
 
-                    <td right>
+                    <td right class="text-truncate" style="min-width: 50px;">
                         Bs. ${Formato.Numerico( monto, 2 )}
                     </td>
 
-                    <td center>
+                    <td center class="text-truncate" style="min-width: 50px;">
                         ${datos.cantidad}
                     </td>
 
-                    <td right class="font-weight-bold">
+                    <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
                         Bs. ${Formato.Numerico( datos.precioTotal, 2 )}
                     </td>
                 </tr>`;
@@ -507,8 +519,23 @@ function CalcularFactura()
  * 
  * @param {*} element 
  */
-function CheckearItem(element)
+function CheckearItem(element, event)
 {
+    var paths = event.path;
+    for(var path of paths)
+    {
+        var tag = path.tagName;
+        if(tag == undefined) continue;
+        tag = tag.toLowerCase();
+        if(tag != "button") continue;
+        var className = path.className;
+        var arrayClassName = className.split(' ');
+        var result = arrayClassName.find(x => x == "eliminar");
+        if(result.length > 0) {
+            return;
+        }
+    }
+
     var input = element.getElementsByTagName('input')[0];
     var statusActual = input.checked;
     var statusNuevo = !statusActual;
@@ -626,5 +653,43 @@ function Facturar(idMesa)
         Loader.Ocultar();
         ver.modalDatos.modal('hide');
         inputNumeroFactura.value = "";
+    });
+}
+
+/**
+ * 
+ * @param {*} idPedido 
+ */
+function ModalEliminar(idPedido)
+{
+    document.getElementById('boton-eliminar-pedido').onclick = function() { EliminarPedido(idPedido) };
+    var modal = $("#modal-eliminar-pedido");
+    modal.modal('show');
+}
+
+/**
+ * 
+ * @param {*} idPedido 
+ */
+function EliminarPedido(idPedido)
+{
+    var modal = $("#modal-eliminar-pedido");
+    var inputMotivo = document.getElementById('motivo');
+    if(inputMotivo.value == "") {
+        alert("Debe introducir el motivo.");
+        return;
+    }
+    
+    socket.emit('eliminar-pedido', {
+        idPedido: idPedido,
+        motivo: inputMotivo.value
+    });
+
+    Loader.Mostrar();
+
+    socket.on('cambio', function(data) {
+        Loader.Ocultar();
+        modal.modal('hide');
+        inputMotivo.value = "";
     });
 }

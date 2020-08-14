@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-08-2020 a las 18:02:16
+-- Tiempo de generación: 14-08-2020 a las 07:52:13
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -528,18 +528,18 @@ CREATE TABLE `platos` (
 --
 
 INSERT INTO `platos` (`idPlato`, `idRestaurant`, `idCategoria`, `nombre`, `descripcion`, `imagen`, `activo`, `precioCosto`, `precioVenta`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
-(1, 1, 6, 'PIZZA MARGARITA', 'PIZZA CON ALGUNOS INGREDIENTES', 'recursos/restaurantes/1/PLATO-1.JPG', 1, 1000, 2000, NULL, NULL, NULL, '2020-06-12 18-52-39'),
-(2, 1, 7, 'VINO TINTO', 'BEBIDA MUY RICA', 'recursos/restaurantes/1/PLATO-2.JPG', 1, 10, 110, NULL, NULL, NULL, '2020-06-12 18-53-35'),
-(4, 1, 6, 'PASTA EN SALSA', 'CON SALSA', 'recursos/restaurantes/1/PLATO-4.JPG', 1, 10, 100, NULL, NULL, NULL, '2020-06-12 19-44-37'),
-(5, 1, 8, 'HELADO DE VAINILLA', 'UN POSTRE MUY SABROSO', 'recursos/restaurantes/1/PLATO-5.JPG', 1, 100, 150, NULL, NULL, NULL, '2020-06-13 5-45-29'),
-(6, 1, 7, 'COCA-COLA', 'REFRESCO', 'recursos/restaurantes/1/PLATO-6.JPG', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-48-44'),
-(7, 1, 7, 'FRESCOLITA', 'REFRESCO', 'recursos/restaurantes/1/PLATO-7.JPG', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-49-02'),
-(8, 1, 7, '7UP', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'recursos/restaurantes/1/PLATO-8.JPG', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-49-18'),
-(9, 1, 7, 'LICOR TIPO A', 'LICORES', 'recursos/restaurantes/1/PLATO-9.JPG', 1, 150, 375, NULL, NULL, NULL, '2020-06-13 6-49-38'),
-(10, 1, 6, 'PASTICHO', 'PASTA', 'recursos/restaurantes/1/PLATO-10.JPG', 1, 500, 750, NULL, NULL, NULL, '2020-06-13 6-50-12'),
-(11, 1, 6, 'PESCADO FRITO', 'PESCADOS', 'recursos/restaurantes/1/PLATO-11.JPG', 1, 1000, 1500, NULL, NULL, NULL, '2020-06-13 6-50-37'),
-(12, 1, 7, 'WHISKY', 'LICORES', 'recursos/restaurantes/1/PLATO-12.JPG', 1, 500, 750, NULL, NULL, NULL, '2020-06-13 6-51-01'),
-(13, 1, 7, 'PEPSI', 'REFRESCO', 'recursos/restaurantes/1/PLATO-13.JPG', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-51-35'),
+(1, 1, 6, 'PIZZA MARGARITA', 'PIZZA CON ALGUNOS INGREDIENTES', 'recursos/restaurantes/1/plato-1.jpg', 1, 1000, 2000, NULL, NULL, NULL, '2020-06-12 18-52-39'),
+(2, 1, 7, 'VINO TINTO', 'BEBIDA MUY RICA', 'recursos/restaurantes/1/plato-2.jpg', 1, 10, 110, NULL, NULL, NULL, '2020-06-12 18-53-35'),
+(4, 1, 6, 'PASTA EN SALSA', 'CON SALSA', 'recursos/restaurantes/1/plato-4.jpg', 1, 10, 100, NULL, NULL, NULL, '2020-06-12 19-44-37'),
+(5, 1, 8, 'HELADO DE VAINILLA', 'UN POSTRE MUY SABROSO', 'recursos/restaurantes/1/plato-5.jpg', 1, 100, 150, NULL, NULL, NULL, '2020-06-13 5-45-29'),
+(6, 1, 7, 'COCA-COLA', 'REFRESCO', 'recursos/restaurantes/1/plato-6.jpg', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-48-44'),
+(7, 1, 7, 'FRESCOLITA', 'REFRESCO', 'recursos/restaurantes/1/plato-7.jpg', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-49-02'),
+(8, 1, 7, '7UP', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'recursos/restaurantes/1/plato-8.jpg', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-49-18'),
+(9, 1, 7, 'LICOR TIPO A', 'LICORES', 'recursos/restaurantes/1/plato-9.jpg', 1, 150, 375, NULL, NULL, NULL, '2020-06-13 6-49-38'),
+(10, 1, 6, 'PASTICHO', 'PASTA', 'recursos/restaurantes/1/plato-10.jpg', 1, 500, 750, NULL, NULL, NULL, '2020-06-13 6-50-12'),
+(11, 1, 6, 'PESCADO FRITO', 'PESCADOS', 'recursos/restaurantes/1/plato-11.jpg', 1, 1000, 1500, NULL, NULL, NULL, '2020-06-13 6-50-37'),
+(12, 1, 7, 'WHISKY', 'LICORES', 'recursos/restaurantes/1/plato-12.jpg', 1, 500, 750, NULL, NULL, NULL, '2020-06-13 6-51-01'),
+(13, 1, 7, 'PEPSI', 'REFRESCO', 'recursos/restaurantes/1/plato-13.jpg', 1, 100, 200, NULL, NULL, NULL, '2020-06-13 6-51-35'),
 (14, 1, 6, 'ASD', 'HOLA MUNDO\n\nINGREDIENTES:\n1\n2\n3\n4', 'recursos/restaurantes/1/plato-14.png', 1, 123, 123, NULL, NULL, NULL, '2020-08-11 8:12:56');
 
 -- --------------------------------------------------------

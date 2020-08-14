@@ -166,3 +166,37 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal-eliminar-pedido">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">
+                    Eliminar pedido
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <form onsubmit="event.preventDefault()" id="form-eliminar-pedido">
+                    <div class="form-group mb-0">
+                        <label class="mb-0">Motivo:</label>
+                        <textarea id="motivo" class="form-control" required placeholder="Motivo..." cols="30" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer bg-light" center>
+                <button class="btn btn-outline-secondary w-100px" data-dismiss="modal">
+                    Cancelar
+                </button>
+                
+                <button class="btn btn-danger w-100px" id="boton-eliminar-pedido">
+                    Eliminar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

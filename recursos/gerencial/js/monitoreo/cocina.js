@@ -214,7 +214,7 @@ function ModalVer(keyPedido)
     ver.inpuVerMesa.innerHTML = objPedido.mesa.nombre;
     ver.inpuVerCantidad.innerHTML = objPedido.cantidad;
     ver.inpuVerNota.innerHTML = (objPedido.nota == "") ? '(Vacio)' : objPedido.nota;
-    ver.imgVerPlato.src = HOST+"recursos/restaurantes/"+objPedido.plato.imagen;
+    ver.imgVerPlato.src = HOST+objPedido.plato.imagen;
 
     ver.tagCombo.className = (objPedido.combo == undefined) ? 'd-none' : 'badge badge-success';
 
