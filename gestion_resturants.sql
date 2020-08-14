@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-08-2020 a las 07:52:13
+-- Tiempo de generación: 14-08-2020 a las 22:36:25
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -244,6 +244,13 @@ CREATE TABLE `facturas` (
   `fecha_registro` varchar(20) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`idFactura`, `idRestaurant`, `numero`, `total`, `fecha_registro`) VALUES
+(1, 1, 1, 1900, '2020-08-14 20:25:40');
+
 -- --------------------------------------------------------
 
 --
@@ -266,12 +273,23 @@ CREATE TABLE `facturas_detalles` (
   `precioTotal` double NOT NULL,
   `nota` text COLLATE utf8_spanish_ci NOT NULL,
   `status` int(11) NOT NULL,
+  `motivo_cancelado` text COLLATE utf8_spanish_ci,
   `para_llevar` tinyint(4) NOT NULL,
   `aux_1` text COLLATE utf8_spanish_ci,
   `aux_2` text COLLATE utf8_spanish_ci,
   `aux_3` text COLLATE utf8_spanish_ci,
   `fecha_registro` varchar(20) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `facturas_detalles`
+--
+
+INSERT INTO `facturas_detalles` (`idFacturaDetalle`, `idFactura`, `idMesa`, `idPlato`, `nombrePlato`, `idCombo`, `nombreCombo`, `loteCombo`, `idAreaMonitoreo`, `precioUnitario`, `cantidad`, `descuento`, `precioTotal`, `nota`, `status`, `motivo_cancelado`, `para_llevar`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
+(1, -1, 1, 2, 'VINO TINTO', 0, 'null', 0, 2, 110, 1, 0, 110, '', 5, 'Prueba del sistema', 0, NULL, NULL, NULL, '2020-08-14 20:24:56'),
+(2, -1, 1, 13, 'PEPSI', 3, 'COMBO 2', 1, 2, 200, 1, 20, 160, '', 5, 'Prueba del sistema cancelado', 0, NULL, NULL, NULL, '2020-08-14 20:25:16'),
+(3, 1, 1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 1, 2000, 1, 20, 1600, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40'),
+(4, 1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 2, 0, 300, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40');
 
 -- --------------------------------------------------------
 
@@ -579,7 +597,7 @@ CREATE TABLE `restaurantes` (
 --
 
 INSERT INTO `restaurantes` (`idRestaurant`, `documento`, `nombre`, `direccion`, `telefono`, `correo`, `logo`, `facebook`, `twitter`, `instagram`, `whatsapp`, `activo`, `imagencomanda`, `titulocomanda`, `textocomanda`, `imagencombo`, `titulocombo`, `textocombo`, `servicio`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
-(1, 'J254099046', 'Empresa de Jefferson CA', 'En un comercio', '', '', 'logo.png', '', '', '', '', 1, 'imgcomanda.png', 'CARTAS', 'Elije un platillo entre nuestra carta', 'imgcombo.png', 'MENUS', 'Elije un combo y aprovecha nuestros descuentos', 0, NULL, NULL, NULL, '2020-06-11 1-14-34'),
+(1, 'J254099046', 'Empresa de Jefferson CA', 'En un comercio', '', '', 'logo.png', '', '', '', '', 1, 'imgcomanda.png', 'CARTAS', 'Elije un platillo entre nuestra carta', 'imgcombo.png', 'MENUS', 'Elije un combo y aprovecha nuestros descuentos', 1, NULL, NULL, NULL, '2020-06-11 1-14-34'),
 (2, 'J227640502', 'Amargados Asociados CA', 'En un comercio de nuevo', '', '', 'logo.svg', NULL, NULL, NULL, NULL, 1, '', '', '', '', '', '', 0, NULL, NULL, NULL, '2020-06-11 1-15-30');
 
 -- --------------------------------------------------------
