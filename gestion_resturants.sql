@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-08-2020 a las 22:36:25
+-- Tiempo de generación: 20-08-2020 a las 00:29:46
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -249,7 +249,9 @@ CREATE TABLE `facturas` (
 --
 
 INSERT INTO `facturas` (`idFactura`, `idRestaurant`, `numero`, `total`, `fecha_registro`) VALUES
-(1, 1, 1, 1900, '2020-08-14 20:25:40');
+(1, 1, 1, 1900, '2020-08-14 20:25:40'),
+(2, 1, 2, 2350, '2020-08-19 22:10:50'),
+(3, 1, 3, 1760, '2020-08-19 22:10:53');
 
 -- --------------------------------------------------------
 
@@ -289,7 +291,21 @@ INSERT INTO `facturas_detalles` (`idFacturaDetalle`, `idFactura`, `idMesa`, `idP
 (1, -1, 1, 2, 'VINO TINTO', 0, 'null', 0, 2, 110, 1, 0, 110, '', 5, 'Prueba del sistema', 0, NULL, NULL, NULL, '2020-08-14 20:24:56'),
 (2, -1, 1, 13, 'PEPSI', 3, 'COMBO 2', 1, 2, 200, 1, 20, 160, '', 5, 'Prueba del sistema cancelado', 0, NULL, NULL, NULL, '2020-08-14 20:25:16'),
 (3, 1, 1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 1, 2000, 1, 20, 1600, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40'),
-(4, 1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 2, 0, 300, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40');
+(4, 1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 2, 0, 300, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40'),
+(5, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, 'Test del sistema', 0, NULL, NULL, NULL, '2020-08-14 20:40:17'),
+(6, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-14 20:40:20'),
+(7, -1, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 1, 1500, 1, 0, 1500, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-14 20:40:22'),
+(8, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, '123', 0, NULL, NULL, NULL, '2020-08-14 20:41:01'),
+(9, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, '2', 0, NULL, NULL, NULL, '2020-08-14 20:41:04'),
+(10, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, '0', 0, NULL, NULL, NULL, '2020-08-14 20:41:08'),
+(11, -1, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 1, 1500, 1, 0, 1500, '', 5, 'Test', 0, NULL, NULL, NULL, '2020-08-18 15:03:50'),
+(12, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, 'test', 0, NULL, NULL, NULL, '2020-08-18 15:03:52'),
+(13, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 5, 'test', 0, NULL, NULL, NULL, '2020-08-19 18:18:29'),
+(14, 2, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:50'),
+(15, 2, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:51'),
+(16, 2, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 1, 1500, 1, 0, 1500, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:51'),
+(17, 3, 1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 1, 2000, 1, 20, 1600, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:53'),
+(18, 3, 1, 13, 'PEPSI', 3, 'COMBO 2', 1, 2, 200, 1, 20, 160, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:53');
 
 -- --------------------------------------------------------
 
@@ -312,11 +328,11 @@ CREATE TABLE `menus_a` (
 INSERT INTO `menus_a` (`idMenuA`, `nombre`, `img`, `link`, `con_opciones`) VALUES
 (1, 'Categorias', 'fas fa-tags', 'Categorias/', 0),
 (2, 'Platos', 'fas fa-hamburger', 'Platos/', 0),
-(3, 'Menus', 'fas fa-home', 'Menus/', 0),
+(3, 'Menus y promociones', 'fas fa-home', 'Menus/', 0),
 (4, 'Mesas', 'fas fa-utensils', 'Mesas/', 0),
-(5, 'Monitoreo', 'fas fa-receipt', 'Monitoreo/', 1),
-(6, 'Pedidos', 'fas fa-receipt', 'Pedidos/', 1),
-(7, 'Contabilidad', 'fas fa-home', '#Caja', 0),
+(5, 'Monitoreo', 'fas fa-video', 'Monitoreo/', 1),
+(6, 'Facturas', 'fas fa-receipt', 'Facturas/', 1),
+(7, 'Estadisticas', 'fas fa-home', 'Estadisticas/', 1),
 (8, 'Usuario', 'fas fa-users', 'Usuarios/', 0),
 (9, 'Configuracion', 'fas fa-chart-area', 'Configuracion/', 0);
 
@@ -342,8 +358,8 @@ INSERT INTO `menus_b` (`idMenuB`, `idMenuA`, `nombre`, `img`, `link`) VALUES
 (1, 5, 'Cocina', 'far fa-circle', 'Monitoreo/Cocina/'),
 (2, 5, 'Camarero', 'far fa-circle', 'Monitoreo/Camarero/'),
 (3, 5, 'Caja', 'far fa-circle', 'Monitoreo/Caja/'),
-(4, 6, 'Para llevar', 'far fa-circle', 'Monitoreo/Postres/'),
-(5, 6, 'Gestion', 'far fa-circle', 'Monitoreo/Postres/');
+(4, 6, 'Consulta', 'far fa-circle', 'Facturas/Consulta/'),
+(5, 7, 'General', 'far fa-circle', 'Estadisticas/General/');
 
 -- --------------------------------------------------------
 
@@ -395,8 +411,6 @@ INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
 (1, 3),
 (1, 4),
 (1, 5),
-(1, 6),
-(1, 7),
 (1, 8),
 (2, 2),
 (2, 3),
@@ -407,8 +421,6 @@ INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
 (3, 3),
 (3, 4),
 (3, 5),
-(3, 6),
-(3, 7),
 (3, 8),
 (4, 2),
 (4, 3),
@@ -463,7 +475,11 @@ INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
 (7, 8),
 (6, 1),
 (6, 9),
-(7, 1);
+(7, 1),
+(1, 7),
+(1, 6),
+(3, 6),
+(3, 7);
 
 -- --------------------------------------------------------
 
@@ -484,13 +500,9 @@ INSERT INTO `permisos_b` (`idRol`, `idMenuB`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
-(1, 4),
-(1, 5),
 (3, 1),
 (3, 2),
 (3, 3),
-(3, 4),
-(3, 5),
 (1, 6),
 (1, 7),
 (3, 6),
@@ -517,7 +529,11 @@ INSERT INTO `permisos_b` (`idRol`, `idMenuB`) VALUES
 (6, 4),
 (6, 5),
 (6, 6),
-(6, 7);
+(6, 7),
+(1, 4),
+(1, 5),
+(3, 4),
+(3, 5);
 
 -- --------------------------------------------------------
 
@@ -597,7 +613,7 @@ CREATE TABLE `restaurantes` (
 --
 
 INSERT INTO `restaurantes` (`idRestaurant`, `documento`, `nombre`, `direccion`, `telefono`, `correo`, `logo`, `facebook`, `twitter`, `instagram`, `whatsapp`, `activo`, `imagencomanda`, `titulocomanda`, `textocomanda`, `imagencombo`, `titulocombo`, `textocombo`, `servicio`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
-(1, 'J254099046', 'Empresa de Jefferson CA', 'En un comercio', '', '', 'logo.png', '', '', '', '', 1, 'imgcomanda.png', 'CARTAS', 'Elije un platillo entre nuestra carta', 'imgcombo.png', 'MENUS', 'Elije un combo y aprovecha nuestros descuentos', 1, NULL, NULL, NULL, '2020-06-11 1-14-34'),
+(1, 'J254099046', 'Empresa de Jefferson CA', 'En un comercio', '', '', 'logo.png', '', '', '', '', 1, 'imgcomanda.png', 'Carta', 'Elije un platillo entre nuestra carta', 'imgcombo.png', 'Menus y promociones', 'Elije un menu y aprovecha nuestros descuentos', 1, NULL, NULL, NULL, '2020-06-11 1-14-34'),
 (2, 'J227640502', 'Amargados Asociados CA', 'En un comercio de nuevo', '', '', 'logo.svg', NULL, NULL, NULL, NULL, 1, '', '', '', '', '', '', 0, NULL, NULL, NULL, '2020-06-11 1-15-30');
 
 -- --------------------------------------------------------
