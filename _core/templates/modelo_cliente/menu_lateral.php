@@ -51,7 +51,7 @@
 					<div class="sb-nav-link-icon">
                         <i class="fas fa-book-open"></i>
 					</div>
-					Menus
+					Menus y promociones
                 </a>
 
                 <!--====================================================================

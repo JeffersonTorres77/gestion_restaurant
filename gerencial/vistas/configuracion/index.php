@@ -31,7 +31,7 @@
             <div class="nav nav-tabs" id="opciones">
                 <a center class="nav-item nav-link active text-truncate w-25" id="opciones-basico" data-toggle="tab" href="#basico">Basico</a>
                 <a center class="nav-item nav-link text-truncate w-25" id="opciones-redes" data-toggle="tab" href="#redes">Redes sociales</a>
-                <a center class="nav-item nav-link text-truncate w-25" id="opciones-otros" data-toggle="tab" href="#otros">Otros</a>
+                <a center class="nav-item nav-link text-truncate w-25" id="opciones-otros" data-toggle="tab" href="#otros">Cliente</a>
             </div>
         </nav>
 

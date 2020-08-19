@@ -324,25 +324,24 @@ function ModalConfirmar(keyMesa)
     ver.textTitulo.innerHTML = objMesa.alias;
 
     header.className = "modal-header bg-primary text-white";
+    listaModal.innerHTML = '';
+
+    if(objMesa.solicitar_camarero) {
+        listaModal.innerHTML += `<div onclick="QuitarAlarma('${objMesa.id}')" class="list-group-item list-group-item-action list-group-item-warning position-relative" center>
+            <i class="fas fa-bell"></i>
+            Se solicita al camarero
+
+            <div class="position-absolute p-2" style="top: 0px; right: 0px;">
+                <button class="btn btn-sm btn-danger">
+                    <i class="fas fa-xs fa-times"></i>
+                </button>
+            </div>
+        </div>`;
+    }
 
     if(objMesa.pedidos.length > 0)
     {
-        listaModal.innerHTML = "";
-
         var codePedidos = "";
-
-        if(objMesa.solicitar_camarero) {
-            codePedidos += `<div onclick="QuitarAlarma('${objMesa.id}')" class="list-group-item list-group-item-action list-group-item-warning position-relative" center>
-                <i class="fas fa-bell"></i>
-                Se solicita al camarero
-
-                <div class="position-absolute p-2" style="top: 0px; right: 0px;">
-                    <button class="btn btn-sm btn-danger">
-                        <i class="fas fa-xs fa-times"></i>
-                    </button>
-                </div>
-            </div>`;
-        }
 
         for(var objPedido of objMesa.pedidos)
         {
@@ -380,14 +379,14 @@ function ModalConfirmar(keyMesa)
             }
         }
 
-        listaModal.innerHTML = codePedidos;
+        listaModal.innerHTML += codePedidos;
     }
     else
     {
         if(objMesa.status == "CERRADA")
         {
             header.className = "modal-header bg-danger text-white";
-            listaModal.innerHTML = `<li class="list-group-item">
+            listaModal.innerHTML += `<li class="list-group-item">
                 <h5 center class="mb-0 text-muted p-2">
                     <i class="fas fa-lock"></i> Cerrada
                 </h5>
@@ -395,7 +394,7 @@ function ModalConfirmar(keyMesa)
         }
         else
         {
-            listaModal.innerHTML = `<li class="list-group-item">
+            listaModal.innerHTML += `<li class="list-group-item">
                 <h5 center class="mb-0 text-muted p-2">
                     (Vacio)
                 </h5>

@@ -19,7 +19,7 @@
             </div>
         </a>
 
-        Menus
+        Menus y promociones
 
         <div class="position-absolute" style="right: 5px;">
             <button class="btn btn-outline-primary" onclick="Actualizar()">

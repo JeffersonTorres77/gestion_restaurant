@@ -1,4 +1,5 @@
 const CARPETA_RESTAURANT = HOST + "recursos/restaurantes/";
+var llamando_camarero = false;
 
 /**==================================================================
  * Cerrar Sesión
@@ -97,8 +98,9 @@ function LlamarCamarero()
         },
         ok: function(data) {
             Loader.Ocultar();
-            var llamando = data.status;
-            CambiarColorBotonCamarero(llamando);
+            llamando_camarero = data.status;
+            CambiarColorBotonCamarero(llamando_camarero);
+            IntervalLlamarCamarero();
         }
     });
 }
@@ -106,7 +108,20 @@ function LlamarCamarero()
 /**
  * 
  */
-ConsultarLLamadoCamarero();
+IntervalLlamarCamarero();
+function IntervalLlamarCamarero()
+{
+    ConsultarLLamadoCamarero();
+    setTimeout(function() {
+        if(llamando_camarero) {
+            IntervalLlamarCamarero();
+        }
+    }, 2000);
+}
+
+/**
+ * 
+ */
 function ConsultarLLamadoCamarero()
 {
     var url = WEBSOCKET_URL + "Camarero/Consultar/";
@@ -125,6 +140,7 @@ function ConsultarLLamadoCamarero()
         },
         ok: function(data) {
             var llamando = data.status;
+            llamando_camarero = data.status;
             CambiarColorBotonCamarero(llamando);
         }
     });

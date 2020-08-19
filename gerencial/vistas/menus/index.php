@@ -1,7 +1,7 @@
 <div class="m-2 p-2">
   <div class="card">
     <div class="card-header">
-        <h5 class="mb-0">Gestión de Menus</h5>
+        <h5 class="mb-0">Gestión de Menus y promociones</h5>
     </div>
 
     <div class="card-body">
@@ -69,7 +69,7 @@
         <div class="modal-content">
 
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title mb-0">Eliminar Combo</h5>
+                <h5 class="modal-title mb-0">Eliminar menu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
