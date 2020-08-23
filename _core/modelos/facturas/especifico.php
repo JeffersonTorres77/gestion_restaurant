@@ -15,7 +15,9 @@ class FacturaModel
     ============================================================================*/
     private $id;
     private $idRestaurant;
+    private $idMesa;
     private $numero;
+    private $idMoneda;
     private $total;
     private $fecha;
     private $hora;
@@ -33,8 +35,16 @@ class FacturaModel
         return $this->idRestaurant;
     }
 
+    public function getIdMesa() {
+        return $this->idMesa;
+    }
+
     public function getNumero() {
         return $this->numero;
+    }
+
+    public function getIdMoneda() {
+        return $this->idMoneda;
     }
 
     public function getTotal() {
@@ -66,7 +76,9 @@ class FacturaModel
 
         $this->id = $datos[0]['idFactura'];
         $this->idRestaurant = $datos[0]['idRestaurant'];
+        $this->idMesa = $datos[0]['idMesa'];
         $this->numero = $datos[0]['numero'];
+        $this->idMoneda = $datos[0]['idMoneda'];
         $this->total = $datos[0]['total'];
         $this->fecha = $datos[0]['fecha'];
         $this->hora = $datos[0]['hora'];

@@ -87,7 +87,7 @@ function Actualizar()
 
                     <td right>
                         <b>
-                            Bs. ${Formato.Numerico(totalCuenta, 2)}
+                            ${MONEDA} ${Formato.Numerico(totalCuenta, 2)}
                         </b>
                     </td>
                 </tr>`;
@@ -121,6 +121,10 @@ function CodigoPlato(descripcion, idStatus, precio, cantidad, total)
     var status = "Error";
 
     switch(idStatus) {
+        case "0":
+            status = `<div class="badge badge-success">Sin confirmar</div>`;
+            break;
+
         case "1":
             status = `<div class="badge badge-primary">En espera</div>`;
             break;
@@ -130,15 +134,7 @@ function CodigoPlato(descripcion, idStatus, precio, cantidad, total)
             break;
             
         case "3":
-            status = `<div class="badge badge-success">Entregado</div>`;
-            break;
-            
-        case "4":
-            status = `<div class="badge badge-dark">Pagado</div>`;
-            break;
-
-        case "5":
-            status = `<div class="badge badge-danger">Cancelado</div>`;
+            status = `<div class="badge badge-dark">Entregado</div>`;
             break;
     }
 
@@ -152,7 +148,7 @@ function CodigoPlato(descripcion, idStatus, precio, cantidad, total)
         </td>
 
         <td right class="text-truncate">
-            Bs. ${Formato.Numerico(precio, 2)}
+            ${MONEDA} ${Formato.Numerico(precio, 2)}
         </td>
 
         <td center>
@@ -160,7 +156,7 @@ function CodigoPlato(descripcion, idStatus, precio, cantidad, total)
         </td>
 
         <td right class="text-truncate">
-           Bs.  ${Formato.Numerico(total, 2)}
+           ${MONEDA}  ${Formato.Numerico(total, 2)}
         </td>
     </tr>`;
 

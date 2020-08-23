@@ -389,7 +389,7 @@ function ModalConfirmar(keyMesa)
                         </td>
 
                         <td right class="text-truncate" style="min-width: 50px;">
-                            Bs. ${Formato.Numerico( monto, 2 )}
+                            ${MONEDA} ${Formato.Numerico( monto, 2 )}
                         </td>
 
                         <td center class="text-truncate" style="min-width: 50px;">
@@ -397,7 +397,7 @@ function ModalConfirmar(keyMesa)
                         </td>
 
                         <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
-                            Bs. ${Formato.Numerico( pedido.precioTotal, 2 )}
+                            ${MONEDA} ${Formato.Numerico( pedido.precioTotal, 2 )}
                         </td>
                     </tr>`;
                 }
@@ -431,7 +431,7 @@ function ModalConfirmar(keyMesa)
                     </td>
 
                     <td right class="text-truncate" style="min-width: 50px;">
-                        Bs. ${Formato.Numerico( monto, 2 )}
+                        ${MONEDA} ${Formato.Numerico( monto, 2 )}
                     </td>
 
                     <td center class="text-truncate" style="min-width: 50px;">
@@ -439,7 +439,7 @@ function ModalConfirmar(keyMesa)
                     </td>
 
                     <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
-                        Bs. ${Formato.Numerico( datos.precioTotal, 2 )}
+                        ${MONEDA} ${Formato.Numerico( datos.precioTotal, 2 )}
                     </td>
                 </tr>`;
             }
@@ -452,7 +452,7 @@ function ModalConfirmar(keyMesa)
             </td>
 
             <td right class="font-weight-bold" style="font-size: 18px;" id="campoTotal">
-                ${Formato.Numerico(0, 2)}
+                ${MONEDA} ${Formato.Numerico(0, 2)}
             </td>
         </tr>`;
     }
@@ -512,7 +512,7 @@ function CalcularFactura()
     
     var campoTotal = document.getElementById('campoTotal');
     if(campoTotal == undefined || campoTotal == null) return;
-    campoTotal.innerHTML = Formato.Numerico(totalFactura, 2);
+    campoTotal.innerHTML = MONEDA + " " + Formato.Numerico(totalFactura, 2);
 }
 
 /**

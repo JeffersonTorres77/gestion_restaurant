@@ -31,8 +31,8 @@ function ModalVer(fila, tarjeta)
     nombre.innerHTML = datos.nombre;
     categoria.innerHTML = datos.categoria.nombre;
     descripcion.innerHTML = datos.descripcion;
-    precio.innerHTML = "BsS. " + Formato.Numerico(datos.precio, 2);
-    precioDescuento.innerHTML = "BsS. " + Formato.Numerico(datos.precio_descuento, 2);
+    precio.innerHTML = MONEDA + " " + Formato.Numerico(datos.precio, 2);
+    precioDescuento.innerHTML = MONEDA + " " + Formato.Numerico(datos.precio_descuento, 2);
 
     var form = document.getElementById("form-categoria-"+datos.categoria.id);
     var limiteActual = form.getAttribute("limite");
@@ -225,7 +225,7 @@ function ModalConfirmar()
                         </div>
 
                         <div class="font-weight-bold text-success big">
-                            BsS. ${Formato.Numerico(totalPlato, 2)}
+                            ${MONEDA} ${Formato.Numerico(totalPlato, 2)}
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ function ModalConfirmar()
         </div>`;
     }
     
-    totalLista.innerHTML = `BsS. ${Formato.Numerico(total, 2)}`;
+    totalLista.innerHTML = `${MONEDA} ${Formato.Numerico(total, 2)}`;
 
     modal.modal("show");
 }

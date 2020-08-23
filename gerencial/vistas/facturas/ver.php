@@ -1,3 +1,14 @@
+<?php
+    $objMoneda = new MonedaModel( $objFactura->getIdMoneda() );
+
+    try {
+        $objMesa = new MesaModel( $objFactura->getIdMesa() );
+        $mesa = $objMesa->getAlias();
+    } catch(Exception $e) {
+        $mesa = "{$objFactura->getIdMesa()} (Mesa eliminada)";
+    }
+?>
+
 <div class="m-2 p-2">
     <div class="card">
         <div class="card-header">
@@ -8,7 +19,7 @@
             </div>
 
             <h5 class="mb-0">
-                <?php echo "Factura N°{$objFactura->getNumero()}"; ?>
+                <?php echo "Factura N° {$objFactura->getNumero()}"; ?>
             </h5>
         </div>
 
@@ -17,6 +28,10 @@
                 <div class="float-left">
                     <div>
                         Numero: <b><?php echo $objFactura->getNumero(); ?></b>
+                    </div>
+
+                    <div>
+                        Mesa: <b><?php echo $mesa; ?></b>
                     </div>
                 </div>
 
@@ -70,7 +85,7 @@
                                         </td>
 
                                         <td right class="text-truncate">
-                                            <?php echo "Bs. " . Formato::Numero($precio, 2); ?>
+                                            <?php echo Formato::Precio($precio, $objMoneda); ?>
                                         </td>
 
                                         <td center>
@@ -78,7 +93,7 @@
                                         </td>
 
                                         <td right class="text-truncate">
-                                            <?php echo "Bs. " . Formato::Numero($total, 2); ?>
+                                            <?php echo Formato::Precio($total, $objMoneda); ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -93,7 +108,7 @@
                             </td>
 
                             <td right>
-                                <?php echo "Bs. " . Formato::Numero($totalFactura, 2); ?>
+                                <?php echo Formato::Precio($totalFactura, $objMoneda); ?>
                             </td>
                         </tr> 
                     </tbody>

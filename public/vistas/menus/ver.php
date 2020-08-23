@@ -113,11 +113,11 @@
                                                     </p>
 
                                                     <h6 class="card-title mb-0 text-muted" style="text-decoration: line-through;">
-                                                        BsS. <?php echo Formato::Numero( $precioOriginal, 2 ); ?>
+                                                        <?php echo Formato::Precio($precioOriginal, $objRestaurant->getMoneda()); ?>
                                                     </h6>
 
                                                     <h5 class="card-title mb-0 text-success mb-3">
-                                                        BsS. <?php echo Formato::Numero( $precioDescuento, 2 ); ?>
+                                                        <?php echo Formato::Precio($precioDescuento, $objRestaurant->getMoneda()); ?>
                                                     </h5>
 
                                                     <div class="float-right mb-0">
@@ -245,7 +245,7 @@
                 </div>
 
                 <div class="h5 mb-0 p-3 text-right font-weight-bold">
-                    Total: <span class="text-success" id="lista-pedidos-total">BsS. 100.000</span>
+                    Total: <span class="text-success" id="lista-pedidos-total">. . .</span>
                 </div>
             </div>
 

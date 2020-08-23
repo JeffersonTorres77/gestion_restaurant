@@ -84,4 +84,16 @@ class Formato
 		$salida = $f[2] ."/". $f[1] ."/". $f[0];
 		return $salida;
 	}
+
+	/*============================================================================
+	 *
+	 *	Precio
+	 *
+	============================================================================*/
+	public static function Precio($monto, $objMoneda)
+	{
+		$decimales = 2;
+		$precio = $objMoneda->getSimbolo() . " " . Formato::Numero($monto, $decimales);
+		return $precio;
+	}
 }

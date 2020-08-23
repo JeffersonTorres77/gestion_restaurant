@@ -32,6 +32,7 @@ class RestaurantModel
     private $titulocombo;
     private $textocombo;
     private $idMoneda;
+    private $moneda;
     private $servicio;
     private $aux_1;
     private $aux_2;
@@ -146,6 +147,10 @@ class RestaurantModel
         return $this->idMoneda;
     }
 
+    public function getMoneda() {
+        return $this->moneda;
+    }
+
     public function getServicio() {
         return $this->servicio;
     }
@@ -214,6 +219,7 @@ class RestaurantModel
         $this->titulocombo = $datos[0]['titulocombo'];
         $this->textocombo = $datos[0]['textocombo'];
         $this->idMoneda = $datos[0]['idMoneda'];
+        $this->moneda = new MonedaModel($this->idMoneda);
         $this->servicio = boolval( $datos[0]['servicio'] );
         $this->aux_1 = $datos[0]['aux_1'];
         $this->aux_2 = $datos[0]['aux_2'];
@@ -326,6 +332,7 @@ class RestaurantModel
         $idMoneda = (int) $idMoneda;
         $this->set("idMoneda", $idMoneda);
         $this->idMoneda = $idMoneda;
+        $this->moneda = new MonedaModel($this->idMoneda);
     }
 
     public function setServicio($boolval) {

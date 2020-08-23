@@ -65,7 +65,7 @@ function Actualizar()
                     code += '           </p>';
                     
                     code += '           <h5 class="card-title mb-0">';
-                    code += '               BsS. ' + Formato.Numerico(plato.precio, 2);
+                    code += '               ' + MONEDA + ' ' + Formato.Numerico(plato.precio, 2);
                     code += '           </h5>';
                     code += '       </div>';
                     code += '   </div>';
@@ -168,7 +168,7 @@ function ModalVer(fila)
     nombre.innerHTML = datos.nombre;
     categoria.innerHTML = datos.categoria.nombre;
     descripcion.innerHTML = datos.descripcion.replace(/\n/g, "<br>");
-    precio.innerHTML = "BsS. " + Formato.Numerico(datos.precio, 2);
+    precio.innerHTML = MONEDA + " " + Formato.Numerico(datos.precio, 2);
 
     modal.modal("show");
 }

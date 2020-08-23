@@ -52,6 +52,7 @@ class Template
                         echo 'const AREA_GERENCIAL = "'.AREA_GERENCIAL.'";';
 
                         echo 'const KEY = "'.Sesion::getKey().'";';
+                        echo 'const MONEDA = "'.Sesion::getRestaurant()->getMoneda()->getSimbolo().'";';
                         
                         if(AUDITORIA) echo 'const AUDITORIA = true;';
                         else echo 'const AUDITORIA = false;';
