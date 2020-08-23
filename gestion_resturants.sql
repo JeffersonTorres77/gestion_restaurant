@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-08-2020 a las 00:29:46
+-- Tiempo de generación: 24-08-2020 a las 00:59:56
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -107,10 +107,10 @@ CREATE TABLE `areas_monitoreo` (
 --
 
 INSERT INTO `areas_monitoreo` (`idAreaMonitoreo`, `nombre`) VALUES
-(1, 'COCINA'),
-(2, 'BAR'),
-(3, 'POSTRES'),
-(4, 'TODOS');
+(1, 'TODOS'),
+(2, 'COCINA'),
+(3, 'BAR'),
+(4, 'POSTRES');
 
 -- --------------------------------------------------------
 
@@ -132,9 +132,9 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`idCategoria`, `idRestaurant`, `nombre`, `idAreaMonitoreo`, `fecha_registro`) VALUES
 (3, 2, 'Combos', 4, '2020-06-09 09:41:00'),
-(6, 1, 'COMIDAS', 1, '2020-06-12 19-54-15'),
-(7, 1, 'BEBIDAS', 2, '2020-06-12 19-54-20'),
-(8, 1, 'POSTRES', 3, '2020-06-12 19-54-25');
+(6, 1, 'COMIDAS', 2, '2020-06-12 19-54-15'),
+(7, 1, 'BEBIDAS', 3, '2020-06-12 19-54-20'),
+(8, 1, 'POSTRES', 4, '2020-06-12 19-54-25');
 
 -- --------------------------------------------------------
 
@@ -239,19 +239,21 @@ INSERT INTO `combos_platos` (`idComboPlato`, `idCombo`, `idPlato`, `aux_1`, `aux
 CREATE TABLE `facturas` (
   `idFactura` bigint(20) NOT NULL,
   `idRestaurant` int(11) NOT NULL,
+  `idMesa` int(11) NOT NULL,
   `numero` bigint(20) NOT NULL,
+  `idMoneda` int(11) NOT NULL,
   `total` double NOT NULL,
-  `fecha_registro` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+  `fecha` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `hora` varchar(10) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `facturas`
 --
 
-INSERT INTO `facturas` (`idFactura`, `idRestaurant`, `numero`, `total`, `fecha_registro`) VALUES
-(1, 1, 1, 1900, '2020-08-14 20:25:40'),
-(2, 1, 2, 2350, '2020-08-19 22:10:50'),
-(3, 1, 3, 1760, '2020-08-19 22:10:53');
+INSERT INTO `facturas` (`idFactura`, `idRestaurant`, `idMesa`, `numero`, `idMoneda`, `total`, `fecha`, `hora`) VALUES
+(1, 1, 1, 1, 2, 850, '2020-08-23', '21:56:15'),
+(2, 1, 1, 2, 2, 1760, '2020-08-23', '21:56:18');
 
 -- --------------------------------------------------------
 
@@ -288,24 +290,14 @@ CREATE TABLE `facturas_detalles` (
 --
 
 INSERT INTO `facturas_detalles` (`idFacturaDetalle`, `idFactura`, `idMesa`, `idPlato`, `nombrePlato`, `idCombo`, `nombreCombo`, `loteCombo`, `idAreaMonitoreo`, `precioUnitario`, `cantidad`, `descuento`, `precioTotal`, `nota`, `status`, `motivo_cancelado`, `para_llevar`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
-(1, -1, 1, 2, 'VINO TINTO', 0, 'null', 0, 2, 110, 1, 0, 110, '', 5, 'Prueba del sistema', 0, NULL, NULL, NULL, '2020-08-14 20:24:56'),
-(2, -1, 1, 13, 'PEPSI', 3, 'COMBO 2', 1, 2, 200, 1, 20, 160, '', 5, 'Prueba del sistema cancelado', 0, NULL, NULL, NULL, '2020-08-14 20:25:16'),
-(3, 1, 1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 1, 2000, 1, 20, 1600, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40'),
-(4, 1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 2, 0, 300, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-14 20:25:40'),
-(5, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, 'Test del sistema', 0, NULL, NULL, NULL, '2020-08-14 20:40:17'),
-(6, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-14 20:40:20'),
-(7, -1, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 1, 1500, 1, 0, 1500, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-14 20:40:22'),
-(8, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, '123', 0, NULL, NULL, NULL, '2020-08-14 20:41:01'),
-(9, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, '2', 0, NULL, NULL, NULL, '2020-08-14 20:41:04'),
-(10, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, '0', 0, NULL, NULL, NULL, '2020-08-14 20:41:08'),
-(11, -1, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 1, 1500, 1, 0, 1500, '', 5, 'Test', 0, NULL, NULL, NULL, '2020-08-18 15:03:50'),
-(12, -1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 5, 'test', 0, NULL, NULL, NULL, '2020-08-18 15:03:52'),
-(13, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 5, 'test', 0, NULL, NULL, NULL, '2020-08-19 18:18:29'),
-(14, 2, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:50'),
-(15, 2, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:51'),
-(16, 2, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 1, 1500, 1, 0, 1500, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:51'),
-(17, 3, 1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 1, 2000, 1, 20, 1600, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:53'),
-(18, 3, 1, 13, 'PEPSI', 3, 'COMBO 2', 1, 2, 200, 1, 20, 160, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-19 22:10:53');
+(1, 1, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 1, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-23 21:56:15'),
+(2, 1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-23 21:56:15'),
+(3, 2, 1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 1, 2000, 1, 20, 1600, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-23 21:56:18'),
+(4, 2, 1, 13, 'PEPSI', 3, 'COMBO 2', 1, 2, 200, 1, 20, 160, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-23 21:56:18'),
+(5, -1, 1, 14, 'ASD', 0, 'null', 0, 1, 123, 1, 0, 123, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:41'),
+(6, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:42'),
+(7, -1, 1, 8, '7UP', 0, 'null', 0, 2, 200, 1, 0, 200, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:44'),
+(8, -1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 1, 0, 150, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:47');
 
 -- --------------------------------------------------------
 
@@ -334,7 +326,7 @@ INSERT INTO `menus_a` (`idMenuA`, `nombre`, `img`, `link`, `con_opciones`) VALUE
 (6, 'Facturas', 'fas fa-receipt', 'Facturas/', 1),
 (7, 'Estadisticas', 'fas fa-home', 'Estadisticas/', 1),
 (8, 'Usuario', 'fas fa-users', 'Usuarios/', 0),
-(9, 'Configuracion', 'fas fa-chart-area', 'Configuracion/', 0);
+(9, 'Configuracion', 'fas fa-chart-area', 'Configuracion/', 1);
 
 -- --------------------------------------------------------
 
@@ -355,11 +347,18 @@ CREATE TABLE `menus_b` (
 --
 
 INSERT INTO `menus_b` (`idMenuB`, `idMenuA`, `nombre`, `img`, `link`) VALUES
-(1, 5, 'Cocina', 'far fa-circle', 'Monitoreo/Cocina/'),
-(2, 5, 'Camarero', 'far fa-circle', 'Monitoreo/Camarero/'),
-(3, 5, 'Caja', 'far fa-circle', 'Monitoreo/Caja/'),
-(4, 6, 'Consulta', 'far fa-circle', 'Facturas/Consulta/'),
-(5, 7, 'General', 'far fa-circle', 'Estadisticas/General/');
+(-2, 5, 'Pedidos - General', 'far fa-circle', 'Monitoreo/Pedidos/General/'),
+(-1, 5, 'Pedidos - Cocina', 'far fa-circle', 'Monitoreo/Pedidos/Cocina/'),
+(0, 5, 'Pedidos - Bar', 'far fa-circle', 'Monitoreo/Pedidos/Bar/'),
+(1, 5, 'Pedidos - Postres', 'far fa-circle', 'Monitoreo/Pedidos/Postres/'),
+(2, 5, 'Camarero', 'fas fa-concierge-bell', 'Monitoreo/Camarero/'),
+(3, 5, 'Caja', 'fas fa-cash-register', 'Monitoreo/Caja/'),
+(4, 6, 'Hoy', 'far fa-circle', 'Facturas/hoy/'),
+(5, 6, 'General', 'far fa-circle', 'Facturas/General/'),
+(6, 7, 'General', 'far fa-circle', 'Estadisticas/General/'),
+(7, 9, 'Datos', 'far fa-circle', 'Configuracion/Datos/'),
+(8, 9, 'Redes sociales', 'far fa-circle', 'Configuracion/Redes_Sociales/'),
+(9, 9, 'Servicio', 'far fa-circle', 'Configuracion/Servicio/');
 
 -- --------------------------------------------------------
 
@@ -393,6 +392,27 @@ INSERT INTO `mesas` (`idMesa`, `idRestaurant`, `status`, `alias`, `usuario`, `cl
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `monedas`
+--
+
+CREATE TABLE `monedas` (
+  `idMoneda` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `simbolo` varchar(10) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `monedas`
+--
+
+INSERT INTO `monedas` (`idMoneda`, `nombre`, `simbolo`) VALUES
+(1, 'Dolar', '$'),
+(2, 'Euro', '€'),
+(3, 'Bolivar', 'Bs');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `permisos_a`
 --
 
@@ -406,7 +426,6 @@ CREATE TABLE `permisos_a` (
 --
 
 INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
-(1, 1),
 (1, 2),
 (1, 3),
 (1, 4),
@@ -432,11 +451,6 @@ INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
 (2, 1),
 (1, 9),
 (2, 9),
-(5, 1),
-(5, 2),
-(5, 3),
-(5, 4),
-(5, 5),
 (6, 2),
 (6, 3),
 (6, 4),
@@ -479,7 +493,8 @@ INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
 (1, 7),
 (1, 6),
 (3, 6),
-(3, 7);
+(3, 7),
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -507,8 +522,6 @@ INSERT INTO `permisos_b` (`idRol`, `idMenuB`) VALUES
 (1, 7),
 (3, 6),
 (3, 7),
-(5, 1),
-(5, 2),
 (6, 1),
 (6, 2),
 (6, 3),
@@ -533,7 +546,12 @@ INSERT INTO `permisos_b` (`idRol`, `idMenuB`) VALUES
 (1, 4),
 (1, 5),
 (3, 4),
-(3, 5);
+(3, 5),
+(1, 8),
+(1, 9),
+(1, 0),
+(1, -1),
+(1, -2);
 
 -- --------------------------------------------------------
 
@@ -601,6 +619,7 @@ CREATE TABLE `restaurantes` (
   `imagencombo` text COLLATE utf8_spanish_ci NOT NULL,
   `titulocombo` text COLLATE utf8_spanish_ci NOT NULL,
   `textocombo` text COLLATE utf8_spanish_ci NOT NULL,
+  `idMoneda` int(11) NOT NULL,
   `servicio` tinyint(4) NOT NULL DEFAULT '0',
   `aux_1` text COLLATE utf8_spanish_ci,
   `aux_2` text COLLATE utf8_spanish_ci,
@@ -612,9 +631,9 @@ CREATE TABLE `restaurantes` (
 -- Volcado de datos para la tabla `restaurantes`
 --
 
-INSERT INTO `restaurantes` (`idRestaurant`, `documento`, `nombre`, `direccion`, `telefono`, `correo`, `logo`, `facebook`, `twitter`, `instagram`, `whatsapp`, `activo`, `imagencomanda`, `titulocomanda`, `textocomanda`, `imagencombo`, `titulocombo`, `textocombo`, `servicio`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
-(1, 'J254099046', 'Empresa de Jefferson CA', 'En un comercio', '', '', 'logo.png', '', '', '', '', 1, 'imgcomanda.png', 'Carta', 'Elije un platillo entre nuestra carta', 'imgcombo.png', 'Menus y promociones', 'Elije un menu y aprovecha nuestros descuentos', 1, NULL, NULL, NULL, '2020-06-11 1-14-34'),
-(2, 'J227640502', 'Amargados Asociados CA', 'En un comercio de nuevo', '', '', 'logo.svg', NULL, NULL, NULL, NULL, 1, '', '', '', '', '', '', 0, NULL, NULL, NULL, '2020-06-11 1-15-30');
+INSERT INTO `restaurantes` (`idRestaurant`, `documento`, `nombre`, `direccion`, `telefono`, `correo`, `logo`, `facebook`, `twitter`, `instagram`, `whatsapp`, `activo`, `imagencomanda`, `titulocomanda`, `textocomanda`, `imagencombo`, `titulocombo`, `textocombo`, `idMoneda`, `servicio`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`) VALUES
+(1, 'J254099046', 'Empresa de Jefferson CA', 'En un comercio', '', '', 'logo.png', '', '', '', '', 1, 'imgcomanda.png', 'Carta', 'Elije un platillo entre nuestra carta', 'imgcombo.png', 'Menus y promociones', 'Elije un menu y aprovecha nuestros descuentos', 2, 1, NULL, NULL, NULL, '2020-06-11 1-14-34'),
+(2, 'J227640502', 'Amargados Asociados CA', 'En un comercio de nuevo', '', '', 'logo.svg', NULL, NULL, NULL, NULL, 1, '', '', '', '', '', '', 3, 0, NULL, NULL, NULL, '2020-06-11 1-15-30');
 
 -- --------------------------------------------------------
 
@@ -639,8 +658,7 @@ INSERT INTO `roles` (`idRol`, `idRestaurant`, `nombre`, `descripcion`, `responsa
 (1, 1, 'GERENTE', '', b'1', '2020-06-11 1-14-34'),
 (2, 1, 'BASICO', '', b'0', '2020-06-11 1-14-34'),
 (3, 2, 'GERENTE', '', b'1', '2020-06-11 1-15-30'),
-(4, 2, 'BASICO', '', b'0', '2020-06-11 1-15-30'),
-(5, 1, 'TETST', '', b'0', '2020-07-05 14-32-10');
+(4, 2, 'BASICO', '', b'0', '2020-06-11 1-15-30');
 
 -- --------------------------------------------------------
 
@@ -761,6 +779,12 @@ ALTER TABLE `mesas`
   ADD PRIMARY KEY (`idMesa`);
 
 --
+-- Indices de la tabla `monedas`
+--
+ALTER TABLE `monedas`
+  ADD PRIMARY KEY (`idMoneda`);
+
+--
 -- Indices de la tabla `platos`
 --
 ALTER TABLE `platos`
@@ -799,6 +823,12 @@ ALTER TABLE `combos_categorias`
 --
 ALTER TABLE `combos_platos`
   MODIFY `idComboPlato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de la tabla `monedas`
+--
+ALTER TABLE `monedas`
+  MODIFY `idMoneda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
