@@ -23,6 +23,11 @@ class Controlador extends ControladorBase
             Incluir::Template("modelo_gerencial");
             Template::Iniciar();
         }
+
+        if(!MenusAModel::Verificar(8, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a este modulo.");
+            exit;
+        }
     }
     
     /*============================================================================

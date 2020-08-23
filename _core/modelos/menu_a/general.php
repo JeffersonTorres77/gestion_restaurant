@@ -39,7 +39,7 @@ class MenusAModel
         $idRol = (int) $idRol;
 
         $query = "SELECT COUNT(*) as cantidad FROM permisos_a WHERE idMenuA = '{$idMenuA}' AND idRol = '{$idRol}'";
-        $datos = Conexion::idRol()->Consultar($query);
+        $datos = Conexion::getMysql()->Consultar($query);
 
         $cantidad = $datos[0]['cantidad'];
 
