@@ -42,11 +42,43 @@ class Controlador extends ControladorBase
      *  
      *
     ============================================================================*/
-    public function cocina()
+    public function pedidos($parametros = [])
     {
-        $this->Vista("monitoreo/cocina");
+        if(!isset($parametros[0])) {
+            $this->Error("No se ha especificado el area.");
+            return;
+        }
+
+        $area = strtolower($parametros[0]);
         echo '<script src="' . HOST."recursos/core/js/socket.io.js" . '"></script>';
-        $this->Javascript("monitoreo/cocina");
+
+        switch($area)
+        {
+            case "general":
+                $this->Vista("monitoreo/general");
+                $this->Javascript("monitoreo/general");
+            break;
+            
+            case "cocina":
+                $this->Vista("monitoreo/individual", ['idAreaMonitoreo' => 2]);
+                $this->Javascript("monitoreo/individual");
+            break;
+            
+            case "bar":
+                $this->Vista("monitoreo/individual", ['idAreaMonitoreo' => 3]);
+                $this->Javascript("monitoreo/individual");
+            break;
+            
+            case "postres":
+                $this->Vista("monitoreo/individual", ['idAreaMonitoreo' => 4]);
+                $this->Javascript("monitoreo/individual");
+            break;
+
+            default:
+                $this->Error("Area de monitoreo de pedidos invalida.");
+                return;
+            break;
+        }
     }
 
     /*============================================================================

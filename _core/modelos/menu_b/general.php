@@ -22,7 +22,7 @@ class MenusBModel
         if($idRol == -1) {
             $query = "SELECT * FROM menus_b WHERE idMenuA = '{$idMenuA}' ORDER BY idMenuB ASC";
         } else {
-            $query = "SELECT * FROM menus_b WHERE idMenuA = '{$idMenuA}' AND idMenuB IN (SELECT idMenuB FROM permisos_b WHERE idRol = '{$idRol}') ORDER BY nombre ASC";
+            $query = "SELECT * FROM menus_b WHERE idMenuA = '{$idMenuA}' AND idMenuB IN (SELECT idMenuB FROM permisos_b WHERE idRol = '{$idRol}') ORDER BY idMenuB ASC";
         }
 
         $datos = Conexion::getMysql()->Consultar($query);

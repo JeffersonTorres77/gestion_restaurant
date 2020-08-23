@@ -1,7 +1,7 @@
 <script>
     const AREA = '<?php echo AREA_GERENCIAL; ?>';
     const MODULO = "monitoreo";
-    const ARCHIVO = "cocina";
+    const ARCHIVO = "pedidos";
 </script>
 
 <style>

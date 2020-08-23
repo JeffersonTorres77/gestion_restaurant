@@ -129,7 +129,73 @@
 
         <div class="row">
             <?php
+                $menu = new MenuBModel(-1);
+                if($menu->Verificar( $idRol ))
+                {
+                    ?>
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="wrimagecard wrimagecard-topimage">
+                                <a href="<?php echo HOST_GERENCIAL . $menu->getLink(); ?>">
+                                    <div class="wrimagecard-topimage_header">
+                                        <center class="icon_interfaz"> <i class="<?php echo $menu->getImg(); ?>"></i></center>
+                                    </div>
+
+                                    <div class="wrimagecard-topimage_title">
+                                        <h4 class="centrar"><?php echo $menu->getNombre(); ?>
+                                            <div class="pull-right badge"> </div>
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php
+                }
+
+                $menu = new MenuBModel(0);
+                if($menu->Verificar( $idRol ))
+                {
+                    ?>
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="wrimagecard wrimagecard-topimage">
+                                <a href="<?php echo HOST_GERENCIAL . $menu->getLink(); ?>">
+                                    <div class="wrimagecard-topimage_header">
+                                        <center class="icon_interfaz"> <i class="<?php echo $menu->getImg(); ?>"></i></center>
+                                    </div>
+
+                                    <div class="wrimagecard-topimage_title">
+                                        <h4 class="centrar"><?php echo $menu->getNombre(); ?>
+                                            <div class="pull-right badge"> </div>
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php
+                }
+
                 $menu = new MenuBModel(1);
+                if($menu->Verificar( $idRol ))
+                {
+                    ?>
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div class="wrimagecard wrimagecard-topimage">
+                                <a href="<?php echo HOST_GERENCIAL . $menu->getLink(); ?>">
+                                    <div class="wrimagecard-topimage_header">
+                                        <center class="icon_interfaz"> <i class="<?php echo $menu->getImg(); ?>"></i></center>
+                                    </div>
+
+                                    <div class="wrimagecard-topimage_title">
+                                        <h4 class="centrar"><?php echo $menu->getNombre(); ?>
+                                            <div class="pull-right badge"> </div>
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php
+                }
+
+                $menu = new MenuBModel(-2);
                 if($menu->Verificar( $idRol ))
                 {
                     ?>
