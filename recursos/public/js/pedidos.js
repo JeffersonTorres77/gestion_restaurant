@@ -236,7 +236,7 @@ function PedidoPlatoHTML(keyPedido, imagen, nombre, cantidad, idStatus, idCollap
 
             <div>
                 <h6 class="font-weight-bold mb-1">${nombre}</h6>
-                <div>Cantidad: <b>${cantidad}</b></div>
+                <div>Cant: <b>${cantidad}</b></div>
                 <div>${status} ${statusNota}</div>
             </div>
         </div>

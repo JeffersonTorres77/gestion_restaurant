@@ -17,7 +17,8 @@ class FacturaModel
     private $idRestaurant;
     private $numero;
     private $total;
-    private $fecha_registro;
+    private $fecha;
+    private $hora;
 
     /*============================================================================
 	 *
@@ -40,8 +41,12 @@ class FacturaModel
         return $this->total;
     }
 
-    public function getFechaRegistro() {
-        return $this->fecha_registro;
+    public function getFecha() {
+        return $this->fecha;
+    }
+
+    public function getHora() {
+        return $this->hora;
     }
 
     /*============================================================================
@@ -63,7 +68,8 @@ class FacturaModel
         $this->idRestaurant = $datos[0]['idRestaurant'];
         $this->numero = $datos[0]['numero'];
         $this->total = $datos[0]['total'];
-        $this->fecha_registro = $datos[0]['fecha_registro'];
+        $this->fecha = $datos[0]['fecha'];
+        $this->hora = $datos[0]['hora'];
     }
 
     /*============================================================================

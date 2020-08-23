@@ -29,6 +29,7 @@ switch($accion)
         $direccion = Input::POST("direccion", FALSE);
         $telefono = Input::POST("telefono", FALSE);
         $correo = Input::POST("correo", FALSE);
+        $idMoneda = Input::POST("idMoneda", FALSE);
 
         /**
          * Imagen
@@ -71,6 +72,11 @@ switch($accion)
         if($direccion !== FALSE) $objRestaurant->setDireccion( $direccion );
         if($telefono !== FALSE) $objRestaurant->setTelefono( $telefono );
         if($correo !== FALSE) $objRestaurant->setCorreo( $correo );
+        if($idMoneda !== FALSE)
+        {
+            $objMoneda = new MonedaModel($idMoneda);
+            $objRestaurant->setIdMoneda($objMoneda->getId());
+        }
 
         /**
          * Redes
@@ -149,7 +155,7 @@ switch($accion)
             $objRestaurant->setimagencombo( "{$nombreImg}.{$extensionImg}" );
         }
         
-        Conexion::getMysql()->Commit();
+        Conexion::getMysql()->Commit();        
 
         $respuesta['cuerpo'] = [
             "id" => $objRestaurant->getId(),

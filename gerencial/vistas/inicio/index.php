@@ -133,7 +133,7 @@
                 if($menu->Verificar( $idRol ))
                 {
                     ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                        <div class="col-12 col-sm-6 col-md-4">
                             <div class="wrimagecard wrimagecard-topimage">
                                 <a href="<?php echo HOST_GERENCIAL . $menu->getLink(); ?>">
                                     <div class="wrimagecard-topimage_header">
@@ -155,7 +155,7 @@
                 if($menu->Verificar( $idRol ))
                 {
                     ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                        <div class="col-12 col-sm-6 col-md-4">
                             <div class="wrimagecard wrimagecard-topimage">
                                 <a href="<?php echo HOST_GERENCIAL . $menu->getLink(); ?>">
                                     <div class="wrimagecard-topimage_header">
@@ -177,7 +177,7 @@
                 if($menu->Verificar( $idRol ))
                 {
                     ?>
-                        <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+                        <div class="col-12 col-sm-6 col-md-4">
                             <div class="wrimagecard wrimagecard-topimage">
                                 <a href="<?php echo HOST_GERENCIAL . $menu->getLink(); ?>">
                                     <div class="wrimagecard-topimage_header">

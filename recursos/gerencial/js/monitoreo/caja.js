@@ -640,6 +640,11 @@ function Facturar(idMesa)
         if(input.checked != true) continue;
         idsPedidos.push(idPedido);
     }
+
+    if(idsPedidos.length <= 0) {
+        Alerta.Danger("Debe seleccionar almenos un pedido.");
+        return;
+    }
     
     socket.emit('facturar', {
         idMesa: idMesa,
@@ -655,6 +660,14 @@ function Facturar(idMesa)
         inputNumeroFactura.value = "";
     });
 }
+
+/**
+ * 
+ */
+socket.on('ws:error-factura', function(mensaje) {
+    Loader.Ocultar();
+    Alerta.Danger(mensaje);
+});
 
 /**
  * 

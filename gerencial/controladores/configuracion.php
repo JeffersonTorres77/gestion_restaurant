@@ -42,11 +42,25 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function index()
+    public function datos()
     {
         $objRestaurant = Sesion::getRestaurant();
-        $this->Vista("configuracion/index", [ "objRestaurant" => $objRestaurant ]);
-        $this->Javascript("configuracion/index");
+        $this->Vista("configuracion/datos", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("configuracion/datos");
+    }
+
+    public function redes_sociales()
+    {
+        $objRestaurant = Sesion::getRestaurant();
+        $this->Vista("configuracion/redessociales", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("configuracion/redessociales");
+    }
+
+    public function servicio()
+    {
+        $objRestaurant = Sesion::getRestaurant();
+        $this->Vista("configuracion/servicio", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("configuracion/servicio");
     }
 
     /*============================================================================

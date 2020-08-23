@@ -121,11 +121,17 @@ class Template
                     </div>
                 </div>
 
-                <div class="modal" id="consultar-pedidos-mesa">
+                <div class="modal fade" id="consultar-pedidos-mesa">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
                                 <h5 class="mb-0">
+                                    <div class="float-left mr-2">
+                                        <button class="btn btn-dark btn-sm" id="boton-actualizar-ver-pedidos">
+                                            <i class="fas fa-xs fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+
                                     Pedidos de la mesa
                                 </h5>
 
@@ -143,11 +149,6 @@ class Template
                             </div>
 
                             <div class="modal-footer bg-light">
-                                <button class="btn btn-primary w-150px" id="boton-actualizar-ver-pedidos">
-                                    <i class="fas fa-sync-alt"></i>
-                                    Actualizar
-                                </button>
-
                                 <button class="btn btn-success w-150px" id="boton-confirmar-ver-pedidos">
                                     Confirmar pedidos
                                 </button>

@@ -47,7 +47,7 @@ class ComboModel
 	}
 
     public function getImagen() {
-		return HOST . $this->imagen;
+		return HOST . $this->imagen."?update=".rand();
     }
 
 	public function getDescuento() {

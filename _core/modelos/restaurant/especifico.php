@@ -31,6 +31,7 @@ class RestaurantModel
     private $imagencombo;
     private $titulocombo;
     private $textocombo;
+    private $idMoneda;
     private $servicio;
     private $aux_1;
     private $aux_2;
@@ -68,7 +69,7 @@ class RestaurantModel
 
     public function getLogo() {
         $ruta = DIR_IMG_REST."/".$this->id."/".$this->logo;
-        $link = HOST_IMG_REST."/".$this->id."/".$this->logo;
+        $link = HOST_IMG_REST."/".$this->id."/".$this->logo."?update=".rand();
         if(file_exists($ruta) && is_File($ruta))
         {
             return $link;
@@ -101,7 +102,7 @@ class RestaurantModel
 
     public function getimagencomanda() {
         $ruta = DIR_IMG_REST."/".$this->id."/".$this->imagencomanda;
-        $link = HOST_IMG_REST."/".$this->id."/".$this->imagencomanda;
+        $link = HOST_IMG_REST."/".$this->id."/".$this->imagencomanda."?update=".rand();
         if(file_exists($ruta) && is_File($ruta))
         {
             return $link;
@@ -122,7 +123,7 @@ class RestaurantModel
 
     public function getimagencombo() {
         $ruta = DIR_IMG_REST."/".$this->id."/".$this->imagencombo;
-        $link = HOST_IMG_REST."/".$this->id."/".$this->imagencombo;
+        $link = HOST_IMG_REST."/".$this->id."/".$this->imagencombo."?update=".rand();
         if(file_exists($ruta) && is_File($ruta))
         {
             return $link;
@@ -139,6 +140,10 @@ class RestaurantModel
 
     public function gettextocombo() {
         return $this->textocombo;
+    }
+
+    public function getIdMoneda() {
+        return $this->idMoneda;
     }
 
     public function getServicio() {
@@ -208,6 +213,7 @@ class RestaurantModel
         $this->imagencombo = $datos[0]['imagencombo'];
         $this->titulocombo = $datos[0]['titulocombo'];
         $this->textocombo = $datos[0]['textocombo'];
+        $this->idMoneda = $datos[0]['idMoneda'];
         $this->servicio = boolval( $datos[0]['servicio'] );
         $this->aux_1 = $datos[0]['aux_1'];
         $this->aux_2 = $datos[0]['aux_2'];
@@ -316,11 +322,16 @@ class RestaurantModel
         $this->textocombo = $textocombo;
     }
 
+    public function setIdMoneda($idMoneda) {
+        $idMoneda = (int) $idMoneda;
+        $this->set("idMoneda", $idMoneda);
+        $this->idMoneda = $idMoneda;
+    }
+
     public function setServicio($boolval) {
-        $boolval = int( boolval($boolval) );
+        $boolval = (int) boolval($boolval);
         $this->set("servicio", $boolval);
         $this->servicio = $boolval;
-
     }
 
     public function setActivo( $activo ) {

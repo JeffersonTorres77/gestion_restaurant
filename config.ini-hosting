@@ -1,0 +1,25 @@
+[Sistema]
+nombre="Gestor Resturant"
+version="0.1.0"
+fase="DESARROLLO"
+url_base="http://restaurante-app.jonathancolina.com/"
+
+[WebSocket]
+url="http://socket-restaurante.dinerofreelancer.com/"
+
+[BaseDatos]
+#Credenciales de base de datos
+servidor="localhost"
+puerto="3306"
+usuario="dinerofr_admin"
+clave="BhozaC3oL0=r"
+nombre_bd="dinerofr_gestion_resturants"
+
+[Seguridad]
+key="gestion_resturant"
+auditoria="1"
+
+[Areas]
+administrador="ADMIN"
+gerencial="GESTION"
+public="PUBLIC"

@@ -112,6 +112,20 @@
                     </nav>
                 </div>
 
+                <!--====================================================================
+                    Seccion por defecto: Cuenta
+                =====================================================================-->
+                <?php
+                    $active = (Peticion::getControlador() == "cuenta") ? 'active' : '';
+                ?>
+
+                <a class="nav-link" <?php echo $active; ?> href="<?php echo HOST."Cuenta/"; ?>">
+					<div class="sb-nav-link-icon">
+                        <i class="fas fa-money-bill-wave-alt"></i>
+					</div>
+                    Cuenta
+                </a>
+
             </div>
         </div>
 

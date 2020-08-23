@@ -63,7 +63,7 @@ class FacturasModel
             $key = $par['ordenar_por'];
             $type = (isset($par['ordenar_tipo'])) ? $par['ordenar_tipo'] : 'ASC';
             if($type != "ASC" && $type != "DESC") $type = "ASC";
-            $order_by = "ORDER BY {$key} {$type}";
+            $order_by = "ORDER BY {$key} {$type}, HORA DESC";
         }
 
         /**

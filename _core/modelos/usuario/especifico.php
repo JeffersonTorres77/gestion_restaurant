@@ -78,7 +78,7 @@ class UsuarioModel
 
     public function getFoto() {
         $ruta = DIR_IMG_REST."/".$this->idRestaurant."/".$this->foto;
-        $link = HOST_IMG_REST."/".$this->idRestaurant."/".$this->foto;
+        $link = HOST_IMG_REST."/".$this->idRestaurant."/".$this->foto."?update=".rand();
         if(file_exists($ruta) && is_File($ruta))
         {
             return $link;

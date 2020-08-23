@@ -161,11 +161,12 @@ class UsuariosModel
         $correo = Filtro::General($correo);
         $activo = (int) TRUE;
         $fecha_registro = Time::get();
+        $fecha_modificacion = $fecha_registro;
 
         $query = "INSERT INTO usuarios
-        (idUsuario, idRestaurant, usuario, clave, documento, nombre, idRol, direccion, telefono, correo, activo, fecha_registro)
+        (idUsuario, idRestaurant, usuario, clave, documento, nombre, idRol, direccion, telefono, correo, activo, fecha_registro, fecha_modificacion)
         VALUES
-        ('{$idUsuario}', '{$idRestaurant}', '{$usuario}', '{$clave}', '{$documento}', '{$nombre}', '{$idRol}', '{$direccion}', '{$telefono}', '{$correo}', '{$activo}', '{$fecha_registro}')";
+        ('{$idUsuario}', '{$idRestaurant}', '{$usuario}', '{$clave}', '{$documento}', '{$nombre}', '{$idRol}', '{$direccion}', '{$telefono}', '{$correo}', '{$activo}', '{$fecha_registro}', '{$fecha_modificacion}')";
         $respuesta = Conexion::getMysql()->Ejecutar($query);
         if($respuesta === FALSE) {
             throw new Exception("Ocurrio un error al intentar registrar el usuario.<br>{$query}");

@@ -34,7 +34,7 @@ function Actualizar()
      */
     var url = `${HOST_GERENCIAL_AJAX}Facturas/CRUD/`;
     var data = new FormData();
-    data.append("accion", "CONSULTAR");
+    data.append("accion", "CONSULTAR-HOY");
     var parametros = Hash.getParametros();
     for(var key in parametros)
     {
@@ -68,15 +68,16 @@ function Actualizar()
                         let dato = data[i];
                         if(dato == undefined) continue;
 
-                        //var link = HOST_GERENCIAL + `Usuarios/Ver/${dato.id}/`;
+                        var link = HOST_GERENCIAL + `Facturas/Ver/${dato.id}/`;
                         var numero = dato.numero;
                         var total = 'Bs. ' + Formato.Numerico(dato.total);
                         var items = dato.items;
-                        var fecha = Formato.Fecha( dato.fecha_registro.split(' ')[0] );
+                        var fecha = dato.fecha;
+                        var hora = dato.hora;
 
                         tbody.innerHTML +=
                         '<tr class="table-sm">' +
-                        '   <td style="vertical-align: middle;" center>' +
+                        '   <td style="vertical-align: middle;" left>' +
                         '       ' + numero +
                         '   </td>' +
 
@@ -90,7 +91,13 @@ function Actualizar()
                         '   </td>' +
 
                         '   <td style="vertical-align: middle;" center>' +
-                        '       ' + fecha +
+                        '       ' + hora +
+                        '   </td>' +
+
+                        '   <td style="vertical-align: middle;" center>' +
+                        '       <a class="btn btn-sm btn-success" href="' + link + '">' +
+                        '           <i class="fas fa-eye"></i>'
+                        '       </a>' +
                         '   </td>' +
                         '</tr>';
                     }

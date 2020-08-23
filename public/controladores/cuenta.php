@@ -3,7 +3,7 @@
 /*================================================================================
  *--------------------------------------------------------------------------------
  *
- *	Controlador del FACTURAS
+ *	Controlador de CUENTA
  *
  *--------------------------------------------------------------------------------
 ================================================================================*/
@@ -20,11 +20,11 @@ class Controlador extends ControladorBase
 
         if( !Peticion::getEsAjax() )
         {
-            Incluir::Template("modelo_gerencial");
+            Incluir::Template("modelo_cliente");
             Template::Iniciar();
         }
     }
-    
+
     /*============================================================================
 	 *
 	 *	Destructor
@@ -42,10 +42,10 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function hoy()
+    public function index()
     {
-        $this->Vista("facturas/hoy");
-        $this->Javascript("facturas/hoy");
+        $this->Vista("cuenta/index");
+        $this->Javascript("cuenta/index");
     }
 
     /*============================================================================
@@ -53,44 +53,8 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function general()
+    public function consultar()
     {
-        $this->Vista("facturas/general");
-        $this->Javascript("facturas/general");
-    }
-    
-    /*============================================================================
-	 *
-	 *	
-	 *
-    ============================================================================*/
-    public function crud()
-    {
-        $this->AJAX("facturas/crud");
-    }
-
-    /*============================================================================
-	 *
-	 *	
-	 *
-    ============================================================================*/
-    public function ver($parametros = [])
-    {
-        if(!isset($parametros[0])) {
-            $this->Error('No se ha enviado el identificador de la factura.');
-            return;
-        }
-
-        $idFactura = $parametros[0];
-
-        try {
-            $objFactura = new FacturaModel($idFactura);
-        } catch(Exception $e) {
-            $this->Error("El identificador de factura <b>{$idFactura}</b> no existe.");
-            return;
-        }
-
-        $this->Vista("facturas/ver", ['objFactura' => $objFactura]);
-        $this->Javascript("facturas/ver");
+        $this->AJAX("cuenta/consultar");
     }
 }
