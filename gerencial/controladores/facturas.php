@@ -49,6 +49,11 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function hoy()
     {
+        if(!MenusBModel::Verificar(4, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a esta sección.");
+            exit;
+        }
+
         $this->Vista("facturas/hoy");
         $this->Javascript("facturas/hoy");
     }
@@ -60,6 +65,11 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function general()
     {
+        if(!MenusBModel::Verificar(5, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a esta sección.");
+            exit;
+        }
+
         $this->Vista("facturas/general");
         $this->Javascript("facturas/general");
     }

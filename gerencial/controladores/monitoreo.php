@@ -60,21 +60,41 @@ class Controlador extends ControladorBase
         switch($area)
         {
             case "general":
+                if(!MenusBModel::Verificar(-2, Sesion::getUsuario()->getRol()->getId())) {
+                    $this->Error("No tiene permisos para acceder a esta sección.");
+                    exit;
+                }
+
                 $this->Vista("monitoreo/general");
                 $this->Javascript("monitoreo/general");
             break;
             
             case "cocina":
+                if(!MenusBModel::Verificar(-1, Sesion::getUsuario()->getRol()->getId())) {
+                    $this->Error("No tiene permisos para acceder a esta sección.");
+                    exit;
+                }
+
                 $this->Vista("monitoreo/individual", ['idAreaMonitoreo' => 2]);
                 $this->Javascript("monitoreo/individual");
             break;
             
             case "bar":
+                if(!MenusBModel::Verificar(0, Sesion::getUsuario()->getRol()->getId())) {
+                    $this->Error("No tiene permisos para acceder a esta sección.");
+                    exit;
+                }
+
                 $this->Vista("monitoreo/individual", ['idAreaMonitoreo' => 3]);
                 $this->Javascript("monitoreo/individual");
             break;
             
             case "postres":
+                if(!MenusBModel::Verificar(1, Sesion::getUsuario()->getRol()->getId())) {
+                    $this->Error("No tiene permisos para acceder a esta sección.");
+                    exit;
+                }
+
                 $this->Vista("monitoreo/individual", ['idAreaMonitoreo' => 4]);
                 $this->Javascript("monitoreo/individual");
             break;
@@ -93,6 +113,11 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function camarero()
     {
+        if(!MenusBModel::Verificar(2, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a esta sección.");
+            exit;
+        }
+
         $this->Vista("monitoreo/camarero");
         echo '<script src="' . HOST."recursos/core/js/socket.io.js" . '"></script>';
         $this->Javascript("monitoreo/camarero");
@@ -105,6 +130,11 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function caja()
     {
+        if(!MenusBModel::Verificar(3, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a esta sección.");
+            exit;
+        }
+
         $this->Vista("monitoreo/caja");
         echo '<script src="' . HOST."recursos/core/js/socket.io.js" . '"></script>';
         $this->Javascript("monitoreo/caja");

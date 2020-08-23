@@ -49,6 +49,11 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function general()
     {
+        if(!MenusBModel::Verificar(6, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a esta sección.");
+            exit;
+        }
+        
         $this->Vista("estadisticas/general");
         $this->Javascript("estadisticas/general");
     }
