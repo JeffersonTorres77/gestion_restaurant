@@ -137,6 +137,7 @@ switch($accion)
         for($I=0; $I<sizeof($facturas); $I++)
         {
             $objFactura = new FacturaModel( $facturas[$I]['idFactura'] );
+            $objMoneda = new MonedaModel($objFactura->getIdMoneda());
             $items = $objFactura->getItems();
 
             $datos[$I] = [
@@ -145,7 +146,11 @@ switch($accion)
                 "total" => $objFactura->getTotal(),
                 "items" => sizeof($items),
                 "fecha" => $objFactura->getFecha(),
-                "hora" => $objFactura->getHora()
+                "hora" => $objFactura->getHora(),
+                "moneda" => [
+                    "id" => $objMoneda->getId(),
+                    "nombre" => $objMoneda->getNombre()
+                ]
             ];
         }
 
@@ -275,6 +280,7 @@ switch($accion)
         for($I=0; $I<sizeof($facturas); $I++)
         {
             $objFactura = new FacturaModel( $facturas[$I]['idFactura'] );
+            $objMoneda = new MonedaModel($objFactura->getIdMoneda());
             $items = $objFactura->getItems();
 
             $datos[$I] = [
@@ -283,7 +289,12 @@ switch($accion)
                 "total" => $objFactura->getTotal(),
                 "items" => sizeof($items),
                 "fecha" => $objFactura->getFecha(),
-                "hora" => $objFactura->getHora()
+                "hora" => $objFactura->getHora(),
+                "moneda" => [
+                    "id" => $objMoneda->getId(),
+                    "nombre" => $objMoneda->getNombre(),
+                    "simbolo" => $objMoneda->getSimbolo()
+                ]
             ];
         }
 
