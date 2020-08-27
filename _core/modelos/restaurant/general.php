@@ -122,12 +122,19 @@ class RestaurantesModel
         $telefono = Filtro::General($telefono);
         $correo = Filtro::General($correo);
         $activo = (int) TRUE;
+        $imagencomanda = "";
+        $titulocomanda = "";
+        $textocomanda = "";
+        $imagencombo = "";
+        $titulocombo = "";
+        $textocombo = "";
+        $idMoneda = 1;
         $fecha_registro = Time::get();
 
         $query = "INSERT INTO restaurantes
-        (idRestaurant, documento, nombre, direccion, telefono, correo, activo, fecha_registro)
+        (idRestaurant, documento, nombre, direccion, telefono, correo, activo, imagencomanda, titulocomanda, textocomanda, imagencombo, titulocombo, textocombo, idMoneda, fecha_registro)
         VALUES
-        ('{$idRestaurant}', '{$documento}', '{$nombre}', '{$direccion}', '{$telefono}', '{$correo}', '{$activo}', '{$fecha_registro}')";
+        ('{$idRestaurant}', '{$documento}', '{$nombre}', '{$direccion}', '{$telefono}', '{$correo}', '{$activo}', '{$imagencomanda}', '{$titulocomanda}', '{$textocomanda}', '{$imagencombo}', '{$titulocombo}', '{$textocombo}', '{$idMoneda}', '{$fecha_registro}')";
         $resp = Conexion::getMysql()->Ejecutar($query);
         if($resp === FALSE) {
             throw new Exception("Error al intentar registrar el restaurant.");
