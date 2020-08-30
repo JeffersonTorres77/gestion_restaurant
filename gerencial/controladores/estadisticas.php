@@ -129,6 +129,6 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function consultas()
     {
-        $this->AJAX('estadisticas/consultas.php');
+        $this->AJAX('estadisticas/consultas');
     }
 }

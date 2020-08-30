@@ -9,6 +9,16 @@
 ================================================================================*/
 class MesasModel
 {
+    public static function General($condicional, $order = "")
+    {
+        $order = ($order == 'ASC' || $order == 'DESC') ? $order : 'ASC';
+
+        if($condicional == "") $condicional = "'1' = '1'";
+        $query = "SELECT * FROM mesas WHERE {$condicional} ORDER BY alias {$order}";
+        $datos = Conexion::getMysql()->Consultar($query);
+        return $datos;
+    }
+
 	/**
      * Listado
      * Array(

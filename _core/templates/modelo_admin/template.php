@@ -32,10 +32,10 @@ class Template
                 <link rel="stylesheet" href="<?php echo HOST."recursos/font-awesome/css/all.css"; ?>">
                 <script src="<?php echo HOST."recursos/font-awesome/js/all.js"; ?>"></script>
 
-                <link rel="stylesheet" href="<?php echo HOST."recursos/administrador/css/template.css"; ?>">
-                <script src="<?php echo HOST."recursos/administrador/js/template.js"; ?>"></script>
-                <link rel="stylesheet" href="<?php echo HOST."recursos/core/css/core.css"; ?>">
-                <script src="<?php echo HOST."recursos/core/js/core.js"; ?>"></script>
+                <link rel="stylesheet" href="<?php echo HOST."recursos/administrador/css/template.css?v=".SISTEMA_VERSION; ?>">
+                <script src="<?php echo HOST."recursos/administrador/js/template.js?v=".SISTEMA_VERSION; ?>"></script>
+                <link rel="stylesheet" href="<?php echo HOST."recursos/core/css/core.css?v=".SISTEMA_VERSION; ?>">
+                <script src="<?php echo HOST."recursos/core/js/core.js?v=".SISTEMA_VERSION; ?>"></script>
 
                 <script>
                     <?php

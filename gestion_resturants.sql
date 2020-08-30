@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-08-2020 a las 00:59:56
+-- Tiempo de generación: 28-08-2020 a las 22:05:53
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -253,7 +253,9 @@ CREATE TABLE `facturas` (
 
 INSERT INTO `facturas` (`idFactura`, `idRestaurant`, `idMesa`, `numero`, `idMoneda`, `total`, `fecha`, `hora`) VALUES
 (1, 1, 1, 1, 2, 850, '2020-08-23', '21:56:15'),
-(2, 1, 1, 2, 2, 1760, '2020-08-23', '21:56:18');
+(2, 1, 1, 2, 2, 1760, '2020-08-23', '21:56:18'),
+(3, 1, 1, 99, 2, 2900, '2020-08-26', '23:03:36'),
+(4, 1, 3, 100, 2, 850, '2020-08-26', '23:03:44');
 
 -- --------------------------------------------------------
 
@@ -297,7 +299,15 @@ INSERT INTO `facturas_detalles` (`idFacturaDetalle`, `idFactura`, `idMesa`, `idP
 (5, -1, 1, 14, 'ASD', 0, 'null', 0, 1, 123, 1, 0, 123, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:41'),
 (6, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 1, 750, 1, 0, 750, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:42'),
 (7, -1, 1, 8, '7UP', 0, 'null', 0, 2, 200, 1, 0, 200, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:44'),
-(8, -1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 1, 0, 150, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:47');
+(8, -1, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 3, 150, 1, 0, 150, '', 5, '1', 0, NULL, NULL, NULL, '2020-08-23 22:07:47'),
+(9, 3, 1, 5, 'HELADO DE VAINILLA', 0, 'null', 0, 4, 150, 1, 0, 150, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
+(10, 3, 1, 8, '7UP', 0, 'null', 0, 3, 200, 1, 0, 200, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
+(11, 3, 1, 7, 'FRESCOLITA', 0, 'null', 0, 3, 200, 1, 0, 200, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
+(12, 3, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 2, 1500, 1, 0, 1500, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
+(13, 3, 1, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
+(14, 3, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 2, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
+(15, 4, 3, 4, 'PASTA EN SALSA', 0, 'null', 0, 2, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:44'),
+(16, 4, 3, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:44');
 
 -- --------------------------------------------------------
 
@@ -355,10 +365,14 @@ INSERT INTO `menus_b` (`idMenuB`, `idMenuA`, `nombre`, `img`, `link`) VALUES
 (3, 5, 'Caja', 'fas fa-cash-register', 'Monitoreo/Caja/'),
 (4, 6, 'Hoy', 'far fa-circle', 'Facturas/hoy/'),
 (5, 6, 'General', 'far fa-circle', 'Facturas/General/'),
-(6, 7, 'General', 'far fa-circle', 'Estadisticas/General/'),
+(6, 7, 'Por platillos', 'far fa-circle', 'Estadisticas/Por_Platillos/'),
 (7, 9, 'Datos', 'far fa-circle', 'Configuracion/Datos/'),
 (8, 9, 'Redes sociales', 'far fa-circle', 'Configuracion/Redes_Sociales/'),
-(9, 9, 'Servicio', 'far fa-circle', 'Configuracion/Servicio/');
+(9, 9, 'Servicio', 'far fa-circle', 'Configuracion/Servicio/'),
+(10, 7, 'Por Menus', 'far fa-circle', 'Estadisticas/Por_Menus/'),
+(11, 7, 'Por Categorias', 'far fa-circle', 'Estadisticas/Por_Categorias/'),
+(12, 7, 'Por Areas', 'far fa-circle', 'Estadisticas/Por_Areas/'),
+(13, 7, 'Por Mesas', 'far fa-circle', 'Estadisticas/Por_Mesas/');
 
 -- --------------------------------------------------------
 
@@ -551,7 +565,11 @@ INSERT INTO `permisos_b` (`idRol`, `idMenuB`) VALUES
 (1, 9),
 (1, 0),
 (1, -1),
-(1, -2);
+(1, -2),
+(1, 12),
+(1, 11),
+(1, 10),
+(1, 13);
 
 -- --------------------------------------------------------
 
@@ -693,7 +711,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`idUsuario`, `idRestaurant`, `usuario`, `clave`, `nombre`, `documento`, `idRol`, `direccion`, `telefono`, `correo`, `foto`, `activo`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`, `fecha_modificacion`) VALUES
 (1, 1, 'admin', 'admin', 'Jefferson Torres', 'V25409904', 1, '', '', 'jefersonugas@gmail.com', 'usuario-admin.jpg', 1, NULL, NULL, NULL, '2020-06-11 15-1-45', '2020-08-11 8:8:55'),
 (2, 2, 'katthyg', 'katthyg', 'Katiuska Gonzalez', 'V22764050', 3, 'En una casa de nuevo', '04262889861', 'jeffersonjtorresu@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-06-11 1-15-30', '2020-06-11 1-15-30'),
-(3, 1, 'test', '123', 'Test User', '000000', 2, 'Por alli', '04241738615', 'test@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-08-02 7:30:58', '2020-08-09 8:29:57');
+(3, 1, 'test', '123', 'Test User', '000000', 2, 'Por alli', '04241738615', 'test@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-08-02 7:30:58', '2020-08-24 10:15:38');
 
 --
 -- Índices para tablas volcadas

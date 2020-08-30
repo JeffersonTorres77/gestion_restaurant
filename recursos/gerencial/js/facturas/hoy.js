@@ -63,14 +63,18 @@ function Actualizar()
                 funcion: 'Actualizar',
                 accion: (tbody, data) =>
                 {
-                    for(var i=0; i<data.length; i++)
+                    var datos = data.datos;
+                    var totalItems = data.totalItems;
+                    var totalIngresos = data.totalIngresos;
+
+                    for(var i=0; i<datos.length; i++)
                     {
-                        let dato = data[i];
+                        let dato = datos[i];
                         if(dato == undefined) continue;
 
                         var link = HOST_GERENCIAL + `Facturas/Ver/${dato.id}/`;
                         var numero = dato.numero;
-                        var total = dato.moneda.simbolo + ' ' + Formato.Numerico(dato.total);
+                        var total = dato.moneda.simbolo + ' ' + Formato.Numerico(dato.total, 2);
                         var items = dato.items;
                         var fecha = dato.fecha;
                         var hora = dato.hora;
@@ -101,6 +105,22 @@ function Actualizar()
                         '   </td>' +
                         '</tr>';
                     }
+
+                    tbody.innerHTML += `<tr class="font-weight-bold">
+                        <td>
+                            TOTAL
+                        </td>
+
+                        <td right>
+                            ${Formato.Numerico(totalIngresos, 2)}
+                        </td>
+
+                        <td center>
+                            ${Formato.Numerico(totalItems, 0)}
+                        </td>
+
+                        <td colspan="2"></td>
+                    </tr>`;
                 }
             });
         }

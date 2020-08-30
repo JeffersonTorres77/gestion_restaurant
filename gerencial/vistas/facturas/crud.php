@@ -33,6 +33,9 @@ switch($accion)
         $buscar = Filtro::General( Input::POST("buscar", FALSE) );
         $filtros = Input::POST("filtros", FALSE);
 
+        $totalItems = 0;
+        $totalIngresos = 0;
+
         /**
          * Valores por defecto
          */
@@ -140,6 +143,9 @@ switch($accion)
             $objMoneda = new MonedaModel($objFactura->getIdMoneda());
             $items = $objFactura->getItems();
 
+            $totalItems += sizeof($items);
+            $totalIngresos += $objFactura->getTotal();
+
             $datos[$I] = [
                 "id" => $objFactura->getId(),
                 "numero" => $objFactura->getNumero(),
@@ -165,7 +171,11 @@ switch($accion)
             "pagina" => $pagina,
             "cantMostrar" => $cantMostrar,
             "total_filas" => $total_filas,
-            "data" => $datos
+            "data" => [
+                "datos" => $datos,
+                "totalItems" => $totalItems,
+                "totalIngresos" => $totalIngresos
+            ]
         ];
     break;
 
@@ -182,6 +192,9 @@ switch($accion)
         $cantMostrar = (int) Input::POST("cantMostrar", FALSE);
         $buscar = Filtro::General( Input::POST("buscar", FALSE) );
         $filtros = Input::POST("filtros", FALSE);
+
+        $totalItems = 0;
+        $totalIngresos = 0;
 
         /**
          * Valores por defecto
@@ -283,6 +296,9 @@ switch($accion)
             $objMoneda = new MonedaModel($objFactura->getIdMoneda());
             $items = $objFactura->getItems();
 
+            $totalItems += sizeof($items);
+            $totalIngresos += $objFactura->getTotal();
+
             $datos[$I] = [
                 "id" => $objFactura->getId(),
                 "numero" => $objFactura->getNumero(),
@@ -309,7 +325,11 @@ switch($accion)
             "pagina" => $pagina,
             "cantMostrar" => $cantMostrar,
             "total_filas" => $total_filas,
-            "data" => $datos
+            "data" => [
+                "datos" => $datos,
+                "totalItems" => $totalItems,
+                "totalIngresos" => $totalIngresos
+            ]
         ];
     break;
 

@@ -69,7 +69,7 @@ class ControladorBase
     protected function Javascript($nombre)
     {
         $url = HOST."recursos/gerencial/js/{$nombre}.js";
-        echo '<script src="'.$url.'"></script>';
+        echo '<script src="'.$url.'?v='.SISTEMA_VERSION.'"></script>';
     }
 
     /*============================================================================
@@ -80,7 +80,7 @@ class ControladorBase
     protected function CSS($nombre)
     {
         $url = HOST."recursos/gerencial/css/{$nombre}.css";
-        echo '<link rel="stylesheet" href="'.$url.'">';
+        echo '<link rel="stylesheet" href="'.$url.'?v='.SISTEMA_VERSION.'">';
     }
 
     /*============================================================================
