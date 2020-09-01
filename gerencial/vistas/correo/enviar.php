@@ -9,13 +9,13 @@ $objUsuario = UsuariosModel::BuscarPorCorreo($correo);
 $objRestaurant = new RestaurantModel( $objUsuario->getIdRestaurant() );
 
 // Constantes
-$fromemail = "edgarloma@hotmail.com";
-$pass = "071270Hotmail";
+$fromemail = "jefersonugas@gmail.com";
+$pass = "Jts08112013.";
 $fromname = "Sistema Restaurant";
-$host = "smtp.live.com";
-$port = "587";
-$SMTPAuth = "login";
-$SMTPSecure = "tls";
+$host = "smtp.gmail.com";
+$port = "465";
+$SMTPAuth = TRUE;
+$SMTPSecure = "ssl";
 
 // Incluir librerias
 include_once(BASE_DIR . "_core\APIs\Mailer\src\PHPMailer.php");
@@ -31,7 +31,7 @@ $bodyEmail = "Hello world";
 try
 {
 	$mail = new PHPMailer\PHPMailer\PHPMailer;
-	$mail -> isSMTP();
+	//$mail -> isSMTP();
 	$mail ->SMPTDebug = 0;
 	$mail ->Host = $host ;
 	$mail ->Port= $port;
@@ -156,6 +156,7 @@ try
 </html>';
 
 	if (!$mail->send()) {
+		throw new Exception($mail->ErrorInfo);
 		throw new Exception("No se ha podido enviar la solicitud para recuperar las credenciales al Correo solicitado. Por favor Revise");
 	}
 }
