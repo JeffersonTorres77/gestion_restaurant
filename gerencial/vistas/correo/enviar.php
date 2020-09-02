@@ -18,9 +18,9 @@ $SMTPAuth = TRUE;
 $SMTPSecure = "ssl";
 
 // Incluir librerias
-include_once(BASE_DIR . "_core\APIs\Mailer\src\PHPMailer.php");
-include_once(BASE_DIR . "_core\APIs\Mailer\src\SMTP.php");
-include_once(BASE_DIR . "_core\APIs\Mailer\src\Exception.php");
+include_once(BASE_DIR . "_core/APIs/Mailer/src/PHPMailer.php");
+include_once(BASE_DIR . "_core/APIs/Mailer/src/SMTP.php");
+include_once(BASE_DIR . "_core/APIs/Mailer/src/Exception.php");
 
 // Preparar el mensaje
 $emailTo = $correo;
