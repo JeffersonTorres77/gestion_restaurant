@@ -80,9 +80,10 @@ function MenuLateral()
  */
 function LlamarCamarero()
 {
-    var url = WEBSOCKET_URL + "Camarero/Llamar/";
+    var url = WEBSOCKET_URL + "Pedidos/Camarero/";
     var data = new FormData();
     data.append("key", KEY);
+    data.append("accion", "cambiar");
 
     AJAX.api({
         url: url,
@@ -124,9 +125,10 @@ function IntervalLlamarCamarero()
  */
 function ConsultarLLamadoCamarero()
 {
-    var url = WEBSOCKET_URL + "Camarero/Consultar/";
+    var url = WEBSOCKET_URL + "Pedidos/Camarero/";
     var data = new FormData();
     data.append("key", KEY);
+    data.append("accion", "consultar");
 
     AJAX.api({
         url: url,

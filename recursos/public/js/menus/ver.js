@@ -256,7 +256,7 @@ function ModalConfirmar()
 function ConfirmarPedido()
 {
     var modal = $("#modal-confirmar");
-    var url = WEBSOCKET_URL + "Registro/Combo/";
+    var url = WEBSOCKET_URL + "Pedidos/Registro/Combo/";
     var data = new FormData();
     data.append("key", KEY);
 

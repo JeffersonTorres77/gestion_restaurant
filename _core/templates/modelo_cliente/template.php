@@ -128,16 +128,16 @@ class Template
                         <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
                                 <h5 class="mb-0">
-                                    <div class="float-left mr-2">
-                                        <button class="btn btn-dark btn-sm" id="boton-actualizar-ver-pedidos">
-                                            <i class="fas fa-xs fa-sync-alt"></i>
-                                        </button>
-                                    </div>
-
                                     Pedidos de la mesa
                                 </h5>
 
-                                <button class="close" data-dismiss="modal">&times;</button>
+                                <button class="close text-white" id="boton-actualizar-ver-pedidos" style="font-size: 18px; padding: 19px;">
+                                    <i class="fas fa-xs fa-sync"></i>
+                                </button>
+
+                                <button class="close text-white ml-0" data-dismiss="modal" style="font-size: 18px; padding: 19px;">
+                                    <i class="fas fa-xs fa-times"></i>
+                                </button>
                             </div>
 
                             <div class="modal-body p-0">

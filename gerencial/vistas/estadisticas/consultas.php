@@ -63,11 +63,16 @@ switch($accion)
             $totalCantidad += $cantidad;
             $totalIngresos += $ingresos;
 
+            $objPlato = new PlatoModel($id);
+            $objCategoria = new CategoriaModel($objPlato->getIdCategoria());
+
             array_push($datos, [
                 "id" => $id,
                 "nombre" => $nombre,
                 "cantidad" => $cantidad,
-                "ingresos" => $ingresos
+                "ingresos" => $ingresos,
+                "idCategoria" => $objCategoria->getId(),
+                "nombreCategoria" => $objCategoria->getNombre()
             ]);
         }
     break;
@@ -236,7 +241,7 @@ switch($accion)
 /**
  * Ordenamos
  */
-if($order_key == "cantidad" || $order_key == "ingresos")
+if($order_key == "cantidad" || $order_key == "ingresos" || $order_key == "nombreCategoria")
 {
     for($i=0; $i<sizeof($datos); $i++)
     {

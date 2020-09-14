@@ -155,7 +155,8 @@ switch($accion)
                 "hora" => $objFactura->getHora(),
                 "moneda" => [
                     "id" => $objMoneda->getId(),
-                    "nombre" => $objMoneda->getNombre()
+                    "nombre" => $objMoneda->getNombre(),
+                    "simbolo" => $objMoneda->getSimbolo()
                 ]
             ];
         }

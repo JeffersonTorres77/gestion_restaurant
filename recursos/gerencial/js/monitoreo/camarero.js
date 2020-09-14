@@ -6,26 +6,17 @@
 var listaMesas = [];
 var keyMesaActualizar = null;
 
-// IDs Elementos
-var idBotonStatus = "boton-status";
-var idContenedorMesas = "contenedor-mesas";
-var idVer = {
-    modal: "modal-ver",
-    textTitulo: "text-ver-nombreMesa",
-    listaPedido: "lista-pedidos-mesa"
-}
-
 // Elementos
-var botonStatus = document.getElementById(idBotonStatus);
-var contenedorMesas = document.getElementById(idContenedorMesas);
+var botonStatus = document.getElementById("boton-status");
+var contenedorMesas = document.getElementById("contenedor-mesas");
 
 // Extra
 botonStatus.setAttribute("class", "btn btn-sm btn-secondary");
 botonStatus.innerHTML = "Conectando...";
 var ver = {
-    modal: $("#" + idVer.modal),
-    textTitulo: document.getElementById(idVer.textTitulo),
-    listaPedido: document.getElementById(idVer.listaPedido)
+    modal: $("#modal-ver"),
+    textTitulo: document.getElementById("text-ver-nombreMesa"),
+    listaPedido: document.getElementById("lista-pedidos-mesa")
 }
 
 /*================================================================================
@@ -37,9 +28,7 @@ var ver = {
 var intentosConexion = 0;
 var socket = io(WEBSOCKET_URL, {
     query: {
-        area: AREA,
-        modulo: MODULO,
-        archivo: ARCHIVO,
+        accion: "MonitoreoCamarero",
         key: KEY
     }
 });
@@ -104,7 +93,7 @@ socket.on('cambio', () => {
     ActualizarPedidos();
 });
 
-socket.on('actualizar-todo', function(data)
+socket.on('actualizar', function(data)
 {
     listaMesas = data;
     PintarMesas();
@@ -121,7 +110,7 @@ socket.on('actualizar-todo', function(data)
 ================================================================================*/
 function ActualizarPedidos()
 {
-    socket.emit('actualizar-todo', []);
+    socket.emit('actualizar', []);
 }
 
 /**
@@ -162,60 +151,57 @@ function PintarMesas()
 function CodigoMesaHTML(keyMesa)
 {
     var objMesa = listaMesas[keyMesa];
-    var mesaHTML = "";
-
+    var pedidos = objMesa.pedidos;
     var nombreMesa = objMesa.alias;
+    var classCardHeader = (objMesa.status == "CERRADA") ? "text-white bg-danger" : "text-white bg-primary";
+    var alertaCamarero = "";
+    var codePedidos = "";
 
-    // Clase de la carta
-    var classCardHeader = "";
-    if(objMesa.status == "CERRADA") {
-        classCardHeader = "bg-danger text-white";
-    }
-
-    // Con pedidos
-    if(objMesa.pedidos.length > 0)
+    if(pedidos.length > 0)
     {
         var codePedidos = "";
-        for(var pedido of objMesa.pedidos)
+        for(var keyPedido in pedidos)
         {
+            var pedido = pedidos[keyPedido];
             var esCombo = pedido.esCombo;
-            var datos = pedido.datos;
+            var lote = pedido.lote;
+            var combo = pedido.combo;
+            var platos = pedido.platos;
 
             if(esCombo)
             {
-                codePedidos += ComboHTML(datos);
-                for(let pedido of datos.pedidos) {
-                    if(pedido.status == 2) {
+                for(let plato of platos) {
+                    if(plato.status == 2) {
                         classCardHeader = "bg-warning";
                     }
                 }
+
+                codePedidos += ComboHTML(keyMesa, keyPedido);
             }
             else
             {
-                codePedidos += PlatoHTML(datos.plato.nombre, datos.status, datos.cantidad);
-                if(datos.status == 2) {
+                if(platos[0].status == 2) {
                     classCardHeader = "bg-warning";
                 }
+                
+                codePedidos += PlatoHTML(keyMesa, keyPedido, 0);
             }
         }
 
         if(codePedidos == "")
         {
             codePedidos = `<div class="text-muted p-3" center>
-                Entregado
+                En espera
             </div>`;
         }
     }
-    // Sin pedidos
     else
     {
         if(objMesa.status != "CERRADA") {
             codePedidos = `<div class="text-muted p-3" center>
                 (Vacio)
             </div>`;
-        }
-
-        if(objMesa.status == "CERRADA") {
+        } else {
             codePedidos = `<div class="text-muted p-3" center>
                 <i class="fas fa-lock"></i> Cerrada
             </div>`;
@@ -223,12 +209,12 @@ function CodigoMesaHTML(keyMesa)
     }
 
     var alertaCamarero = (objMesa.solicitar_camarero == false) ? '' : `
-    <div class="py-1 px-2 bg-warning font-weight-bold border-bottom border-warning" center>
+    <div class="py-1 px-2 alert alert-warning mb-0 rounded-0 font-weight-bold border-bottom border-warning" center>
         <i class="fas fa-bell"></i>
         Se solicita al camarero
     </div>`;
 
-    mesaHTML += `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
+    return `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
         <div class="card card-mesa sombra" style="cursor: pointer;" tabindex="0" onclick="ModalConfirmar('${keyMesa}')">
             <div class="card-header ${classCardHeader}">
                 <div class="h6 mb-0">
@@ -242,42 +228,59 @@ function CodigoMesaHTML(keyMesa)
             </div>
         </div>
     </div>`;
-
-    return mesaHTML;
 }
 
 /**
  * 
- * @param {*} datos 
+ * @param {*} keyMesa 
+ * @param {*} keyPedido 
  */
-function PlatoHTML(nombre, idStatus, cantidad)
+function ComboHTML(keyMesa, keyPedido)
 {
-    var codePlato = "";
+    var objPedido = listaMesas[keyMesa].pedidos[keyPedido];
+    var arrayPlatos = objPedido.platos;
+    
+    var codeCombo = "";
+    for(let indexPlato in arrayPlatos)
+    {
+        codeCombo += PlatoHTML(keyMesa, keyPedido, indexPlato);
+    }
 
-    var status = idStatus;
-    var platoNombre = nombre;
+    return codeCombo;
+}
+
+/**
+ * 
+ * @param {*} keyMesa 
+ * @param {*} keyPedido 
+ */
+function PlatoHTML(keyMesa, keyPedido, indexPlato)
+{
+    var objPedido = listaMesas[keyMesa].pedidos[keyPedido];
+    var objPlato = objPedido.platos[indexPlato];
+
+    var status = objPlato.status;
+    var platoNombre = objPlato.plato.nombre;
+    var cantidad = objPlato.cantidad;
     var classImg = "fas fa-times";
     var classDiv = "text-danger font-weight-bold";
     var classCantidad = "badge badge-danger";
 
-    if(status == "1")
-    {
+    if(status == "1") {
         classImg = "far fa-clock";
         classDiv = "";
         classCantidad = "badge badge-primary";
-    }
-    else if(status == "2")
-    {
+    } else if(status == "2") {
         classImg = "fas fa-bell";
         classDiv = "text-warning font-weight-bold";
         classCantidad = "badge badge-warning";
+    }  else {
+        classImg = "fas fa-check";
+        classDiv = "text-success font-weight-bold";
+        classCantidad = "badge badge-success";
     }
-    else
-    {
-        return "";
-    }
-    
-    codePlato += `<div class="py-1 px-2 ${classDiv} hover position-relative">
+
+    return `<div class="py-1 px-2 ${classDiv} hover position-relative">
         <i class="${classImg} mr-1"></i> ${platoNombre}
 
         <div class="position-absolute p-1" style="top: 0px; right: 0px">
@@ -286,24 +289,6 @@ function PlatoHTML(nombre, idStatus, cantidad)
             </div>
         </div>
     </div>`;
-
-    return codePlato;
-}
-
-/**
- * 
- * @param {*} datos 
- */
-function ComboHTML(datos)
-{
-    var codeCombo = "";
-
-    for(let pedido of datos.pedidos)
-    {
-        codeCombo += PlatoHTML(pedido.nombrePlato, pedido.status, pedido.cantidad);
-    }
-
-    return codeCombo;
 }
 
 /*================================================================================
@@ -327,7 +312,7 @@ function ModalConfirmar(keyMesa)
     listaModal.innerHTML = '';
 
     if(objMesa.solicitar_camarero) {
-        listaModal.innerHTML += `<div onclick="QuitarAlarma('${objMesa.id}')" class="list-group-item list-group-item-action list-group-item-warning position-relative" center>
+        listaModal.innerHTML += `<div onclick="QuitarAlarma('${objMesa.idMesa}')" class="list-group-item list-group-item-action list-group-item-warning position-relative" center>
             <i class="fas fa-bell"></i>
             Se solicita al camarero
 
@@ -343,39 +328,27 @@ function ModalConfirmar(keyMesa)
     {
         var codePedidos = "";
 
-        for(var objPedido of objMesa.pedidos)
+        for(var keyPedido in objMesa.pedidos)
         {
+            var objPedido = objMesa.pedidos[keyPedido];
             var esCombo = objPedido.esCombo;
-            var datos = objPedido.datos;
+            var platos = objPedido.platos;
 
             if(esCombo)
             {
                 var conNota = false;
-                for(var pedido of datos.pedidos) {
-                    if(pedido.nota != "") {
+                for(var plato of platos) {
+                    if(plato.nota != "") {
                         conNota = true;
                         break;
                     }
                 }
 
-                codePedidos += ComboModalHTML(
-                    datos.lote, datos.imagen,
-                    datos.nombre, datos.descuento,
-                    datos.status, conNota,
-                    datos.pedidos
-                );
+                codePedidos += ComboModalHTML(keyMesa, keyPedido);
             }
             else
             {
-                var conNota = (datos.nota != "");
-                var nota = (datos.nota == "") ? '<span class="text-muted">(Ninguna)</span>' : datos.nota;
-                var codigoCollapse = `Nota: <b>${nota}</b>`;
-
-                codePedidos += PlatoModalHTML(
-                    datos.id, datos.plato.imagen,
-                    datos.plato.nombre, datos.cantidad,
-                    datos.status, conNota, codigoCollapse
-                );
+                codePedidos += PlatoModalHTML(keyMesa, keyPedido, 0);
             }
         }
 
@@ -411,79 +384,69 @@ ver.modal.on('hidden.bs.modal', function() {
 
 /**
  * 
- * @param {*} loteCombo 
- * @param {*} imagen 
- * @param {*} nombre 
- * @param {*} descuento 
- * @param {*} idStatus 
- * @param {*} pedidos 
+ * @param {*} keyMesa 
+ * @param {*} keyPedido 
  */
-function ComboModalHTML(loteCombo, imagen, nombre, descuento, idStatus, conNota, pedidos)
+function ComboModalHTML(keyMesa, keyPedido)
 {
-    var codeHTML = "";
+    var objMesa = listaMesas[keyMesa];
+    var objPedido = objMesa.pedidos[keyPedido];
 
     var codePlatos = "";
-    for(var pedido of pedidos)
-    {
-        var conNota = (pedido.nota != "");
-        var nota = (pedido.nota == "") ? '<span class="text-muted">(Ninguna)</span>' : pedido.nota;
-        var codigoCollapse = `<div> Nota: <b>${nota}</b> </div>`;
-                
-        codePlatos += PlatoModalHTML(
-            pedido.idPedido, pedido.imagenPlato,
-            pedido.nombrePlato, pedido.cantidad,
-            pedido.status, conNota,
-            codigoCollapse);
+    for(var keyPlato in objPedido.platos)
+    {                
+        codePlatos += PlatoModalHTML(keyMesa, keyPedido, keyPlato);
     }
 
-    codeHTML = `<div class="list-group-item pt-0 pr-0 hover">
+    return `<div class="list-group-item pt-0 pr-0 hover">
         <div class="py-2 px-0" style="margin-left: -10px;">
-            ${nombre}
+            ${objPedido.combo.nombre}
         </div>
 
         <div class="list-group border rounded">
             ${codePlatos}
         </div>
     </div>`;
-    return codeHTML;
 }
 
 /**
  * 
- * @param {*} idPedido 
- * @param {*} imagen 
- * @param {*} nombre 
- * @param {*} cantidad 
- * @param {*} idStatus 
- * @param {*} nota 
+ * @param {*} keyMesa 
+ * @param {*} keyPedido 
+ * @param {*} keyPlato 
  */
-function PlatoModalHTML(idPedido, imagen, nombre, cantidad, idStatus, conNota = false, codigoCollapse = "")
+function PlatoModalHTML(keyMesa, keyPedido, keyPlato)
 {
-    imagen = HOST + imagen;
-    var idCollapse = `collapse-pedido-${idPedido}`;
-    var status = StatusHTML(idStatus);
-    var statusNota = (conNota) ? '<div class="badge badge-warning">Con nota</div>' : '';
+    var objMesa = listaMesas[keyMesa];
+    var objPedido = objMesa.pedidos[keyPedido];
+    var objPlato = objPedido.platos[keyPlato];
+
+    imagen = HOST + objPlato.plato.imagen;
+    var idCollapse = `collapse-pedido-${objPlato.idPedido}`;
+    var status = StatusHTML(objPlato.status);
+    var statusNota = (objPlato.nota != "") ? '<div class="badge badge-warning">Con nota</div>' : '';
+    var codigoCollapse = `Nota: <b>${objPlato.nota}</b>`;
 
     var botones = `<button class="btn btn-sm btn-info mx-1" style="padding: 0.25rem 0.75rem;" data-toggle="collapse" data-target="#${idCollapse}">
         <i class="fas fa-info"></i>
     </button>`;
 
     var classItem = "list-group-item list-group-item-action";
-    if(idStatus == '1')
+    if(objPlato.status == '1')
     {
         classItem += " list-group-item-info";
     }
-    else if(idStatus == '2')
+    else if(objPlato.status == '2')
     {
         classItem += " list-group-item-warning";
-        botones = `<button class="btn btn-sm btn-success" onclick="ConfirmarPedido('${idPedido}')">
+        botones = `<button class="btn btn-sm btn-success" onclick="ConfirmarPedido('${objPlato.idPedido}')">
             <i class="fas fa-check"></i>
             ¡Listo!
         </button>
         ${botones}`;
     }
 
-    var codeHTML = `<div class="${classItem}">
+    return `<div class="${classItem}">
         <div class="position-relative">
             <div class="tarjeta-miniatura-pedido">
                 <div>
@@ -493,8 +456,8 @@ function PlatoModalHTML(idPedido, imagen, nombre, cantidad, idStatus, conNota = 
                 </div>
 
                 <div>
-                    <h6 class="font-weight-bold mb-1">${nombre}</h6>
-                    <div>Cantidad: <b>${cantidad}</b></div>
+                    <h6 class="font-weight-bold mb-1">${objPlato.plato.nombre}</h6>
+                    <div>Cantidad: <b>${objPlato.cantidad}</b></div>
                     <div>${status} ${statusNota}</div>
                 </div>
             </div>
@@ -510,8 +473,6 @@ function PlatoModalHTML(idPedido, imagen, nombre, cantidad, idStatus, conNota = 
             </div>
         </div>
     </div>`;
-
-    return codeHTML;
 }
 
 /**

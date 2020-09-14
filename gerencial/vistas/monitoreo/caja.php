@@ -97,25 +97,27 @@
             <div class="modal-body p-0">
                 <form class="list-group list-group-flush" id="lista-pedidos-mesa" onsubmit="event.preventDefault()">
                     <div id="modal-ver-alarma"></div>
+                    <div class="table-responsive">
                     <table class="table table-hover table-striped table-bordered mb-0">
-                        <thead class="table-sm">
-                            <tr>
-                                <th style="min-width: 200px;" class="w-auto">Item</th>
-                                <th class="w-100px">Status</th>
-                                <th class="w-150px">Precio</th>
-                                <th class="w-50px">Cantidad</th>
-                                <th class="w-150px">Total</th>
-                            </tr>
-                        </thead>
+                            <thead class="table-sm">
+                                <tr>
+                                    <th style="min-width: 200px;" class="w-auto">Item</th>
+                                    <th class="w-100px">Status</th>
+                                    <th class="w-150px">Precio</th>
+                                    <th class="w-50px">Cantidad</th>
+                                    <th class="w-150px">Total</th>
+                                </tr>
+                            </thead>
 
-                        <tbody id="modal-ver-tbody">
-                            <tr>
-                                <td colspan="100">
-                                    <h5 class="mb-0 py-2" center>. . .</h5>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <tbody id="modal-ver-tbody">
+                                <tr>
+                                    <td colspan="100">
+                                        <h5 class="mb-0 py-2" center>. . .</h5>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </form>
             </div>
 

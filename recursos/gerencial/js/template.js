@@ -51,9 +51,10 @@ function CambiarServicio()
     /**
      * Variables
      */
-    var url = `${WEBSOCKET_URL}Servicio/Cambio/`;
+    var url = `${WEBSOCKET_URL}Servicio/Cambiar/`;
     var data = new FormData();
     data.append("key", KEY);
+    data.append("authService", false);
 
     /**
      * Enviamos la petición

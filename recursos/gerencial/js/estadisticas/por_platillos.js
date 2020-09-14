@@ -48,7 +48,6 @@ function Actualizar()
         },
 
         ok: function(cuerpo) {
-            console.log(cuerpo);
             tabla.Actualizar({
                 cuerpo: cuerpo,
                 funcion: 'Actualizar',
@@ -69,6 +68,10 @@ function Actualizar()
                             </td>
 
                             <td center>
+                                ${dato.nombreCategoria}
+                            </td>
+
+                            <td center>
                                 ${Formato.Numerico(dato.cantidad, 0)}
                             </td>
 
@@ -79,7 +82,7 @@ function Actualizar()
                     }
 
                     tbody.innerHTML += `<tr class="font-weight-bold">
-                        <td class="py-2">
+                        <td class="py-2" colspan="2">
                             TOTAL
                         </td>
 

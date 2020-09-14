@@ -186,7 +186,7 @@ function ConfirmarPedido()
     var modal = $("#" + idModal);
     var form = document.getElementById(idForm);
 
-    var url = WEBSOCKET_URL + "Registro/Plato/";
+    var url = WEBSOCKET_URL + "Pedidos/Registro/Plato/";
     var data = new FormData(form);
     data.append("key", KEY);
 
@@ -206,7 +206,7 @@ function ConfirmarPedido()
         },
 
         ok: function (cuerpo)
-        {            
+        {
             ActualizarPedidos();
             Loader.Ocultar();
             modal.modal("hide");

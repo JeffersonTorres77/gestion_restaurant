@@ -1,37 +1,20 @@
 var listaPedidos = [];
 
-// IDs Elementos
-var idBotonStatus = "boton-status";
-var idContenedorPedidos = "contenedor-pedidos";
-var idVer = {
-    modal: "modal-ver",
-    textId: "text-ver-idPedido",
-    inpuVerId: "input-ver-id",
-    inpuVerPlato: "input-ver-plato",
-    inpuVerCategoria: "input-ver-categoria",
-    inpuVerNumero: "input-ver-numero",
-    inpuVerMesa: "input-ver-mesa",
-    inpuVerCantidad: "input-ver-cantidad",
-    inpuVerNota: "input-ver-nota",
-    imgVerPlato: "img-ver-plato",
-    tagCombo: "tag-combo"
-};
-
 // Elementos
-var botonStatus = document.getElementById(idBotonStatus);
-var contenedorPedidos = document.getElementById(idContenedorPedidos);
+var botonStatus = document.getElementById("boton-status");
+var contenedorPedidos = document.getElementById("contenedor-pedidos");
 var ver = {
-    modal: $("#" + idVer.modal),
-    textId: document.getElementById(idVer.textId),
-    inpuVerId: document.getElementById(idVer.inpuVerId),
-    inpuVerPlato: document.getElementById(idVer.inpuVerPlato),
-    inpuVerCategoria: document.getElementById(idVer.inpuVerCategoria),
-    inpuVerNumero: document.getElementById(idVer.inpuVerNumero),
-    inpuVerMesa: document.getElementById(idVer.inpuVerMesa),
-    inpuVerCantidad: document.getElementById(idVer.inpuVerCantidad),
-    inpuVerNota: document.getElementById(idVer.inpuVerNota),
-    imgVerPlato: document.getElementById(idVer.imgVerPlato),
-    tagCombo: document.getElementById(idVer.tagCombo)
+    modal: $("#modal-ver"),
+    textId: document.getElementById("text-ver-idPedido"),
+    inpuVerId: document.getElementById("input-ver-id"),
+    inpuVerPlato: document.getElementById("input-ver-plato"),
+    inpuVerCategoria: document.getElementById("input-ver-categoria"),
+    inpuVerNumero: document.getElementById("input-ver-numero"),
+    inpuVerMesa: document.getElementById("input-ver-mesa"),
+    inpuVerCantidad: document.getElementById("input-ver-cantidad"),
+    inpuVerNota: document.getElementById("input-ver-nota"),
+    imgVerPlato: document.getElementById("img-ver-plato"),
+    tagCombo: document.getElementById("tag-combo")
 };
 
 // Extra
@@ -42,9 +25,7 @@ botonStatus.innerHTML = "Conectando...";
 var intentosConexion = 0;
 var socket = io(WEBSOCKET_URL, {
     query: {
-        area: AREA,
-        modulo: MODULO,
-        archivo: ARCHIVO,
+        accion: "MonitoreoPedidos",
         key: KEY
     }
 });
@@ -106,7 +87,7 @@ socket.on('cambio', () => {
     ActualizarPedidos();
 });
 
-socket.on('actualizar-todo', function(data)
+socket.on('actualizar', function(data)
 {
     Loader.Ocultar();
     listaPedidos = data;
@@ -117,7 +98,7 @@ socket.on('actualizar-todo', function(data)
 ActualizarPedidos();
 function ActualizarPedidos()
 {
-    socket.emit('actualizar-todo', {
+    socket.emit('actualizar', {
         idAreaMonitoreo: ID_AREA_MONITOREO
     });
 }

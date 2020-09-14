@@ -199,7 +199,7 @@ class Sesion
 
         self::$key = AES::Encriptar( json_encode([
             "idRestaurant" => FALSE,
-            "idUsuario" => self::$usuario->getUsuario(),
+            "idAdmin" => self::$usuario->getUsuario(),
             "ip" => self::$ip
         ]) );
 
@@ -253,7 +253,7 @@ class Sesion
 
         self::$key = AES::Encriptar( json_encode([
             "idRestaurant" => self::$restaurant->getId(),
-            "idUsuario" => self::$usuario->getId(),
+            "idMesa" => self::$usuario->getId(),
             "ip" => self::$ip
         ]) );
 

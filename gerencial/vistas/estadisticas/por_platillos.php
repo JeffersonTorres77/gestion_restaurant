@@ -78,6 +78,7 @@
                         <thead>
                             <tr>
                                 <th ordenar="true" key="nombre" class="w-auto">Plato</th>
+                                <th ordenar="true" key="nombreCategoria" class="w-auto">Categoria</th>
                                 <th ordenar="true" key="cantidad" class="w-100px">Cantidad</th>
                                 <th ordenar="true" key="ingresos" class="w-200px">Ingresos</th>
                             </tr>

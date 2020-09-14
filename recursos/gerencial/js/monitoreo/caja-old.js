@@ -84,8 +84,9 @@ socket.on('ws:error', (data) =>
         <div class="card bg-danger text-white">
             <div class="card-body" center>
                 <span class="h5">${data}</span>
-                <br>
-                <br>
+
+                <br><br>
+
                 <button class="btn btn-sm btn-light text-danger" onclick="ActualizarPedidos()">
                     <i class="fas fa-sync-alt"></i>
                 </button>
@@ -98,11 +99,13 @@ socket.on('cambio', () => {
     ActualizarPedidos();
 });
 
-socket.on('actualizar', function(data)
+socket.on('actualizar-todo', function(data)
 {
     listaMesas = data;
     PintarMesas();
-    if( keyMesaActualizar != null) ModalConfirmar(keyMesaActualizar);
+    if( keyMesaActualizar != null) {
+        ModalConfirmar(keyMesaActualizar);
+    }
     Loader.Ocultar();
 });
 
@@ -113,7 +116,7 @@ socket.on('actualizar', function(data)
 ================================================================================*/
 function ActualizarPedidos()
 {
-    socket.emit('actualizar', []);
+    socket.emit('actualizar-todo', []);
 }
 
 /**
@@ -154,40 +157,41 @@ function PintarMesas()
 function CodigoMesaHTML(keyMesa)
 {
     var objMesa = listaMesas[keyMesa];
-    var pedidos = objMesa.pedidos;
-    var nombreMesa = objMesa.alias;
-    var classCardHeader = (objMesa.status == "CERRADA") ? "text-white bg-danger" : "text-white bg-primary";
-    var alertaCamarero = "";
-    var codePedidos = "";
+    var mesaHTML = "";
 
-    if(pedidos.length > 0)
+    var nombreMesa = objMesa.alias;
+
+    // Clase de la carta
+    var classCardHeader = "";
+    if(objMesa.status == "CERRADA") {
+        classCardHeader = "bg-danger text-white";
+    }
+
+    // Con pedidos
+    if(objMesa.pedidos.length > 0)
     {
         var codePedidos = "";
-        for(var keyPedido in pedidos)
+        for(var pedido of objMesa.pedidos)
         {
-            var pedido = pedidos[keyPedido];
             var esCombo = pedido.esCombo;
-            var lote = pedido.lote;
-            var combo = pedido.combo;
-            var platos = pedido.platos;
+            var datos = pedido.datos;
 
             if(esCombo)
             {
-                for(let plato of platos) {
-                    if(plato.status == 2) {
+                for(let pedido of datos.pedidos) {
+                    if(pedido.status == 2) {
                         classCardHeader = "bg-warning";
                     }
                 }
 
-                codePedidos += ComboHTML(keyMesa, keyPedido);
+                codePedidos += ComboHTML(datos);
             }
             else
             {
-                if(platos[0].status == 2) {
+                codePedidos += PlatoHTML(datos.plato.nombre, datos.status, datos.cantidad);
+                if(datos.status == 2) {
                     classCardHeader = "bg-warning";
                 }
-                
-                codePedidos += PlatoHTML(keyMesa, keyPedido, 0);
             }
         }
 
@@ -198,13 +202,16 @@ function CodigoMesaHTML(keyMesa)
             </div>`;
         }
     }
+    // Sin pedidos
     else
     {
         if(objMesa.status != "CERRADA") {
             codePedidos = `<div class="text-muted p-3" center>
                 (Vacio)
             </div>`;
-        } else {
+        }
+
+        if(objMesa.status == "CERRADA") {
             codePedidos = `<div class="text-muted p-3" center>
                 <i class="fas fa-lock"></i> Cerrada
             </div>`;
@@ -217,7 +224,7 @@ function CodigoMesaHTML(keyMesa)
         Se solicita al camarero
     </div>`;
 
-    return `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
+    mesaHTML += `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
         <div class="card card-mesa sombra" style="cursor: pointer;" tabindex="0" onclick="ModalConfirmar('${keyMesa}')">
             <div class="card-header ${classCardHeader}">
                 <div class="h6 mb-0">
@@ -231,59 +238,44 @@ function CodigoMesaHTML(keyMesa)
             </div>
         </div>
     </div>`;
+
+    return mesaHTML;
 }
 
 /**
  * 
- * @param {*} keyMesa 
- * @param {*} keyPedido 
+ * @param {*} datos 
  */
-function ComboHTML(keyMesa, keyPedido)
+function PlatoHTML(nombre, idStatus, cantidad)
 {
-    var objPedido = listaMesas[keyMesa].pedidos[keyPedido];
-    var arrayPlatos = objPedido.platos;
-    
-    var codeCombo = "";
-    for(let indexPlato in arrayPlatos)
-    {
-        codeCombo += PlatoHTML(keyMesa, keyPedido, indexPlato);
-    }
+    var codePlato = "";
 
-    return codeCombo;
-}
-
-/**
- * 
- * @param {*} keyMesa 
- * @param {*} keyPedido 
- */
-function PlatoHTML(keyMesa, keyPedido, indexPlato)
-{
-    var objPedido = listaMesas[keyMesa].pedidos[keyPedido];
-    var objPlato = objPedido.platos[indexPlato];
-
-    var status = objPlato.status;
-    var platoNombre = objPlato.plato.nombre;
-    var cantidad = objPlato.cantidad;
+    var status = idStatus;
+    var platoNombre = nombre;
     var classImg = "fas fa-times";
     var classDiv = "text-danger font-weight-bold";
     var classCantidad = "badge badge-danger";
 
-    if(status == "1") {
+    if(status == "1")
+    {
         classImg = "far fa-clock";
         classDiv = "";
         classCantidad = "badge badge-primary";
-    } else if(status == "2") {
+    }
+    else if(status == "2")
+    {
         classImg = "fas fa-bell";
         classDiv = "text-warning font-weight-bold";
         classCantidad = "badge badge-warning";
-    }  else {
+    }
+    else
+    {
         classImg = "fas fa-check";
         classDiv = "text-success font-weight-bold";
         classCantidad = "badge badge-success";
     }
-
-    return `<div class="py-1 px-2 ${classDiv} hover position-relative">
+    
+    codePlato += `<div class="py-1 px-2 ${classDiv} hover position-relative">
         <i class="${classImg} mr-1"></i> ${platoNombre}
 
         <div class="position-absolute p-1" style="top: 0px; right: 0px">
@@ -292,6 +284,24 @@ function PlatoHTML(keyMesa, keyPedido, indexPlato)
             </div>
         </div>
     </div>`;
+
+    return codePlato;
+}
+
+/**
+ * 
+ * @param {*} datos 
+ */
+function ComboHTML(datos)
+{
+    var codeCombo = "";
+
+    for(let pedido of datos.pedidos)
+    {
+        codeCombo += PlatoHTML(pedido.nombrePlato, pedido.status, pedido.cantidad);
+    }
+
+    return codeCombo;
 }
 
 /*================================================================================
@@ -305,42 +315,131 @@ function PlatoHTML(keyMesa, keyPedido, indexPlato)
  */
 function ModalConfirmar(keyMesa)
 {
-    //
-    var objMesa = listaMesas[keyMesa];
-
-    //
+    /**
+     * 
+     */
     keyMesaActualizar = keyMesa;
+    var objMesa = listaMesas[keyMesa];
     ver.modalTitle.innerHTML = objMesa.alias;
-    ver.modalAlarma.innerHTML = (!objMesa.solicitar_camarero) ? '' : `<div class="alert alert-warning mb-0">
-        <i class="fas fa-bell"></i>
-        Se solicita al camarero
 
-        <button class="close" onclick="QuitarAlarma(${objMesa.idMesa})">&times;</button>
-    </div>`;
+    /**
+     * 
+     */
+    if(objMesa.solicitar_camarero)
+    {
+        ver.modalAlarma.innerHTML = `<div class="alert alert-warning mb-0">
+            <i class="fas fa-bell"></i>
+            Se solicita al camarero
 
+            <button class="close" onclick="QuitarAlarma(${objMesa.id})">&times;</button>
+        </div>`;
+    }
+    else
+    {
+        ver.modalAlarma.innerHTML = "";
+    }
+
+    /**
+     * 
+     */
     if(objMesa.pedidos.length > 0)
     {
         ver.botonFacturar.style.display = "";
-        ver.botonFacturar.onclick = function(){ ModalDatosFactura(objMesa.idMesa); };
+        ver.botonFacturar.onclick = function(){ ModalDatosFactura(objMesa.id); };
         ver.modalDialog.className = 'modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl';
         ver.modalHeader.className = 'modal-header bg-primary text-white border-bottom-0';
 
         ver.tbody.innerHTML = "";
         var codeHTML = "";
-
-        for(var keyPedido in objMesa.pedidos)
+        for(var pedido of objMesa.pedidos)
         {
-            var pedido = objMesa.pedidos[keyPedido];
-            var platos = pedido.platos;
+            var datos = pedido.datos;
             var esCombo = pedido.esCombo;
 
             if(esCombo)
             {
+                for(let pedido of datos.pedidos)
+                {
+                    var checked = (pedido.status == "3") ? 'checked' : '';
+                    var monto = pedido.precioUnitario * (1 - (pedido.descuento / 100));
+                    codeHTML += `<tr class="table-${classStatus(pedido.status)}" style="cursor: pointer;" onclick="CheckearItem(this, event)">
+                        <td class="text-truncate" style="min-width: 50px;">
+                            <div style="display: inline-block;">
+                                <button class="badge badge-danger border-0 eliminar" onclick="ModalEliminar('${pedido.idPedido}')">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
 
+                            <div class="custom-control custom-checkbox" style="display: inline-block;">
+                                <input type="checkbox"
+                                class="custom-control-input"
+                                id="check-pedido-${pedido.idPedido}" ${checked}
+                                idPedido="${pedido.idPedido}"
+                                total="${pedido.precioTotal}">
+                                <label class="custom-control-label" for="check-pedido-${pedido.idPedido}">
+                                    ${datos.nombre} - ${pedido.nombrePlato}
+                                </label>
+                            </div>
+                        </td>
+
+                        <td center class="text-truncate" style="min-width: 50px;">
+                            ${statusText(pedido.status)}
+                        </td>
+
+                        <td right class="text-truncate" style="min-width: 50px;">
+                            ${MONEDA} ${Formato.Numerico( monto, 2 )}
+                        </td>
+
+                        <td center class="text-truncate" style="min-width: 50px;">
+                            ${pedido.cantidad}
+                        </td>
+
+                        <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
+                            ${MONEDA} ${Formato.Numerico( pedido.precioTotal, 2 )}
+                        </td>
+                    </tr>`;
+                }
             }
             else
             {
-                codeHTML += ModalCodePlatoHTML(keyMesa, keyPedido, 0);
+                var checked = (datos.status == "3") ? 'checked' : '';
+                var monto = datos.precioUnitario * (1 - (datos.descuento / 100));
+                codeHTML += `<tr class="table-${classStatus(datos.status)}" style="cursor: pointer;" onclick="CheckearItem(this, event)">
+                    <td class="text-truncate" style="min-width: 50px;">
+                        <div style="display: inline-block;">
+                            <button class="badge badge-danger border-0 eliminar" onclick="ModalEliminar('${datos.id}')">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="custom-control custom-checkbox" style="display: inline-block;">
+                            <input type="checkbox"
+                            class="custom-control-input"
+                            id="check-pedido-${datos.id}" ${checked}
+                            idPedido="${datos.id}"
+                            total="${datos.precioTotal}">
+                            <label class="custom-control-label" for="check-pedido-${datos.id}">
+                                ${datos.plato.nombre}
+                            </label>
+                        </div>
+                    </td>
+
+                    <td center class="text-truncate" style="min-width: 50px;">
+                        ${statusText(datos.status)}
+                    </td>
+
+                    <td right class="text-truncate" style="min-width: 50px;">
+                        ${MONEDA} ${Formato.Numerico( monto, 2 )}
+                    </td>
+
+                    <td center class="text-truncate" style="min-width: 50px;">
+                        ${datos.cantidad}
+                    </td>
+
+                    <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
+                        ${MONEDA} ${Formato.Numerico( datos.precioTotal, 2 )}
+                    </td>
+                </tr>`;
             }
         }
 
@@ -395,55 +494,6 @@ ver.modal.on('hidden.bs.modal', function() {
 
 /**
  * 
- * @param {*} keyMesa 
- * @param {*} keyPedido 
- * @param {*} keyPlato 
- */
-function ModalCodePlatoHTML(keyMesa, keyPedido, keyPlato)
-{
-    var plato = listaMesas[keyMesa].pedidos[keyPedido].platos[keyPlato];
-    var checked = (plato.status == "3") ? 'checked' : '';
-    var monto = plato.precioUnitario * (1 - (plato.descuento / 100));
-    return `<tr class="table-${classStatus(plato.status)}" style="cursor: pointer;" onclick="CheckearItem(this, event)">
-        <td class="text-truncate" style="min-width: 50px;">
-            <div style="display: inline-block;">
-                <button class="badge badge-danger border-0 eliminar" onclick="ModalEliminar('${plato.idPedido}')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <div class="custom-control custom-checkbox" style="display: inline-block;">
-                <input type="checkbox"
-                class="custom-control-input"
-                id="check-pedido-${plato.idPedido}" ${checked}
-                idPedido="${plato.idPedido}"
-                total="${plato.precioTotal}">
-                <label class="custom-control-label" for="check-pedido-${plato.idPedido}">
-                    ${plato.plato.nombre}
-                </label>
-            </div>
-        </td>
-
-        <td center class="text-truncate" style="min-width: 50px;">
-            ${statusText(plato.status)}
-        </td>
-
-        <td right class="text-truncate" style="min-width: 50px;">
-            ${MONEDA} ${Formato.Numerico( monto, 2 )}
-        </td>
-
-        <td center class="text-truncate" style="min-width: 50px;">
-            ${plato.cantidad}
-        </td>
-
-        <td right class="font-weight-bold text-truncate" style="min-width: 50px;">
-            ${MONEDA} ${Formato.Numerico( plato.precioTotal, 2 )}
-        </td>
-    </tr>`;
-}
-
-/**
- * 
  */
 function CalcularFactura()
 {
@@ -461,6 +511,34 @@ function CalcularFactura()
     var campoTotal = document.getElementById('campoTotal');
     if(campoTotal == undefined || campoTotal == null) return;
     campoTotal.innerHTML = MONEDA + " " + Formato.Numerico(totalFactura, 2);
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
+function CheckearItem(element, event)
+{
+    var paths = event.path;
+    for(var path of paths)
+    {
+        var tag = path.tagName;
+        if(tag == undefined) continue;
+        tag = tag.toLowerCase();
+        if(tag != "button") continue;
+        var className = path.className;
+        var arrayClassName = className.split(' ');
+        var result = arrayClassName.find(x => x == "eliminar");
+        if(result.length > 0) {
+            return;
+        }
+    }
+
+    var input = element.getElementsByTagName('input')[0];
+    var statusActual = input.checked;
+    var statusNuevo = !statusActual;
+    input.checked = statusNuevo
+    CalcularFactura();
 }
 
 /**
@@ -519,78 +597,12 @@ function classStatus(status)
 
 /**
  * 
- * @param {*} element 
- */
-function CheckearItem(element, event)
-{
-    var paths = event.path;
-    for(var path of paths)
-    {
-        var tag = path.tagName;
-        if(tag == undefined) continue;
-        tag = tag.toLowerCase();
-        if(tag != "button") continue;
-        var className = path.className;
-        var arrayClassName = className.split(' ');
-        var result = arrayClassName.find(x => x == "eliminar");
-        if(result.length > 0) {
-            return;
-        }
-    }
-
-    var input = element.getElementsByTagName('input')[0];
-    var statusActual = input.checked;
-    var statusNuevo = !statusActual;
-    input.checked = statusNuevo
-    CalcularFactura();
-}
-
-/**
- * 
  * @param {*} idMesa 
  */
 function QuitarAlarma(idMesa)
 {
     socket.emit('quitar-alarma', {
         idMesa: idMesa
-    });
-}
-
-/**
- * 
- * @param {*} idPedido 
- */
-function ModalEliminar(idPedido)
-{
-    document.getElementById('boton-eliminar-pedido').onclick = function() { EliminarPedido(idPedido) };
-    var modal = $("#modal-eliminar-pedido");
-    modal.modal('show');
-}
-
-/**
- * 
- * @param {*} idPedido 
- */
-function EliminarPedido(idPedido)
-{
-    var modal = $("#modal-eliminar-pedido");
-    var inputMotivo = document.getElementById('motivo');
-    if(inputMotivo.value == "") {
-        alert("Debe introducir el motivo.");
-        return;
-    }
-    
-    socket.emit('eliminar-pedido', {
-        idPedido: idPedido,
-        motivo: inputMotivo.value
-    });
-
-    Loader.Mostrar();
-
-    socket.on('cambio', function(data) {
-        Loader.Ocultar();
-        modal.modal('hide');
-        inputMotivo.value = "";
     });
 }
 
@@ -654,3 +666,41 @@ socket.on('ws:error-factura', function(mensaje) {
     Loader.Ocultar();
     Alerta.Danger(mensaje);
 });
+
+/**
+ * 
+ * @param {*} idPedido 
+ */
+function ModalEliminar(idPedido)
+{
+    document.getElementById('boton-eliminar-pedido').onclick = function() { EliminarPedido(idPedido) };
+    var modal = $("#modal-eliminar-pedido");
+    modal.modal('show');
+}
+
+/**
+ * 
+ * @param {*} idPedido 
+ */
+function EliminarPedido(idPedido)
+{
+    var modal = $("#modal-eliminar-pedido");
+    var inputMotivo = document.getElementById('motivo');
+    if(inputMotivo.value == "") {
+        alert("Debe introducir el motivo.");
+        return;
+    }
+    
+    socket.emit('eliminar-pedido', {
+        idPedido: idPedido,
+        motivo: inputMotivo.value
+    });
+
+    Loader.Mostrar();
+
+    socket.on('cambio', function(data) {
+        Loader.Ocultar();
+        modal.modal('hide');
+        inputMotivo.value = "";
+    });
+}
