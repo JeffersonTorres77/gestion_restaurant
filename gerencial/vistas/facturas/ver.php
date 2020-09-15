@@ -1,11 +1,18 @@
 <?php
     $objMoneda = new MonedaModel( $objFactura->getIdMoneda() );
 
-    try {
-        $objMesa = new MesaModel( $objFactura->getIdMesa() );
-        $mesa = $objMesa->getAlias();
-    } catch(Exception $e) {
-        $mesa = "{$objFactura->getIdMesa()} (Mesa eliminada)";
+    if($objFactura->getIdMesa() != "-1")
+    {
+        try {
+            $objMesa = new MesaModel( $objFactura->getIdMesa() );
+            $mesa = $objMesa->getAlias();
+        } catch(Exception $e) {
+            $mesa = "{$objFactura->getIdMesa()} (Mesa eliminada)";
+        }
+    }
+    else
+    {
+        $mesa = "Para llevar";
     }
 ?>
 

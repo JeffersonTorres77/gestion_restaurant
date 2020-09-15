@@ -54,6 +54,37 @@ class Controlador extends ControladorBase
         $this->Javascript("para_llevar/index");
     }
 
+    public function menus($parametros = [])
+    {
+        if(isset($parametros[0]))
+        {
+            $idMenu = (int) $parametros[0];
+            try {
+                $objCombo = new ComboModel($idMenu);
+            } catch(Exception $e) {
+                $this->Error("Menu no encontrado.");
+                return;
+            }
+            
+            $objRestaurant = Sesion::getRestaurant();
+            $this->Vista("para_llevar/menus_ver", [ "objRestaurant" => $objRestaurant, "objCombo" => $objCombo ]);
+            $this->Javascript("para_llevar/menus_ver");
+        }
+        else
+        {
+            $objRestaurant = Sesion::getRestaurant();
+            $this->Vista("para_llevar/menus", [ "objRestaurant" => $objRestaurant ]);
+            $this->Javascript("para_llevar/menus");
+        }
+    }
+
+    public function carta()
+    {
+        $objRestaurant = Sesion::getRestaurant();
+        $this->Vista("para_llevar/carta", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("para_llevar/carta");
+    }
+
     /*============================================================================
 	 *
 	 *	

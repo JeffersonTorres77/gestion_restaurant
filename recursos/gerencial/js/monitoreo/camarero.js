@@ -499,6 +499,10 @@ function StatusHTML(idStatus)
         case ("3", 3):
             statusHTML = `<div class="badge badge-dark">Entregado</div>`;
         break;
+
+        case ("4", 4):
+            statusHTML = `<div class="badge badge-success">Entregado</div>`;
+        break;
     }
 
     return statusHTML;
