@@ -16,10 +16,9 @@ class Controlador extends ControladorBase
     ============================================================================*/
     public function __construct()
     {
-        $this->ValidarSesion();
-
         if( !Peticion::getEsAjax() )
         {
+            $this->ValidarSesion();
             Incluir::Template("modelo_cliente");
             Template::Iniciar();
         }
