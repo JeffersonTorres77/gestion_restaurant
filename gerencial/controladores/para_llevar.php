@@ -3,7 +3,7 @@
 /*================================================================================
  *--------------------------------------------------------------------------------
  *
- *	Controlador del CONFIGURACION
+ *	Controlador del INICIO
  *
  *--------------------------------------------------------------------------------
 ================================================================================*/
@@ -24,7 +24,7 @@ class Controlador extends ControladorBase
             Template::Iniciar();
         }
 
-        if(!MenusAModel::Verificar(10, Sesion::getUsuario()->getRol()->getId())) {
+        if(!MenusAModel::Verificar(5, Sesion::getUsuario()->getRol()->getId())) {
             $this->Error("No tiene permisos para acceder a este modulo.");
             exit;
         }
@@ -47,40 +47,11 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function datos()
+    public function index()
     {
-        if(!MenusBModel::Verificar(7, Sesion::getUsuario()->getRol()->getId())) {
-            $this->Error("No tiene permisos para acceder a esta sección.");
-            exit;
-        }
-
         $objRestaurant = Sesion::getRestaurant();
-        $this->Vista("configuracion/datos", [ "objRestaurant" => $objRestaurant ]);
-        $this->Javascript("configuracion/datos");
-    }
-
-    public function redes_sociales()
-    {
-        if(!MenusBModel::Verificar(8, Sesion::getUsuario()->getRol()->getId())) {
-            $this->Error("No tiene permisos para acceder a esta sección.");
-            exit;
-        }
-
-        $objRestaurant = Sesion::getRestaurant();
-        $this->Vista("configuracion/redessociales", [ "objRestaurant" => $objRestaurant ]);
-        $this->Javascript("configuracion/redessociales");
-    }
-
-    public function servicio()
-    {
-        if(!MenusBModel::Verificar(9, Sesion::getUsuario()->getRol()->getId())) {
-            $this->Error("No tiene permisos para acceder a esta sección.");
-            exit;
-        }
-
-        $objRestaurant = Sesion::getRestaurant();
-        $this->Vista("configuracion/servicio", [ "objRestaurant" => $objRestaurant ]);
-        $this->Javascript("configuracion/servicio");
+        $this->Vista("para_llevar/index", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("para_llevar/index");
     }
 
     /*============================================================================
@@ -88,8 +59,8 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function crud_restaurantes()
+    public function crud()
     {
-        $this->AJAX("configuracion/crud_restaurantes");
+        $this->AJAX("para_llevar/crud");
     }
 }

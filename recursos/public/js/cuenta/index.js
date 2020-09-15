@@ -16,7 +16,7 @@ Actualizar();
  */
 function Actualizar()
 {
-    var url = WEBSOCKET_URL + "Consultar/Pedidos/";
+    var url = WEBSOCKET_URL + "Pedidos/Consulta/";
     var data = new FormData();
     data.append("key", KEY);
 
@@ -51,17 +51,18 @@ function Actualizar()
                 for(var pedido of pedidos)
                 {
                     var esCombo = pedido.esCombo;
-                    var datos = pedido.datos;
+                    var platos = pedido.platos;
+                    var combo = pedido.combo;
 
                     if(esCombo)
                     {
-                        for(var pedidoCombo of datos.pedidos)
+                        for(var plato of platos)
                         {
-                            var descripcion = pedidoCombo.nombreCombo + " - " + pedidoCombo.nombrePlato;
-                            var status = pedidoCombo.status;
-                            var precio = pedidoCombo.precioUnitario * (1 - (pedidoCombo.descuento / 100));
-                            var cantidad = pedidoCombo.cantidad;
-                            var total = pedidoCombo.precioTotal;
+                            var descripcion = combo.nombre + " - " + plato.plato.nombre;
+                            var status = plato.status;
+                            var precio = plato.precioUnitario * (1 - (plato.descuento / 100));
+                            var cantidad = plato.cantidad;
+                            var total = plato.precioTotal;
                             codeHTML += CodigoPlato(descripcion, status, precio, cantidad, total);
 
                             totalCuenta += Number(total);
@@ -69,11 +70,12 @@ function Actualizar()
                     }
                     else
                     {
-                        var descripcion = datos.nombrePlato;
-                        var status = datos.status;
-                        var precio = datos.precioUnitario * (1 - (datos.descuento / 100));
-                        var cantidad = datos.cantidad;
-                        var total = datos.precioTotal;
+                        var plato = pedido.platos[0];
+                        var descripcion = plato.plato.nombre;
+                        var status = plato.status;
+                        var precio = plato.precioUnitario * (1 - (plato.descuento / 100));
+                        var cantidad = plato.cantidad;
+                        var total = plato.precioTotal;
                         codeHTML += CodigoPlato(descripcion, status, precio, cantidad, total);
 
                         totalCuenta += Number(total);

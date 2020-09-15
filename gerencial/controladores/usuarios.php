@@ -24,7 +24,7 @@ class Controlador extends ControladorBase
             Template::Iniciar();
         }
 
-        if(!MenusAModel::Verificar(8, Sesion::getUsuario()->getRol()->getId())) {
+        if(!MenusAModel::Verificar(9, Sesion::getUsuario()->getRol()->getId())) {
             $this->Error("No tiene permisos para acceder a este modulo.");
             exit;
         }
