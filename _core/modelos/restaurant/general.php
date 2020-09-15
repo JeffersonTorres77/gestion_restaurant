@@ -151,7 +151,7 @@ class RestaurantesModel
     ============================================================================*/
     public static function CantidadResponsables($idRestaurant)
     {
-        $query = "SELECT COUNT(*) AS cantidad FROM usuarios A, roles B WHERE A.idRol = B.idRol AND B.idRestaurant = '{$idRestaurant}' AND B.responsable = '1' AND A.activo = '1'";
+        $query = "SELECT COUNT(*) AS cantidad FROM usuarios A, roles B WHERE A.idRol = B.idRol AND A.idRestaurant = '{$idRestaurant}' AND B.responsable = '1' AND A.activo = '1'";
         $datos = Conexion::getMysql()->Consultar($query);
         $cantidad = $datos[0]['cantidad'];
 

@@ -15,7 +15,6 @@ class RolModel
 	 *
     ============================================================================*/
     private $id;
-    private $idRestaurant;
     private $nombre;
     private $descripcion;
     private $responsable;
@@ -28,10 +27,6 @@ class RolModel
     ============================================================================*/
     public function getId() {
         return $this->id;
-    }
-
-    public function getIdRestaurant() {
-        return $this->idRestaurant;
     }
 
     public function getNombre() {
@@ -66,7 +61,6 @@ class RolModel
         }
 
         $this->id = $datos[0]['idRol'];
-        $this->idRestaurant = $datos[0]['idRestaurant'];
         $this->nombre = $datos[0]['nombre'];
         $this->descripcion = $datos[0]['descripcion'];
         $this->responsable = boolval( $datos[0]['responsable'] );
@@ -166,6 +160,12 @@ class RolModel
         $descripcion = Filtro::General($descripcion);
         $this->set("descripcion", $descripcion);
         $this->descripcion = $descripcion;
+    }
+    
+    public function setResponsable( $responsable ) {
+        $responsable = boolval($responsable);
+        $this->set("responsable", $responsable);
+        $this->responsable = $responsable;
     }
 
     /*============================================================================

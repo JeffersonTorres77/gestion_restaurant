@@ -215,7 +215,7 @@ switch($accion)
         $direccion = Input::POST("direccion", FALSE);
         $telefono = Input::POST("telefono", FALSE);
         $correo = Input::POST("correo", FALSE);
-        $idRol = Input::POST("acceso", FALSE);
+        $idRol = Input::POST("idRol", FALSE);
         $activo = Input::POST("activo", FALSE);
 
         /**

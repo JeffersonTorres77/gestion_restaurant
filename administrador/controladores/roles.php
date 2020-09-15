@@ -42,6 +42,17 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
+    public function index()
+    {
+        $this->Vista("roles/index");
+        $this->Javascript("roles/index");
+    }
+
+    /*============================================================================
+	 *
+	 *	
+	 *
+    ============================================================================*/
     public function crud()
     {
         $this->AJAX("roles/crud");

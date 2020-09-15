@@ -137,7 +137,7 @@
                                         <label for="input-cuenta-rol" class="mb-0">Rol:</label>
                                         <select class="form-control" id="input-cuenta-rol" name="idRol">
                                             <?php
-                                                $roles = RolesModel::Listado($objRestaurant->getId());
+                                                $roles = RolesModel::ListadoRestaurant($objRestaurant->getId());
                                                 foreach($roles as $rol)
                                                 {
                                                     $selected = "";

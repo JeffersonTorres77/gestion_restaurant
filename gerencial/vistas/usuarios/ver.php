@@ -45,8 +45,26 @@
                             <?php echo $objUsuario->getNombre(); ?>
                         </div>
 
-                        <div class="acceso">
-                            <?php echo $objUsuario->getRol()->getNombre(); ?>
+                        <div class="row justify-content-center">
+                            <div class="acceso col-10">
+                                <select class="form-control" name="idRol" id="">
+                                    <?php
+                                        $idRolActual = $objUsuario->getRol()->getId();
+                                        $objRestaurant = Sesion::getRestaurant();
+                                        $roles = RolesModel::ListadoRestaurant($objRestaurant->getId());
+                                        foreach($roles as $rol)
+                                        {
+                                            $selected = ($rol['idRol'] == $idRolActual) ? 'selected' : '';
+
+                                            ?>
+                                                <option <?php echo $selected; ?> value="<?php echo $rol['idRol']; ?>">
+                                                    <?php echo $rol['nombre']; ?>
+                                                </option>
+                                            <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="custom-control custom-switch mt-2">

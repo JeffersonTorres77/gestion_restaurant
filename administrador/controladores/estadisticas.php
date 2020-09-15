@@ -3,7 +3,7 @@
 /*================================================================================
  *--------------------------------------------------------------------------------
  *
- *	Controlador de RESTURANTES
+ *	Controlador del ESTADISTICAS
  *
  *--------------------------------------------------------------------------------
 ================================================================================*/
@@ -42,29 +42,10 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function gestion($parametros = [])
-    {
-        if(isset($parametros[0]))
-        {
-            $idRestaurante = $parametros[0];
-
-            try {
-                $objRestaurant = new RestaurantModel($idRestaurante);
-            } catch(Exception $e) {
-                $this->Error("Restaurant <b>ID: {$idRestaurante}</b> invalido.");
-                return;
-            }
-
-            //VER RESTAURANTE
-            $this->Vista("restaurantes/ver", [ "objRestaurant" => $objRestaurant ]);
-            $this->Javascript("restaurantes/ver");
-        }
-        else
-        {
-            //TABLA DE GESTION
-            $this->Vista("restaurantes/gestion");
-            $this->Javascript("restaurantes/gestion");
-        }
+    public function index()
+    {        
+        $this->Vista("estadisticas/index");
+        $this->Javascript("estadisticas/index");
     }
 
     /*============================================================================
@@ -72,29 +53,8 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function registrar()
+    public function consultas()
     {
-        $this->Vista("restaurantes/registrar");
-        $this->Javascript("restaurantes/registrar");
-    }
-    
-    /*============================================================================
-	 *
-	 *	
-	 *
-    ============================================================================*/
-    public function crud()
-    {
-        $this->AJAX("restaurantes/crud");
-    }
-    
-    /*============================================================================
-	 *
-	 *	
-	 *
-    ============================================================================*/
-    public function crud_roles()
-    {
-        $this->AJAX("restaurantes/crud_roles");
+        $this->AJAX('estadisticas/consultas');
     }
 }
