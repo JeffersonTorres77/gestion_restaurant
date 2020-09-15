@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-08-2020 a las 00:00:10
+-- Tiempo de generación: 15-09-2020 a las 19:12:33
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -42,6 +42,8 @@ CREATE TABLE `adm_menus_a` (
 
 INSERT INTO `adm_menus_a` (`idMenuA`, `nombre`, `img`, `link`, `con_opciones`) VALUES
 (1, 'Resturantes', 'fas fa-store', 'Restaurantes/', 1),
+(2, 'Roles', 'fas fa-user-cog', 'Roles/', 0),
+(3, 'Estadisticas', 'fas fa-chart-line', 'Estadisticas/', 0),
 (100, 'Gestion Sistema', 'fas fa-desktop', 'Gestion_Sistema/', 1);
 
 -- --------------------------------------------------------
@@ -255,7 +257,10 @@ INSERT INTO `facturas` (`idFactura`, `idRestaurant`, `idMesa`, `numero`, `idMone
 (1, 1, 1, 1, 2, 850, '2020-08-23', '21:56:15'),
 (2, 1, 1, 2, 2, 1760, '2020-08-23', '21:56:18'),
 (3, 1, 1, 99, 2, 2900, '2020-08-26', '23:03:36'),
-(4, 1, 3, 100, 2, 850, '2020-08-26', '23:03:44');
+(4, 1, 3, 100, 2, 850, '2020-08-26', '23:03:44'),
+(5, 1, 1, 9, 2, 1600, '2020-09-14', '11:14:13'),
+(6, 1, -1, 99999, 2, 223, '2020-09-15', '16:55:13'),
+(7, 1, -1, 123456789, 2, 2510, '2020-09-15', '17:02:39');
 
 -- --------------------------------------------------------
 
@@ -307,7 +312,15 @@ INSERT INTO `facturas_detalles` (`idFacturaDetalle`, `idFactura`, `idMesa`, `idP
 (13, 3, 1, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
 (14, 3, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 2, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:37'),
 (15, 4, 3, 4, 'PASTA EN SALSA', 0, 'null', 0, 2, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:44'),
-(16, 4, 3, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:44');
+(16, 4, 3, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 1, 0, 750, '', 4, NULL, 0, NULL, NULL, NULL, '2020-08-26 23:03:44'),
+(17, -1, 1, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 5, 0, 3750, '', 5, 'Prueba', 0, NULL, NULL, NULL, '2020-09-14 11:08:57'),
+(18, 5, 1, 4, 'PASTA EN SALSA', 0, 'null', 0, 2, 100, 1, 0, 100, '', 4, NULL, 0, NULL, NULL, NULL, '2020-09-14 11:14:13'),
+(19, 5, 1, 11, 'PESCADO FRITO', 0, 'null', 0, 2, 1500, 1, 0, 1500, '123', 4, NULL, 0, NULL, NULL, NULL, '2020-09-14 11:14:13'),
+(20, 6, -1, 14, 'ASD', 0, 'null', 0, 2, 123, 1, 0, 123, '', 4, NULL, 1, NULL, NULL, NULL, '2020-09-15 16:55:13'),
+(21, 6, -1, 4, 'PASTA EN SALSA', 0, 'null', 0, 2, 100, 1, 0, 100, '', 4, NULL, 1, NULL, NULL, NULL, '2020-09-15 16:55:13'),
+(22, 7, -1, 10, 'PASTICHO', 0, 'null', 0, 2, 750, 1, 0, 750, '', 4, NULL, 1, NULL, NULL, NULL, '2020-09-15 17:02:39'),
+(23, 7, -1, 1, 'PIZZA MARGARITA', 3, 'COMBO 2', 1, 2, 2000, 1, 20, 1600, '', 4, NULL, 1, NULL, NULL, NULL, '2020-09-15 17:02:40'),
+(24, 7, -1, 13, 'PEPSI', 3, 'COMBO 2', 1, 3, 200, 1, 20, 160, '', 4, NULL, 1, NULL, NULL, NULL, '2020-09-15 17:02:40');
 
 -- --------------------------------------------------------
 
@@ -332,11 +345,12 @@ INSERT INTO `menus_a` (`idMenuA`, `nombre`, `img`, `link`, `con_opciones`) VALUE
 (2, 'Platos', 'fas fa-hamburger', 'Platos/', 0),
 (3, 'Menus y promociones', 'fas fa-home', 'Menus/', 0),
 (4, 'Mesas', 'fas fa-utensils', 'Mesas/', 0),
-(5, 'Monitoreo', 'fas fa-video', 'Monitoreo/', 1),
-(6, 'Facturas', 'fas fa-receipt', 'Facturas/', 1),
-(7, 'Estadisticas', 'fas fa-home', 'Estadisticas/', 1),
-(8, 'Usuario', 'fas fa-users', 'Usuarios/', 0),
-(9, 'Configuracion', 'fas fa-chart-area', 'Configuracion/', 1);
+(5, 'Para llevar', 'fas fa-car', 'Para_Llevar/', 0),
+(6, 'Monitoreo', 'fas fa-video', 'Monitoreo/', 1),
+(7, 'Facturas', 'fas fa-receipt', 'Facturas/', 1),
+(8, 'Estadisticas', 'fas fa-chart-line', 'Estadisticas/', 1),
+(9, 'Usuario', 'fas fa-users', 'Usuarios/', 0),
+(10, 'Configuracion', 'fas fa-chart-area', 'Configuracion/', 1);
 
 -- --------------------------------------------------------
 
@@ -357,22 +371,22 @@ CREATE TABLE `menus_b` (
 --
 
 INSERT INTO `menus_b` (`idMenuB`, `idMenuA`, `nombre`, `img`, `link`) VALUES
-(-2, 5, 'Pedidos - General', 'far fa-circle', 'Monitoreo/Pedidos/General/'),
-(-1, 5, 'Pedidos - Cocina', 'far fa-circle', 'Monitoreo/Pedidos/Cocina/'),
-(0, 5, 'Pedidos - Bar', 'far fa-circle', 'Monitoreo/Pedidos/Bar/'),
-(1, 5, 'Pedidos - Postres', 'far fa-circle', 'Monitoreo/Pedidos/Postres/'),
-(2, 5, 'Camarero', 'fas fa-concierge-bell', 'Monitoreo/Camarero/'),
-(3, 5, 'Caja', 'fas fa-cash-register', 'Monitoreo/Caja/'),
-(4, 6, 'Hoy', 'far fa-circle', 'Facturas/hoy/'),
-(5, 6, 'General', 'far fa-circle', 'Facturas/General/'),
-(6, 7, 'Por platillos', 'far fa-circle', 'Estadisticas/Por_Platillos/'),
-(7, 9, 'Datos', 'far fa-circle', 'Configuracion/Datos/'),
-(8, 9, 'Redes sociales', 'far fa-circle', 'Configuracion/Redes_Sociales/'),
-(9, 9, 'Servicio', 'far fa-circle', 'Configuracion/Servicio/'),
-(10, 7, 'Por Menus', 'far fa-circle', 'Estadisticas/Por_Menus/'),
-(11, 7, 'Por Categorias', 'far fa-circle', 'Estadisticas/Por_Categorias/'),
-(12, 7, 'Por Areas', 'far fa-circle', 'Estadisticas/Por_Areas/'),
-(13, 7, 'Por Mesas', 'far fa-circle', 'Estadisticas/Por_Mesas/');
+(-2, 6, 'Pedidos - General', 'far fa-circle', 'Monitoreo/Pedidos/General/'),
+(-1, 6, 'Pedidos - Cocina', 'far fa-circle', 'Monitoreo/Pedidos/Cocina/'),
+(0, 6, 'Pedidos - Bar', 'far fa-circle', 'Monitoreo/Pedidos/Bar/'),
+(1, 6, 'Pedidos - Postres', 'far fa-circle', 'Monitoreo/Pedidos/Postres/'),
+(2, 6, 'Camarero', 'fas fa-concierge-bell', 'Monitoreo/Camarero/'),
+(3, 6, 'Caja', 'fas fa-cash-register', 'Monitoreo/Caja/'),
+(4, 7, 'Hoy', 'far fa-circle', 'Facturas/hoy/'),
+(5, 7, 'General', 'far fa-circle', 'Facturas/General/'),
+(6, 8, 'Por platillos', 'far fa-circle', 'Estadisticas/Por_Platillos/'),
+(7, 10, 'Datos', 'far fa-circle', 'Configuracion/Datos/'),
+(8, 10, 'Redes sociales', 'far fa-circle', 'Configuracion/Redes_Sociales/'),
+(9, 10, 'Servicio', 'far fa-circle', 'Configuracion/Servicio/'),
+(10, 8, 'Por Menus', 'far fa-circle', 'Estadisticas/Por_Menus/'),
+(11, 8, 'Por Categorias', 'far fa-circle', 'Estadisticas/Por_Categorias/'),
+(12, 8, 'Por Areas', 'far fa-circle', 'Estadisticas/Por_Areas/'),
+(13, 8, 'Por Mesas', 'far fa-circle', 'Estadisticas/Por_Mesas/');
 
 -- --------------------------------------------------------
 
@@ -440,75 +454,16 @@ CREATE TABLE `permisos_a` (
 --
 
 INSERT INTO `permisos_a` (`idRol`, `idMenuA`) VALUES
+(1, 1),
 (1, 2),
 (1, 3),
 (1, 4),
 (1, 5),
-(1, 8),
-(2, 2),
-(2, 3),
-(2, 4),
-(2, 8),
-(3, 1),
-(3, 2),
-(3, 3),
-(3, 4),
-(3, 5),
-(3, 8),
-(4, 2),
-(4, 3),
-(4, 4),
-(4, 8),
-(3, 9),
-(4, 1),
-(4, 9),
-(2, 1),
-(1, 9),
-(2, 9),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6),
-(6, 7),
-(6, 8),
-(7, 2),
-(7, 3),
-(7, 4),
-(7, 7),
-(7, 8),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6),
-(6, 7),
-(6, 8),
-(7, 2),
-(7, 3),
-(7, 4),
-(7, 7),
-(7, 8),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6),
-(6, 7),
-(6, 8),
-(7, 2),
-(7, 3),
-(7, 4),
-(7, 7),
-(7, 8),
-(6, 1),
-(6, 9),
-(7, 1),
-(1, 7),
 (1, 6),
-(3, 6),
-(3, 7),
-(1, 1);
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10);
 
 -- --------------------------------------------------------
 
@@ -526,50 +481,19 @@ CREATE TABLE `permisos_b` (
 --
 
 INSERT INTO `permisos_b` (`idRol`, `idMenuB`) VALUES
-(1, 1),
+(1, -2),
 (1, 2),
 (1, 3),
-(3, 1),
-(3, 2),
-(3, 3),
-(1, 6),
-(1, 7),
-(3, 6),
-(3, 7),
-(6, 1),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6),
-(6, 7),
-(6, 1),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6),
-(6, 7),
-(6, 1),
-(6, 2),
-(6, 3),
-(6, 4),
-(6, 5),
-(6, 6),
-(6, 7),
 (1, 4),
 (1, 5),
-(3, 4),
-(3, 5),
-(1, 8),
-(1, 9),
-(1, 0),
-(1, -1),
-(1, -2),
-(1, 12),
-(1, 11),
+(1, 6),
 (1, 10),
-(1, 13);
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 7),
+(1, 8),
+(1, 9);
 
 -- --------------------------------------------------------
 
@@ -661,7 +585,6 @@ INSERT INTO `restaurantes` (`idRestaurant`, `documento`, `nombre`, `direccion`, 
 
 CREATE TABLE `roles` (
   `idRol` int(11) NOT NULL,
-  `idRestaurant` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `responsable` bit(1) NOT NULL,
@@ -672,11 +595,34 @@ CREATE TABLE `roles` (
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`idRol`, `idRestaurant`, `nombre`, `descripcion`, `responsable`, `fecha_registro`) VALUES
-(1, 1, 'GERENTE', '', b'1', '2020-06-11 1-14-34'),
-(2, 1, 'BASICO', '', b'0', '2020-06-11 1-14-34'),
-(3, 2, 'GERENTE', '', b'1', '2020-06-11 1-15-30'),
-(4, 2, 'BASICO', '', b'0', '2020-06-11 1-15-30');
+INSERT INTO `roles` (`idRol`, `nombre`, `descripcion`, `responsable`, `fecha_registro`) VALUES
+(1, 'Gerente', '', b'1', '2020-09-14 00:00:00'),
+(2, 'Caja', '', b'0', '2020-09-14 00:00:00'),
+(3, 'Camarero', '', b'0', '2020-09-14 00:00:00'),
+(4, 'Cocina', '', b'0', '2020-09-14 00:00:00'),
+(5, 'Bar', '', b'0', '2020-09-14 00:00:00'),
+(6, 'Mesa de postre', '', b'0', '2020-09-14 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles_permisos`
+--
+
+CREATE TABLE `roles_permisos` (
+  `idRol` int(11) NOT NULL,
+  `idRestaurant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `roles_permisos`
+--
+
+INSERT INTO `roles_permisos` (`idRol`, `idRestaurant`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1);
 
 -- --------------------------------------------------------
 
@@ -711,7 +657,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`idUsuario`, `idRestaurant`, `usuario`, `clave`, `nombre`, `documento`, `idRol`, `direccion`, `telefono`, `correo`, `foto`, `activo`, `aux_1`, `aux_2`, `aux_3`, `fecha_registro`, `fecha_modificacion`) VALUES
 (1, 1, 'admin', 'admin', 'Jefferson Torres', 'V25409904', 1, '', '', 'jefersonugas@gmail.com', 'usuario-admin.jpg', 1, NULL, NULL, NULL, '2020-06-11 15-1-45', '2020-08-11 8:8:55'),
 (2, 2, 'katthyg', 'katthyg', 'Katiuska Gonzalez', 'V22764050', 3, 'En una casa de nuevo', '04262889861', 'jeffersonjtorresu@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-06-11 1-15-30', '2020-06-11 1-15-30'),
-(3, 1, 'test', '123', 'Test User', '000000', 2, 'Por alli', '04241738615', 'test@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-08-02 7:30:58', '2020-08-24 10:15:38');
+(3, 1, 'test', '123', 'Test User', '000000', 3, 'Por alli', '04241738615', 'test@gmail.com', NULL, 1, NULL, NULL, NULL, '2020-08-02 7:30:58', '2020-09-15 5:22:28');
 
 --
 -- Índices para tablas volcadas
