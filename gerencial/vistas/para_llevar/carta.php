@@ -10,6 +10,7 @@
                 <a class="text-center text-sm-left nav-link" id="v-pills-cuenta-tab" href="<?php echo HOST_GERENCIAL."Para_Llevar/"; ?>">Cuenta</a>
                 <a class="text-center text-sm-left nav-link" id="v-pills-combo-tab" href="<?php echo HOST_GERENCIAL."Para_Llevar/Menus/"; ?>">Menus</a>
                 <a class="text-center text-sm-left nav-link active" id="v-pills-carta-tab">Carta</a>
+                <a class="text-center text-sm-left nav-link" id="v-pills-espera-tab" href="<?php echo HOST_GERENCIAL."Para_Llevar/Espera/"; ?>">En espera</a>
             </div>
         </div>
 

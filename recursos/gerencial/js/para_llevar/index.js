@@ -10,9 +10,6 @@ var botonPagar = document.getElementById('boton-pagar');
 var modalPagar = $("#modal-pagar");
 var formPagar = document.getElementById("form-pagar");
 
-var botonListo = document.getElementById('boton-listo');
-var modalListo = $("#modal-listo");
-
 /**
  * 
  */
@@ -28,6 +25,7 @@ function Actualizar()
     var data = new FormData();
     data.append("key", KEY);
     data.append("para_llevar", true);
+    data.append('status', 0);
 
     AJAX.api({
         url: url,
@@ -52,7 +50,6 @@ function Actualizar()
 
         ok: function(data) {
             var botonPagarActivo = false;
-            var botonListoActivo = false;
             var codeHTML = "";
             listaPedidos = data.pedidos;
             var pedidos = data.pedidos;
@@ -104,10 +101,6 @@ function Actualizar()
                             botonPagarActivo = true;
                         }
 
-                        if(plato.status == 4) {
-                            botonListoActivo = true;
-                        }
-
                         codeHTML += CodigoPlato(descripcion, status, precio, cantidad, total, indexPedido, numero_factura);
 
                         totalCuenta += Number(total);
@@ -115,7 +108,6 @@ function Actualizar()
                 }
 
                 botonPagar.disabled = !(botonPagarActivo);
-                botonListo.disabled = !(botonListoActivo);
 
                 codeHTML += `<tr class="table-sm">
                     <td colspan="5">
@@ -285,14 +277,6 @@ function ModalPagar()
  */
 function Pagar()
 {
-    if(document.getElementById('pagar-numero_factura').value == "") {
-        Alerta.Danger("Debe colocar un numero de factura.");
-        return;
-    }
-
-    var r = confirm(`¿Esta seguro que desea confirmar todos los pedidos?`);
-    if(r == false) return;
-
     var url = WEBSOCKET_URL + "Pedidos/Confirmar/";
     var data = new FormData(formPagar);
     data.append("key", KEY);
@@ -314,44 +298,6 @@ function Pagar()
             formPagar.reset();
             Loader.Ocultar();
             modalPagar.modal("hide");
-        }
-    });
-}
-
-/**
- * 
- */
-function ModalMigrar()
-{
-    modalListo.modal('show');
-}
-
-/**
- * 
- */
-function Migrar()
-{
-    var url = WEBSOCKET_URL + "Pedidos/Facturar/Para_Llevar/";
-    var data = new FormData();
-    data.append("key", KEY);
-
-    AJAX.api({
-        url: url,
-        data: data,
-
-        antes: function() {
-            Loader.Mostrar();
-        },
-        error: function(mensaje) {
-            Loader.Ocultar();
-            if(mensaje == "404") mensaje = "Servicio de WebSocket no activo.";
-            Alerta.Danger(mensaje);
-        },
-        ok: function(data) {
-            console.log(data);
-            Actualizar();
-            Loader.Ocultar();
-            modalListo.modal("hide");
         }
     });
 }

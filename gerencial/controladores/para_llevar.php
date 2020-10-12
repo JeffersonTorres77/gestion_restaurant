@@ -85,6 +85,13 @@ class Controlador extends ControladorBase
         $this->Javascript("para_llevar/carta");
     }
 
+    public function espera()
+    {
+        $objRestaurant = Sesion::getRestaurant();
+        $this->Vista("para_llevar/espera", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("para_llevar/espera");
+    }
+
     /*============================================================================
 	 *
 	 *	

@@ -73,7 +73,7 @@ function Actualizar()
                         if(dato == undefined) continue;
 
                         var link = HOST_GERENCIAL + `Facturas/Ver/${dato.id}/`;
-                        var numero = dato.numero;
+                        var numero = dato.id;
                         var total = dato.moneda.simbolo + ' ' + Formato.Numerico(dato.total, 2);
                         var items = dato.items;
                         var fecha = dato.fecha;

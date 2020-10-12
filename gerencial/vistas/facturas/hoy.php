@@ -21,7 +21,7 @@
                             </button>
                         </div>
 
-                        <input type="search" class="form-control" placeholder="Numero..." id="input-buscador">
+                        <input type="search" class="form-control" placeholder="ID factura..." id="input-buscador">
 
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary rounded-right" data-toggle="collapse" data-target="#filtros">
@@ -37,9 +37,9 @@
                                     <form id="form-filtro" onsubmit="event.preventDefault()">
                                         <div class="input-group input-group-sm mb-2">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text w-100px">Numero</span>
+                                                <span class="input-group-text w-100px">ID</span>
                                             </div>
-                                            <input type="text" name="numero" class="form-control">
+                                            <input type="text" name="idFactura" class="form-control">
                                         </div>
 
                                         <div class="input-group input-group-sm mb-2">
@@ -75,7 +75,7 @@
                     <table class="table table-hover table-striped table-bordered">
                         <thead class="table-sm">
                             <tr>
-                                <th ordenar="true" key="numero" class="w-auto">Numero</th>
+                                <th ordenar="true" key="numero" class="w-auto">ID</th>
                                 <th ordenar="true" key="total" class="w-150px">Total</th>
                                 <th class="w-50px">Items</th>
                                 <th ordenar="true" key="hora" class="w-100px">Hora</th>

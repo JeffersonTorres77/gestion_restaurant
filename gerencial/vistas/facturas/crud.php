@@ -51,7 +51,7 @@ switch($accion)
          */
         if($buscar != FALSE)
         {
-            $condicional = "numero LIKE '%{$buscar}%'";
+            $condicional = "idFactura LIKE '%{$buscar}%'";
 
             $par = [];
             $par['cantMostrar'] = $cantMostrar;
@@ -68,7 +68,7 @@ switch($accion)
          */
         elseif($filtros == "si")
         {
-            $numero = Filtro::General( Input::POST("numero", FALSE) );
+            $idFactura = Filtro::General( Input::POST("idFactura", FALSE) );
             $totalInicio = Filtro::General( Input::POST("total-inicio", FALSE) );
             $totalFin = Filtro::General( Input::POST("total-fin", FALSE) );
             $horaInicio = Input::POST("hora-inicio", FALSE);
@@ -76,9 +76,9 @@ switch($accion)
 
             $condicional = "";
 
-            if($numero != FALSE) {
+            if($idFactura != FALSE) {
                 if($condicional != "") $condicional .= " AND ";
-                $condicional .= "numero LIKE '%{$numero}'%";
+                $condicional .= "idFactura = '{$idFactura}'";
             }
 
             if($totalInicio != FALSE) {
@@ -148,7 +148,6 @@ switch($accion)
 
             $datos[$I] = [
                 "id" => $objFactura->getId(),
-                "numero" => $objFactura->getNumero(),
                 "total" => $objFactura->getTotal(),
                 "items" => sizeof($items),
                 "fecha" => $objFactura->getFecha(),
@@ -210,7 +209,7 @@ switch($accion)
          */
         if($buscar != FALSE)
         {
-            $condicional = "numero LIKE '%{$buscar}%'";
+            $condicional = "idFactura LIKE '%{$buscar}%'";
 
             $par = [];
             $par['cantMostrar'] = $cantMostrar;
@@ -226,7 +225,7 @@ switch($accion)
          */
         elseif($filtros !== FALSE)
         {
-            $numero = Filtro::General( Input::POST("numero", FALSE) );
+            $idFactura = Filtro::General( Input::POST("idFactura", FALSE) );
             $totalInicio = Filtro::General( Input::POST("total-inicio", FALSE) );
             $totalFin = Filtro::General( Input::POST("total-fin", FALSE) );
             $fechaInicio = Input::POST("fecha-inicio", FALSE);
@@ -234,9 +233,9 @@ switch($accion)
 
             $condicional = "";
 
-            if($numero != FALSE) {
+            if($idFactura != FALSE) {
                 if($condicional != "") $condicional .= " AND ";
-                $condicional .= "numero LIKE '%{$numero}'%";
+                $condicional .= "idFactura = '{$idFactura}'";
             }
 
             if($totalInicio != FALSE) {
@@ -302,7 +301,6 @@ switch($accion)
 
             $datos[$I] = [
                 "id" => $objFactura->getId(),
-                "numero" => $objFactura->getNumero(),
                 "total" => $objFactura->getTotal(),
                 "items" => sizeof($items),
                 "fecha" => $objFactura->getFecha(),
