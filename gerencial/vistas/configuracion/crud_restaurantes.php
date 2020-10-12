@@ -89,6 +89,7 @@ switch($accion)
          * Administracion
          */
         $idMoneda = Input::POST("idMoneda", FALSE);
+        $iva = Input::POST("iva", FALSE);
         $facturar = Input::POST("facturar", FALSE);
         $facturarParaLlevar = Input::POST("facturarParaLlevar", FALSE);
 
@@ -96,6 +97,10 @@ switch($accion)
         {
             $objMoneda = new MonedaModel($idMoneda);
             $objRestaurant->setIdMoneda($objMoneda->getId());
+        }
+        
+        if($iva !== FALSE) {
+            $objRestaurant->setIva($iva);
         }
 
         if($facturar !== FALSE) {

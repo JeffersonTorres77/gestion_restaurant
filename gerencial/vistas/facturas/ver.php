@@ -26,7 +26,7 @@
             </div>
 
             <h5 class="mb-0">
-                <?php echo "Factura N° {$objFactura->getNumero()}"; ?>
+                <?php echo "Factura N° {$objFactura->getId()}"; ?>
             </h5>
         </div>
 
@@ -34,7 +34,7 @@
             <div>
                 <div class="float-left">
                     <div>
-                        Numero: <b><?php echo $objFactura->getNumero(); ?></b>
+                        Numero: <b><?php echo $objFactura->getId(); ?></b>
                     </div>
 
                     <div>
@@ -108,6 +108,26 @@
                                 $totalFactura += $total;
                             }
                         ?>
+
+                        <tr class="font-weight-bold">
+                            <td colspan="3">
+                                SubTotal
+                            </td>
+
+                            <td right>
+                                <?php echo Formato::Precio($totalFactura, $objMoneda); ?>
+                            </td>
+                        </tr> 
+
+                        <tr class="font-weight-bold">
+                            <td colspan="3">
+                                Impuestos
+                            </td>
+
+                            <td right>
+                                <?php echo Formato::Precio($totalFactura, $objMoneda); ?>
+                            </td>
+                        </tr> 
 
                         <tr class="font-weight-bold">
                             <td colspan="3">

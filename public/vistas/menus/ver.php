@@ -153,8 +153,8 @@
 
 <script>
     const ID_COMBO = '<?php echo $objCombo->getId(); ?>';
-    const PLATOS = JSON.parse('<?php echo json_encode($arrayPlatos); ?>');
-    const LIMITES = JSON.parse('<?php echo json_encode($arrayCategorias); ?>');
+    const PLATOS = JSON.parse(`<?php echo json_encode($arrayPlatos); ?>`);
+    const LIMITES = JSON.parse(`<?php echo json_encode($arrayCategorias); ?>`);
 </script>
 
 <div class="modal fade" id="modal-ver">

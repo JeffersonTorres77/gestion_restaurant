@@ -175,5 +175,5 @@ botonCamarero.onclick = function() { Llamar_Camarero(); }
  */
 function Llamar_Camarero()
 {
-    LlamarCamarero();
+    LlamarCamarero(true);
 }

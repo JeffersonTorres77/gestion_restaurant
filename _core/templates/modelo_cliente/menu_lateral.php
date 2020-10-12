@@ -90,7 +90,8 @@
                         </a>
 
                         <?php
-                            $categorias = CategoriasModel::Listado( $objRestaurant->getId() );
+                            $condicional = "idRestaurant = '{$objRestaurant->getId()}'";
+                            $categorias = CategoriasModel::Listado($condicional);
                             foreach($categorias as $categoria)
                             {
                                 $link = HOST . "Carta/#/categoria=".$categoria['idCategoria']."/";

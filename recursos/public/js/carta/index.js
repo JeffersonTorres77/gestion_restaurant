@@ -50,33 +50,45 @@ function Actualizar()
                 code += '       <h5 class="mb-0">'+categoria.nombre+'</h5>';
                 code += '   </div>';
 
-                code += '   <div class="card-body">';
-                code += '       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 px-2">';
-
-                for(var plato of platos)
+                if(platos.length > 0)
                 {
-                    code += '<div class="mb-4 d-flex justify-content-center px-2" onclick="ModalVer('+index+')">';
-                    code += '   <div class="card card-especial" tabindex="0">';
-                    code += '       <img src="'+plato.imagen+'" class="card-img-top border-bottom">';
+                    code += '   <div class="card-body">';
+                    code += '       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 px-2">';
 
-                    code += '       <div class="card-body">';
-                    code += '           <p class="card-text mb-1">';
-                    code += '               ' + plato.nombre;
-                    code += '           </p>';
-                    
-                    code += '           <h5 class="card-title mb-0">';
-                    code += '               ' + MONEDA + ' ' + Formato.Numerico(plato.precio, 2);
-                    code += '           </h5>';
+                    for(var plato of platos)
+                    {
+                        code += '<div class="mb-4 d-flex justify-content-center px-2" onclick="ModalVer('+index+')">';
+                        code += '   <div class="card card-especial" tabindex="0">';
+                        code += '       <img src="'+plato.imagen+'" class="card-img-top border-bottom">';
+
+                        code += '       <div class="card-body">';
+                        code += '           <p class="card-text mb-1">';
+                        code += '               ' + plato.nombre;
+                        code += '           </p>';
+                        
+                        code += '           <h5 class="card-title mb-0">';
+                        code += '               ' + MONEDA + ' ' + Formato.Numerico(plato.precio, 2);
+                        code += '           </h5>';
+                        code += '       </div>';
+                        code += '   </div>';
+                        code += '</div>';
+
+                        datos_platos.push(plato);
+                        index += 1;
+                    }
+
                     code += '       </div>';
                     code += '   </div>';
+                }
+                else
+                {
+                    code += '<div>';
+                    code += '   <h5 class="text-center mb-0 p-4">';
+                    code += '       No hay platos disponibles.';
+                    code += '   </h5>';
                     code += '</div>';
-
-                    datos_platos.push(plato);
-                    index += 1;
                 }
 
-                code += '       </div>';
-                code += '   </div>';
                 code += '</div>';
             }
 

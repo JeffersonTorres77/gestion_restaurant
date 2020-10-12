@@ -208,10 +208,10 @@ function CodigoMesaHTML(keyMesa)
         }
     }
 
-    var alertaCamarero = (objMesa.solicitar_camarero == false) ? '' : `
-    <div class="py-1 px-2 alert alert-warning mb-0 rounded-0 font-weight-bold border-bottom border-warning" center>
+    var alertaCamarero = (objMesa.solicitar_camarero == '0') ? '' : `
+    <div class="py-1 px-2 alert mb-0 rounded-0 font-weight-bold border-bottom ${(objMesa.solicitar_camarero == '1') ? 'border-warning alert-warning' : 'border-success alert-success'}" center>
         <i class="fas fa-bell"></i>
-        Se solicita al camarero
+        ${(objMesa.solicitar_camarero == '1') ? 'Se solicita al camarero' : 'Se solicita la cuenta'}
     </div>`;
 
     return `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
@@ -311,10 +311,10 @@ function ModalConfirmar(keyMesa)
     header.className = "modal-header bg-primary text-white";
     listaModal.innerHTML = '';
 
-    if(objMesa.solicitar_camarero) {
-        listaModal.innerHTML += `<div onclick="QuitarAlarma('${objMesa.idMesa}')" class="list-group-item list-group-item-action list-group-item-warning position-relative" center>
+    if(objMesa.solicitar_camarero != '0') {
+        listaModal.innerHTML += `<div onclick="QuitarAlarma('${objMesa.idMesa}')" class="list-group-item list-group-item-action position-relative ${(objMesa.solicitar_camarero == '1') ? 'list-group-item-warning' : 'list-group-item-success'}" center>
             <i class="fas fa-bell"></i>
-            Se solicita al camarero
+            ${(objMesa.solicitar_camarero == '1') ? 'Se solicita al camarero' : 'Se solicita la cuenta'}
 
             <div class="position-absolute p-2" style="top: 0px; right: 0px;">
                 <button class="btn btn-sm btn-danger">

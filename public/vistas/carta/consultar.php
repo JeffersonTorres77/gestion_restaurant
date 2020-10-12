@@ -8,7 +8,8 @@ if($idCategoria === FALSE)
 {
     $condicional = "idRestaurant = '{$objRestaurant->getId()}'";
     $categorias = CategoriasModel::Listado($condicional);
-} else
+}
+else
 {
     $objCategoria = new CategoriaModel( $idCategoria );
     $condicional = "idRestaurant = '{$objRestaurant->getId()}' AND ";

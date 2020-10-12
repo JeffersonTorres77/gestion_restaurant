@@ -211,10 +211,10 @@ function CodigoMesaHTML(keyMesa)
         }
     }
 
-    var alertaCamarero = (objMesa.solicitar_camarero == false) ? '' : `
-    <div class="py-1 px-2 alert alert-warning mb-0 rounded-0 font-weight-bold border-bottom border-warning" center>
+    var alertaCamarero = (objMesa.solicitar_camarero == '0') ? '' : `
+    <div class="py-1 px-2 alert mb-0 rounded-0 font-weight-bold border-bottom ${(objMesa.solicitar_camarero == '1') ? 'border-warning alert-warning' : 'border-success alert-success'}" center>
         <i class="fas fa-bell"></i>
-        Se solicita al camarero
+        ${(objMesa.solicitar_camarero == '1') ? 'Se solicita al camarero' : 'Se solicita la cuenta'}
     </div>`;
 
     return `<div class="card-pedido col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3">
@@ -311,9 +311,9 @@ function ModalConfirmar(keyMesa)
     //
     keyMesaActualizar = keyMesa;
     ver.modalTitle.innerHTML = objMesa.alias;
-    ver.modalAlarma.innerHTML = (!objMesa.solicitar_camarero) ? '' : `<div class="alert alert-warning mb-0">
+    ver.modalAlarma.innerHTML = (!objMesa.solicitar_camarero) ? '' : `<div class="alert mb-0 ${(objMesa.solicitar_camarero == '1') ? 'alert-warning' : 'alert-success'}">
         <i class="fas fa-bell"></i>
-        Se solicita al camarero
+        ${(objMesa.solicitar_camarero == '1') ? 'Se solicita al camarero' : 'Se solicita la cuenta'}
 
         <button class="close" onclick="QuitarAlarma(${objMesa.idMesa})">&times;</button>
     </div>`;
@@ -336,17 +336,24 @@ function ModalConfirmar(keyMesa)
 
             if(esCombo)
             {
-
+                for(let keyPlato in platos) {
+                    codeHTML += ModalCodePlatoHTML(keyMesa, keyPedido, keyPlato, true);
+                }
             }
             else
             {
-                codeHTML += ModalCodePlatoHTML(keyMesa, keyPedido, 0);
+                codeHTML += ModalCodePlatoHTML(keyMesa, keyPedido, 0, false);
             }
         }
 
         ver.tbody.innerHTML = `${codeHTML}
         <tr>
             <td colspan="4" class="font-weight-bold" style="font-size: 18px;" right>
+                <div class="custom-control custom-checkbox float-left">
+                    <input type="checkbox" class="custom-control-input" id="check-all" onchange="CheckAll(this)">
+                    <label class="custom-control-label" for="check-all">Check all</label>
+                </div>    
+
                 Total:
             </td>
 
@@ -399,7 +406,7 @@ ver.modal.on('hidden.bs.modal', function() {
  * @param {*} keyPedido 
  * @param {*} keyPlato 
  */
-function ModalCodePlatoHTML(keyMesa, keyPedido, keyPlato)
+function ModalCodePlatoHTML(keyMesa, keyPedido, keyPlato, esCombo)
 {
     var plato = listaMesas[keyMesa].pedidos[keyPedido].platos[keyPlato];
     var checked = (plato.status == "3") ? 'checked' : '';
@@ -419,7 +426,7 @@ function ModalCodePlatoHTML(keyMesa, keyPedido, keyPlato)
                 idPedido="${plato.idPedido}"
                 total="${plato.precioTotal}">
                 <label class="custom-control-label" for="check-pedido-${plato.idPedido}">
-                    ${plato.plato.nombre}
+                    ${(esCombo) ? "COMBO - "+plato.plato.nombre : plato.plato.nombre}
                 </label>
             </div>
         </td>
@@ -654,3 +661,24 @@ socket.on('ws:error-factura', function(mensaje) {
     Loader.Ocultar();
     Alerta.Danger(mensaje);
 });
+
+function CheckAll(element) {
+    let form = document.getElementById('lista-pedidos-mesa');
+    let elementos = form.elements;
+
+    for(let elemento of elementos) {
+        if(elemento.type != 'checkbox') continue;
+        if(elemento == element) continue;
+                
+        if(element.checked)
+        {
+            elemento.checked = true;
+        }
+        else
+        {
+            elemento.checked = false;
+        }
+
+        CalcularFactura();
+    }
+}

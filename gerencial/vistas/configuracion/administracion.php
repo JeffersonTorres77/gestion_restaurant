@@ -6,7 +6,7 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-md-6">
                     <div class="form-group mb-4">
                         <label class="mb-0" for="input-idMoneda">Moneda</label>
                         <select name="idMoneda" id="input-idMoneda" class="form-control">
@@ -27,6 +27,13 @@
                                 }
                             ?>
                         </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group mb-4">
+                        <label for="input-iva" class="mb-0">Impuestos</label>
+                        <input type="number" class="form-control" id="input-iva" value="<?php echo $objRestaurant->getIva(); ?>">
                     </div>
                 </div>
 

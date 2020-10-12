@@ -78,12 +78,16 @@ function MenuLateral()
 /**
  * 
  */
-function LlamarCamarero()
+function LlamarCamarero(cuenta = false)
 {
     var url = WEBSOCKET_URL + "Pedidos/Camarero/";
     var data = new FormData();
     data.append("key", KEY);
     data.append("accion", "cambiar");
+
+    if(cuenta) {
+        data.append("cuenta", true);
+    }
 
     AJAX.api({
         url: url,
@@ -155,12 +159,18 @@ function ConsultarLLamadoCamarero()
 function CambiarColorBotonCamarero(llamando)
 {
     var botonCamarero = document.getElementById('boton-camarero');
-    if(llamando)
+    switch(Number(llamando))
     {
-        botonCamarero.className = "btn btn-sm text-warning";
-    }
-    else
-    {
-        botonCamarero.className = "btn btn-sm";
+        case 1:
+            botonCamarero.className = "btn btn-sm text-warning";
+            break;
+            
+        case 2:
+            botonCamarero.className = "btn btn-sm text-white bg-warning";
+            break;
+            
+        default:
+            botonCamarero.className = "btn btn-sm";
+            break;
     }
 }

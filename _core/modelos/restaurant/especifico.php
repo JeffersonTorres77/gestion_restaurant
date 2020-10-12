@@ -36,6 +36,7 @@ class RestaurantModel
     private $servicio;
     private $imprimirFactura;
     private $imprimirFacturaParaLlevar;
+    private $iva;
     private $aux_1;
     private $aux_2;
     private $aux_3;
@@ -196,6 +197,9 @@ class RestaurantModel
         return $this->imprimirFacturaParaLlevar;
     }
 
+    public function getIva() {
+        return $this->iva;
+    }
     
 	/*============================================================================
 	 *
@@ -235,6 +239,7 @@ class RestaurantModel
         $this->servicio = boolval( $datos[0]['servicio'] );
         $this->imprimirFactura = boolval( $datos[0]['imprimirFactura'] );
         $this->imprimirFacturaParaLlevar = boolval( $datos[0]['imprimirFacturaParaLlevar'] );
+        $this->iva = $datos[0]['iva'];
         $this->aux_1 = $datos[0]['aux_1'];
         $this->aux_2 = $datos[0]['aux_2'];
         $this->aux_3 = $datos[0]['aux_3'];
@@ -371,6 +376,11 @@ class RestaurantModel
         $imprimirFacturaParaLlevar = (int) $imprimirFacturaParaLlevar;
         $this->set("imprimirFacturaParaLlevar", $imprimirFacturaParaLlevar);
         $this->imprimirFacturaParaLlevar = boolval( $imprimirFacturaParaLlevar );
+    }
+
+    public function setIva( $iva ) {
+        $this->set("iva", $iva);
+        $this->iva = $iva;
     }
 
     /*============================================================================
