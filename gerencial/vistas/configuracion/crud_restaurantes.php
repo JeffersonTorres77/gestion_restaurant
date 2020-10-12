@@ -29,7 +29,6 @@ switch($accion)
         $direccion = Input::POST("direccion", FALSE);
         $telefono = Input::POST("telefono", FALSE);
         $correo = Input::POST("correo", FALSE);
-        $idMoneda = Input::POST("idMoneda", FALSE);
 
         /**
          * Imagen
@@ -72,11 +71,6 @@ switch($accion)
         if($direccion !== FALSE) $objRestaurant->setDireccion( $direccion );
         if($telefono !== FALSE) $objRestaurant->setTelefono( $telefono );
         if($correo !== FALSE) $objRestaurant->setCorreo( $correo );
-        if($idMoneda !== FALSE)
-        {
-            $objMoneda = new MonedaModel($idMoneda);
-            $objRestaurant->setIdMoneda($objMoneda->getId());
-        }
 
         /**
          * Redes
@@ -92,9 +86,29 @@ switch($accion)
         if($instagram !== FALSE) $objRestaurant->setInstagram( $instagram );
 
         /**
+         * Administracion
+         */
+        $idMoneda = Input::POST("idMoneda", FALSE);
+        $facturar = Input::POST("facturar", FALSE);
+        $facturarParaLlevar = Input::POST("facturarParaLlevar", FALSE);
+
+        if($idMoneda !== FALSE)
+        {
+            $objMoneda = new MonedaModel($idMoneda);
+            $objRestaurant->setIdMoneda($objMoneda->getId());
+        }
+
+        if($facturar !== FALSE) {
+            $objRestaurant->setImprimirFactura($facturar);            
+        }
+
+        if($facturarParaLlevar !== FALSE) {
+            $objRestaurant->setImprimirFacturaParaLLevar($facturarParaLlevar);            
+        }
+
+        /**
          * Otros
          */
-
         $titulocomanda = Input::POST("titulocomanda", FALSE);
         $textocomanda = Input::POST("textocomanda", FALSE);
         $titulocombo = Input::POST("titulocombo", FALSE);

@@ -34,6 +34,8 @@ class RestaurantModel
     private $idMoneda;
     private $moneda;
     private $servicio;
+    private $imprimirFactura;
+    private $imprimirFacturaParaLlevar;
     private $aux_1;
     private $aux_2;
     private $aux_3;
@@ -184,6 +186,16 @@ class RestaurantModel
             return FALSE;
         }
     }
+
+    public function getImprimirFactura() {
+        return $this->imprimirFactura;
+    }
+
+
+    public function getImprimirFacturaParaLLevar() {
+        return $this->imprimirFacturaParaLlevar;
+    }
+
     
 	/*============================================================================
 	 *
@@ -221,6 +233,8 @@ class RestaurantModel
         $this->idMoneda = $datos[0]['idMoneda'];
         $this->moneda = new MonedaModel($this->idMoneda);
         $this->servicio = boolval( $datos[0]['servicio'] );
+        $this->imprimirFactura = boolval( $datos[0]['imprimirFactura'] );
+        $this->imprimirFacturaParaLlevar = boolval( $datos[0]['imprimirFacturaParaLlevar'] );
         $this->aux_1 = $datos[0]['aux_1'];
         $this->aux_2 = $datos[0]['aux_2'];
         $this->aux_3 = $datos[0]['aux_3'];
@@ -345,6 +359,18 @@ class RestaurantModel
         $activo = (int) $activo;
         $this->set("activo", $activo);
         $this->activo = boolval( $activo );
+    }
+
+    public function setImprimirFactura( $imprimirFactura ) {
+        $imprimirFactura = (int) $imprimirFactura;
+        $this->set("imprimirFactura", $imprimirFactura);
+        $this->imprimirFactura = boolval( $imprimirFactura );
+    }
+
+    public function setImprimirFacturaParaLLevar( $imprimirFacturaParaLlevar ) {
+        $imprimirFacturaParaLlevar = (int) $imprimirFacturaParaLlevar;
+        $this->set("imprimirFacturaParaLlevar", $imprimirFacturaParaLlevar);
+        $this->imprimirFacturaParaLlevar = boolval( $imprimirFacturaParaLlevar );
     }
 
     /*============================================================================

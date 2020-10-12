@@ -47,9 +47,21 @@ class Controlador extends ControladorBase
 	 *	
 	 *
     ============================================================================*/
-    public function datos()
+    public function administracion()
     {
         if(!MenusBModel::Verificar(7, Sesion::getUsuario()->getRol()->getId())) {
+            $this->Error("No tiene permisos para acceder a esta sección.");
+            exit;
+        }
+
+        $objRestaurant = Sesion::getRestaurant();
+        $this->Vista("configuracion/administracion", [ "objRestaurant" => $objRestaurant ]);
+        $this->Javascript("configuracion/administracion");
+    }
+
+    public function datos()
+    {
+        if(!MenusBModel::Verificar(8, Sesion::getUsuario()->getRol()->getId())) {
             $this->Error("No tiene permisos para acceder a esta sección.");
             exit;
         }
@@ -61,7 +73,7 @@ class Controlador extends ControladorBase
 
     public function redes_sociales()
     {
-        if(!MenusBModel::Verificar(8, Sesion::getUsuario()->getRol()->getId())) {
+        if(!MenusBModel::Verificar(9, Sesion::getUsuario()->getRol()->getId())) {
             $this->Error("No tiene permisos para acceder a esta sección.");
             exit;
         }
@@ -73,7 +85,7 @@ class Controlador extends ControladorBase
 
     public function servicio()
     {
-        if(!MenusBModel::Verificar(9, Sesion::getUsuario()->getRol()->getId())) {
+        if(!MenusBModel::Verificar(14, Sesion::getUsuario()->getRol()->getId())) {
             $this->Error("No tiene permisos para acceder a esta sección.");
             exit;
         }
