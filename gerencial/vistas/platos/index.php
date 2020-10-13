@@ -95,7 +95,7 @@
 
 
 <!-- Modal Para Agregar.. -->
-<div class="modal fade" id="staticBackdropnuevoPla" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdropnuevoPla" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
 
@@ -159,6 +159,16 @@
                 <label for="PrecioVentaPlato" class="mb-0">Precio de Venta</label>	
                 <input type="number" class="form-control" id="PrecioVentaPlato"name="PrecioVentaPlato" placeholder="Precio Venta">	
               </div>
+
+              <div class="form-group col-md-6">
+                <label for="Impuesto" class="mb-0">Impuestos</label>
+                <input type="number" class="form-control" id="Impuesto" disabled value="<?php echo $objRestaurant->getIva(); ?>">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="PrecioVentaIva" class="mb-0">Precio de Venta con Impuestos</label> 
+                <input type="number" class="form-control" id="PrecioVentaIva" name="PrecioVentaIva" placeholder="Precio con impuestos" value="0">   
+              </div>
               
               <div class="custom-control custom-switch">
                 <input type="checkbox" checked class="custom-control-input" id="customSwitch1" name="ActivoPlato">
@@ -182,7 +192,7 @@
 
 
 <!-- Modal Para Modificar.. -->
-<div class="modal fade" id="staticBackdropmodificaPla" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdropmodificaPla" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
 
@@ -248,6 +258,16 @@
                   <label for="MPrecioVentaPlato" class="mb-0">Precio de Venta</label> 
                   <input type="number" class="form-control" id="MPrecioVentaPlato" name="MPrecioVentaPlato" placeholder="Precio Venta">   
                 </div>
+
+                <div class="form-group col-md-6">
+                  <label for="MPImpuesto" class="mb-0">Impuestos</label>
+                  <input type="number" class="form-control" id="MPImpuesto" disabled value="<?php echo $objRestaurant->getIva(); ?>">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="MPPrecioVentaIva" class="mb-0">Precio de Venta con Impuestos</label> 
+                  <input type="number" class="form-control" id="MPPrecioVentaIva" name="MPPrecioVentaIva" placeholder="Precio con impuestos" value="0">   
+                </div>
               
                 <div class="custom-control custom-switch">
                   <input type="checkbox" checked class="custom-control-input" id="customSwitch2" name="ActivoPlato">
@@ -268,7 +288,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="modal-eliminar" data-backdrop="static">
+<div class="modal fade" id="modal-eliminar">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
 

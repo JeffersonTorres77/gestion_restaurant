@@ -112,6 +112,20 @@ Actualizar();
  *	
  *
 ================================================================================*/
+var nuevoPrecioVenta = document.getElementById('PrecioVentaPlato');
+var nuevoImpuesto = document.getElementById('Impuesto');
+var nuevoPrecioImpuesto = document.getElementById('PrecioVentaIva');
+
+nuevoPrecioVenta.onkeyup = function() {
+    let precioIva = Number(this.value) * (1 + (Number(nuevoImpuesto.value) / 100));
+    nuevoPrecioImpuesto.value = precioIva.toFixed(2);
+}
+
+nuevoPrecioImpuesto.onkeyup = function() {
+    let precio = Number(this.value) * 100 / (100 + Number(nuevoImpuesto.value));
+    nuevoPrecioVenta.value = precio.toFixed(2);
+}
+
 function Agregar()
 {
     /**
@@ -190,6 +204,10 @@ function ModalModificar(fila)
     var inputCosto = document.getElementById("MPrecioCostoPlato");
     var inputVenta = document.getElementById("MPrecioVentaPlato");
     var inputActivo = document.getElementById("customSwitch2");
+    var inputImpuesto = document.getElementById('MPImpuesto');
+    var inputVentaImpuesto = document.getElementById('MPPrecioVentaIva');
+
+    var precioConImpuesto = Number(datos.precioVenta) * (1 + (Number(inputImpuesto.value) / 100));
 
     inputId.value = datos.id;
     img.src = datos.imagen;
@@ -200,6 +218,17 @@ function ModalModificar(fila)
     inputCosto.value = datos.precioCosto;
     inputVenta.value = datos.precioVenta;
     inputActivo.checked = datos.activo;
+    inputVentaImpuesto.value = precioConImpuesto.toFixed(2);
+
+    inputVenta.onkeyup = function() {
+        let precioIva = Number(this.value) * (1 + (Number(inputImpuesto.value) / 100));
+        inputVentaImpuesto.value = precioIva.toFixed(2);
+    }
+
+    inputVentaImpuesto.onkeyup = function() {
+        let precio = Number(this.value) * 100 / (100 + Number(inputImpuesto.value));
+        inputVenta.value = precio.toFixed(2);
+    }
 
     modal.modal("show");
 }
