@@ -20,9 +20,7 @@ var ver = {
     modalTitle: document.getElementById('modal-ver-title'),
     modalAlarma: document.getElementById('modal-ver-alarma'),
     tbody: document.getElementById("modal-ver-tbody"),
-    botonFacturar: document.getElementById('boton-facturar'),
-    modalDatos: $('#modal-datos-factura'),
-    formDatos: document.getElementById('form-datos-factura')
+    botonFacturar: document.getElementById('boton-facturar')
 }
 
 /*================================================================================
@@ -321,7 +319,7 @@ function ModalConfirmar(keyMesa)
     if(objMesa.pedidos.length > 0)
     {
         ver.botonFacturar.style.display = "";
-        ver.botonFacturar.onclick = function(){ ModalDatosFactura(objMesa.idMesa); };
+        ver.botonFacturar.onclick = function(){ Facturar(objMesa.idMesa); };
         ver.modalDialog.className = 'modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl';
         ver.modalHeader.className = 'modal-header bg-primary text-white border-bottom-0';
 
@@ -605,23 +603,10 @@ function EliminarPedido(idPedido)
  * 
  * @param {*} idMesa 
  */
-function ModalDatosFactura(idMesa)
-{
-    document.getElementById('boton-facturar-final').onclick = function() { Facturar(idMesa); };
-    ver.modalDatos.modal('show');
-}
-
-/**
- * 
- * @param {*} idMesa 
- */
 function Facturar(idMesa)
 {
-    var inputNumeroFactura = document.getElementById('numero_factura');
-    if(inputNumeroFactura.value == "") {
-        alert("Debe introducir el numero de factura.");
-        return;
-    }
+    var r = confirm('Confirme para continuar con la facturación.');
+    if(r == false) return;
 
     var idsPedidos = [];
     var inputs = ver.tbody.getElementsByTagName("input");
@@ -641,16 +626,13 @@ function Facturar(idMesa)
     
     socket.emit('facturar', {
         idMesa: idMesa,
-        idsPedidos: idsPedidos,
-        numero_factura: inputNumeroFactura.value
+        idsPedidos: idsPedidos
     });
 
     Loader.Mostrar();
 
     socket.on('cambio', function(data) {
         Loader.Ocultar();
-        ver.modalDatos.modal('hide');
-        inputNumeroFactura.value = "";
     });
 }
 

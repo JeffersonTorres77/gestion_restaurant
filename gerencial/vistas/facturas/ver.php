@@ -1,4 +1,5 @@
 <?php
+    $iva = $objFactura->getIva();
     $objMoneda = new MonedaModel( $objFactura->getIdMoneda() );
 
     if($objFactura->getIdMesa() != "-1")
@@ -109,7 +110,7 @@
                             }
                         ?>
 
-                        <tr class="font-weight-bold">
+                        <tr class="font-weight-bold table-sm">
                             <td colspan="3">
                                 SubTotal
                             </td>
@@ -119,23 +120,23 @@
                             </td>
                         </tr> 
 
-                        <tr class="font-weight-bold">
+                        <tr class="font-weight-bold table-sm">
                             <td colspan="3">
-                                Impuestos
+                                Impuestos (<?php echo $iva."%"; ?>)
                             </td>
 
                             <td right>
-                                <?php echo Formato::Precio($totalFactura, $objMoneda); ?>
+                                <?php echo Formato::Precio($totalFactura * ($iva / 100), $objMoneda); ?>
                             </td>
                         </tr> 
 
-                        <tr class="font-weight-bold">
+                        <tr class="font-weight-bold table-sm">
                             <td colspan="3">
                                 Total
                             </td>
 
                             <td right>
-                                <?php echo Formato::Precio($totalFactura, $objMoneda); ?>
+                                <?php echo Formato::Precio($totalFactura * (1 + ($iva / 100)), $objMoneda); ?>
                             </td>
                         </tr> 
                     </tbody>

@@ -17,7 +17,8 @@ class FacturaModel
     private $idRestaurant;
     private $idMesa;
     private $idMoneda;
-    private $total;
+    private $subtotal;
+    private $iva;
     private $fecha;
     private $hora;
 
@@ -42,8 +43,16 @@ class FacturaModel
         return $this->idMoneda;
     }
 
+    public function getSubtotal() {
+        return $this->subtotal;
+    }
+
+    public function getIva() {
+        return $this->iva;
+    }
+
     public function getTotal() {
-        return $this->total;
+        return bcdiv($this->subtotal * (1 + ($this->iva / 100)), '1', 2);
     }
 
     public function getFecha() {
@@ -73,7 +82,8 @@ class FacturaModel
         $this->idRestaurant = $datos[0]['idRestaurant'];
         $this->idMesa = $datos[0]['idMesa'];
         $this->idMoneda = $datos[0]['idMoneda'];
-        $this->total = $datos[0]['total'];
+        $this->subtotal = $datos[0]['subtotal'];
+        $this->iva = $datos[0]['iva'];
         $this->fecha = $datos[0]['fecha'];
         $this->hora = $datos[0]['hora'];
     }

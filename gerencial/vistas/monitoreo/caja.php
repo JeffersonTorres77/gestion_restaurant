@@ -135,40 +135,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-datos-factura">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">
-                    Datos de la factura
-                    <button class="close" data-dismiss="modal">&times;</button>
-                </h5>
-            </div>
-
-            <div class="card-body">
-                <form onsubmit="event.preventDefault()" id="form-datos-factura">
-                    <div class="form-group mb-0">
-                        <label class="mb-0">Numero de factura:</label>
-                        <input type="number" id="numero_factura" class="form-control" required placeholder="Numero de factura...">
-                    </div>
-                </form>
-            </div>
-
-            <div class="card-footer bg-light" center>
-                <button class="btn btn-outline-secondary w-100px" data-dismiss="modal">
-                    Cancelar
-                </button>
-                
-                <button class="btn btn-primary w-100px" id="boton-facturar-final">
-                    Facturar
-                </button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="modal-eliminar-pedido">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
