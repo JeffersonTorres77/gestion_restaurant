@@ -58,6 +58,8 @@
                 $index = 0;
                 $categorias = $objCombo->getCategorias();
 
+                $iva = $objRestaurant->getIva();
+
                 foreach($categorias as $categoria)
                 {
                     $objCategoria = new CategoriaModel( $categoria['idCategoria'] );
@@ -87,8 +89,10 @@
                                         {
                                             $objPlato = new PlatoModel( $plato['idPlato'] );
                                             $idPlato = $objPlato->getId();
-                                            $precioOriginal = $objPlato->getPrecioVenta();
+                                            $precioOriginal = $objPlato->getPrecioVenta() * (1 + ($iva / 100));
+                                            $precioOriginal = bcdiv($precioOriginal, '1', 2);
                                             $precioDescuento = $precioOriginal * (1 - $descuento);
+                                            $precioDescuento = bcdiv($precioDescuento, '1', 2);
 
                                             array_push($arrayPlatos, [
                                                 "id" => $idPlato,

@@ -45,7 +45,6 @@
                                 <tr>
                                     <th style="width: 35px;"></th>
                                     <th class="w-auto">Descripción</th>
-                                    <th class="w-150px">N° factura</th>
                                     <th class="w-100px">Status</th>
                                     <th class="w-50px">Cantidad</th>
                                     <th class="w-150px">Total</th>

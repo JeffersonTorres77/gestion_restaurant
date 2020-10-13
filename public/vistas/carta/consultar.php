@@ -17,6 +17,8 @@ else
     $categorias = CategoriasModel::Listado($condicional);
 }
 
+$iva = $objRestaurant->getIva();
+
 foreach($categorias as $categoria)
 {
     $datos = PlatosModel::ListadoCliente( $objRestaurant->getId(), $categoria['idCategoria'] );
@@ -25,6 +27,8 @@ foreach($categorias as $categoria)
     foreach($datos as $dato)
     {
         $objPlato = new PlatoModel($dato['idPlato']);
+        $precio = $objPlato->getPrecioVenta() * (1 + ($iva / 100));
+        $precio = bcdiv($precio, '1', 2);
 
         array_push($platos, [
             "id" => $objPlato->getId(),
@@ -35,7 +39,7 @@ foreach($categorias as $categoria)
             "nombre" => $objPlato->getNombre(),
             "descripcion" => $objPlato->getDescripcion(),
             "imagen" => $objPlato->getImagen(),
-            "precio" => $objPlato->getPrecioVenta()
+            "precio" => $precio
         ]);
     }
 

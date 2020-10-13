@@ -68,7 +68,7 @@
 
         <div class="card-footer" center>
             <button class="btn btn-primary w-150px" id="boton-llamarCamarero">
-                Llamar camarero
+                Pedir cuenta
             </button>
         </div>
     </div>

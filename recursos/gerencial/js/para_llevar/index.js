@@ -110,7 +110,7 @@ function Actualizar()
                 botonPagar.disabled = !(botonPagarActivo);
 
                 codeHTML += `<tr class="table-sm">
-                    <td colspan="5">
+                    <td colspan="4">
                         <b>TOTAL</b>
                     </td>
 
@@ -189,10 +189,6 @@ function CodigoPlato(descripcion, idStatus, precio, cantidad, total, index, nume
 
         <td left class="text-truncate" style="vertical-align: middle;">
             ${descripcion}
-        </td>
-
-        <td center class="text-truncate" style="vertical-align: middle;">
-            ${numero_factura}
         </td>
 
         <td center style="vertical-align: middle;">

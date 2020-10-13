@@ -3,6 +3,8 @@
 $objRestaurant = Sesion::getRestaurant();
 $data['combos'] = [];
 
+$iva = $objRestaurant->getIva();
+
 $combos = CombosModel::ListadoCliente( $objRestaurant->getId() );
 foreach($combos as $combo)
 {

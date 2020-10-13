@@ -80,12 +80,16 @@
                     <div class="card-body">
                         <form class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 px-2" limite="<?php echo $cantidadPlatos; ?>" idCategoria="<?php echo $idCategoria; ?>" id="<?php echo 'form-categoria-'.$idCategoria; ?>" onsubmit="event.preventDefault()">
                             <?php
+                                $iva = $objRestaurant->getIva();
+
                                 foreach($platos as $plato)
                                 {
                                     $objPlato = new PlatoModel( $plato['idPlato'] );
                                     $idPlato = $objPlato->getId();
-                                    $precioOriginal = $objPlato->getPrecioVenta();
+                                    $precioOriginal = $objPlato->getPrecioVenta() * (1 + ($iva / 100));
+                                    $precioOriginal = bcdiv($precioOriginal, '1', 2);
                                     $precioDescuento = $precioOriginal * (1 - $descuento);
+                                    $precioDescuento = bcdiv($precioDescuento, '1', 2);
 
                                     array_push($arrayPlatos, [
                                         "id" => $idPlato,
