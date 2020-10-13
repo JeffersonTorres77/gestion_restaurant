@@ -35,7 +35,7 @@
             <div>
                 <div class="float-left">
                     <div>
-                        Numero: <b><?php echo $objFactura->getId(); ?></b>
+                        ID: <b><?php echo $objFactura->getId(); ?></b>
                     </div>
 
                     <div>
@@ -142,6 +142,12 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="card-footer" center>
+            <a class="btn btn-primary" target="_blank" href="<?php echo HOST_GERENCIAL_AJAX."Facturas/PDF/{$objFactura->getId()}/"; ?>">
+                Imprimir
+            </a>
         </div>
     </div>
 </div>

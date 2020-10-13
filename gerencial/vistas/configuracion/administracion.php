@@ -43,17 +43,11 @@
 
                         <?php
                             $checked_1 = ($objRestaurant->getImprimirFactura()) ? 'checked' : '';
-                            $checked_2 = ($objRestaurant->getImprimirFacturaParaLlevar()) ? 'checked' : '';
                         ?>
 
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="input-facturar" <?php echo $checked_1; ?>>
                             <label class="custom-control-label" for="input-facturar">Facturar</label>
-                        </div>
-
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="input-facturarParaLlevar" <?php echo $checked_2; ?>>
-                            <label class="custom-control-label" for="input-facturarParaLlevar">Facturar para llevar</label>
                         </div>
                     </div>
                 </div>

@@ -36,6 +36,7 @@ if(Peticion::getEsAjax()) {
  *	
  *
 ================================================================================*/
+require_once(BASE_DIR."_core/APIs/vendor/autoload.php");
 require_once(__DIR__."/".Peticion::getArea()."/panel.php");
 
 ?>

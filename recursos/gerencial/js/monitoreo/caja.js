@@ -639,6 +639,16 @@ function Facturar(idMesa)
 /**
  * 
  */
+socket.on('imprimir', function(obj) {
+    if(IMPRIMIR) {
+        let url = HOST_GERENCIAL_AJAX+`Facturas/PDF/${obj.idFactura}/`;
+        window.open(url, '_blank');
+    }
+});
+
+/**
+ * 
+ */
 socket.on('ws:error-factura', function(mensaje) {
     Loader.Ocultar();
     Alerta.Danger(mensaje);

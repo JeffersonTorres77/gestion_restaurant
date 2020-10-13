@@ -91,7 +91,6 @@ switch($accion)
         $idMoneda = Input::POST("idMoneda", FALSE);
         $iva = Input::POST("iva", FALSE);
         $facturar = Input::POST("facturar", FALSE);
-        $facturarParaLlevar = Input::POST("facturarParaLlevar", FALSE);
 
         if($idMoneda !== FALSE)
         {
@@ -105,10 +104,6 @@ switch($accion)
 
         if($facturar !== FALSE) {
             $objRestaurant->setImprimirFactura($facturar);            
-        }
-
-        if($facturarParaLlevar !== FALSE) {
-            $objRestaurant->setImprimirFacturaParaLLevar($facturarParaLlevar);            
         }
 
         /**

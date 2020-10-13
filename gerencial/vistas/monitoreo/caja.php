@@ -2,6 +2,8 @@
     const AREA = '<?php echo AREA_GERENCIAL; ?>';
     const MODULO = "monitoreo";
     const ARCHIVO = "caja";
+
+    const IMPRIMIR = <?php echo (Sesion::getRestaurant()->getImprimirFactura()) ? 'true' : 'false'; ?>;
 </script>
 
 <style>

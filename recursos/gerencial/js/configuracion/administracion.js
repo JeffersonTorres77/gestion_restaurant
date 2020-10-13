@@ -2,7 +2,6 @@ var botonGuardar = document.getElementById('boton-guardar');
 var inputIdMoneda = document.getElementById('input-idMoneda');
 var inputIva = document.getElementById('input-iva');
 var inputFacturar = document.getElementById('input-facturar');
-var inputFacturarParaLlevar = document.getElementById('input-facturarParaLlevar');
 
 botonGuardar.onclick = function() {
     GuardarDatos();
@@ -12,7 +11,6 @@ function GuardarDatos() {
     let idMoneda = inputIdMoneda.value;
     let iva = inputIva.value;
     let facturar = (inputFacturar.checked) ? '1' : '0';
-    let facturarParaLlevar = (inputFacturarParaLlevar.checked) ? '1' : '0';
 
     var url = `${HOST_GERENCIAL_AJAX}Configuracion/CRUD_Restaurantes/`;
     var data = new FormData();
@@ -20,9 +18,6 @@ function GuardarDatos() {
     data.append("idMoneda", idMoneda);
     data.append('iva', iva);
     data.append("facturar", facturar);
-    data.append("facturarParaLlevar", facturarParaLlevar);
-
-    console.log(iva);
 
     AJAX.Enviar({
         url: url,
