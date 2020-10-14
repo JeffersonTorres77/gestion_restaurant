@@ -59,7 +59,7 @@ switch($accion)
             $par['ordenar_por'] = $order_key;
             $par['ordenar_tipo'] = $order_type;
 
-            $condicional = "fecha = '{$fecha_hoy}' AND ({$condicional})";
+            $condicional = "fecha >= '{$fecha_hoy}' AND ({$condicional})";
             $facturas = FacturasModel::Listado( $condicional, $par );
             $total_filas = FacturasModel::Total( $condicional );
         }
