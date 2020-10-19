@@ -78,7 +78,7 @@ function MenuLateral()
 /**
  * 
  */
-function LlamarCamarero(cuenta = false)
+function ClienteLlamarCamarero(cuenta = false)
 {
     var url = WEBSOCKET_URL + "Pedidos/Camarero/";
     var data = new FormData();
@@ -108,6 +108,14 @@ function LlamarCamarero(cuenta = false)
             IntervalLlamarCamarero();
         }
     });
+}
+
+/**
+ * 
+ */
+function ClienteSolicitarCuenta()
+{
+    ClienteLlamarCamarero(true);
 }
 
 /**
@@ -158,19 +166,23 @@ function ConsultarLLamadoCamarero()
  */
 function CambiarColorBotonCamarero(llamando)
 {
-    var botonCamarero = document.getElementById('boton-camarero');
+    var botonCamarero = document.getElementById('header-option-camarero');
+    var botonCuenta = document.getElementById('header-option-cuenta');
     switch(Number(llamando))
     {
         case 1:
-            botonCamarero.className = "btn btn-sm text-warning";
+            botonCamarero.className = "header-opcion bg-warning";
+            botonCuenta.className = "header-opcion";
             break;
             
         case 2:
-            botonCamarero.className = "btn btn-sm text-white bg-warning";
+            botonCamarero.className = "header-opcion";
+            botonCuenta.className = "header-opcion bg-warning";
             break;
             
         default:
-            botonCamarero.className = "btn btn-sm";
+            botonCamarero.className = "header-opcion";
+            botonCuenta.className = "header-opcion";
             break;
     }
 }

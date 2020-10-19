@@ -294,6 +294,8 @@ function Pagar()
             formPagar.reset();
             Loader.Ocultar();
             modalPagar.modal("hide");
+            
+            window.open(HOST_GERENCIAL_AJAX+'Facturas/PDF/'+data.idFactura+'/', '_blank');
         }
     });
 }
