@@ -198,7 +198,7 @@ class Controlador extends ControladorBase
             <div style="width: 100%; position: relative; padding-bottom: 20px;">
                 <div>
                     <div>ID: '.$objFactura->getId().'</div>
-                    <div>Fecha: '.$mesa.'</div>
+                    <div>Mesa: '.$mesa.'</div>
                 </div>
 
                 <div style="position: absolute; top: 0px; right: 0px; text-align: right;">
@@ -248,5 +248,15 @@ class Controlador extends ControladorBase
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
         $dompdf->stream('prueba.pdf', ['Attachment' => FALSE]);
+    }
+
+    /*============================================================================
+	 *
+	 *	
+	 *
+    ============================================================================*/
+    public function enviar_correo()
+    {
+        $this->AJAX("facturas/enviar_correo");
     }
 }

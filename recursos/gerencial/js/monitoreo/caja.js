@@ -319,7 +319,7 @@ function ModalConfirmar(keyMesa)
     if(objMesa.pedidos.length > 0)
     {
         ver.botonFacturar.style.display = "";
-        ver.botonFacturar.onclick = function(){ Facturar(objMesa.idMesa); };
+        ver.botonFacturar.onclick = function(){ ModalConfirmarFacturacion(objMesa.idMesa); };
         ver.modalDialog.className = 'modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl';
         ver.modalHeader.className = 'modal-header bg-primary text-white border-bottom-0';
 
@@ -550,6 +550,18 @@ function CheckearItem(element, event)
     CalcularFactura();
 }
 
+
+
+
+
+
+
+/**
+ * 
+ * Alarmas
+ * 
+ */
+
 /**
  * 
  * @param {*} idMesa 
@@ -560,6 +572,18 @@ function QuitarAlarma(idMesa)
         idMesa: idMesa
     });
 }
+
+
+
+
+
+
+
+/**
+ * 
+ * Eliminar
+ * 
+ */
 
 /**
  * 
@@ -599,14 +623,63 @@ function EliminarPedido(idPedido)
     });
 }
 
+
+
+
+
+
+/**
+ * 
+ * Facturar
+ * 
+ */
+
+ function ModalConfirmarFacturacion(idMesa) {
+    let datos = listaMesas.filter(item => item.idMesa == idMesa)[0];
+    document.getElementById("confirmarFacturacion-nombreMesa").innerHTML = datos.alias;
+    document.getElementById("confirmarFacturacion-submit").setAttribute('onclick', `Facturar('${idMesa}')`);
+    $("#modal-confirmar-facturacion").modal('show');
+ }
+
+ function ModalDespuesFacturacion(idFactura) {
+    document.getElementById("despuesFacturacion-MostrarPDF").onclick = function() {
+        let url = HOST_GERENCIAL_AJAX+`Facturas/PDF/${idFactura}/`;
+        window.open(url, '_blank');
+    }
+
+    let formEnvioCorreo = document.getElementById('form-envio-correo');
+    formEnvioCorreo.onsubmit = function(e) {
+        e.preventDefault();
+        let url = `${HOST_GERENCIAL_AJAX}Facturas/Enviar_Correo/`;
+        let data = new FormData(formEnvioCorreo);
+        data.append('idFactura', idFactura);
+        AJAX.Enviar({
+            url: url,
+            data: data,
+            antes() {
+                Loader.Mostrar();
+            },
+            error(mensaje) {
+                Loader.Ocultar();
+                Alerta.Danger(mensaje);
+            },
+            ok(data) {
+                Loader.Ocultar();
+                Alerta.Success('Se ha enviado el correo exitosamente.');
+            }
+        });
+    }
+
+    $("#modal-despues-facturacion").modal('show');
+ }
+
 /**
  * 
  * @param {*} idMesa 
  */
 function Facturar(idMesa)
 {
-    var r = confirm('Confirme para continuar con la facturación.');
-    if(r == false) return;
+    $("#modal-confirmar-facturacion").modal('hide');
 
     var idsPedidos = [];
     var inputs = ver.tbody.getElementsByTagName("input");
@@ -640,10 +713,7 @@ function Facturar(idMesa)
  * 
  */
 socket.on('imprimir', function(obj) {
-    if(IMPRIMIR) {
-        let url = HOST_GERENCIAL_AJAX+`Facturas/PDF/${obj.idFactura}/`;
-        window.open(url, '_blank');
-    }
+    ModalDespuesFacturacion(obj.idFactura);
 });
 
 /**

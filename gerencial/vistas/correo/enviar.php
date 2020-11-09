@@ -9,12 +9,12 @@ $objUsuario = UsuariosModel::BuscarPorCorreo($correo);
 $objRestaurant = new RestaurantModel( $objUsuario->getIdRestaurant() );
 
 // Constantes
-$fromemail = "jefersonugas@gmail.com";
-$pass = "Jts08112013.";
-$fromname = "Sistema Restaurant";
-$host = "smtp.gmail.com";
-$port = "465";
-$SMTPAuth = TRUE;
+$fromemail = CORREO['correo'];
+$pass = CORREO['clave'];
+$fromname = CORREO['nombre'];
+$host = CORREO['host'];
+$port = CORREO['port'];
+$SMTPAuth = CORREO['SMTPAuth'];
 $SMTPSecure = "ssl";
 
 // Incluir librerias
@@ -31,7 +31,7 @@ $bodyEmail = "Hello world";
 try
 {
 	$mail = new PHPMailer\PHPMailer\PHPMailer;
-	//$mail -> isSMTP();
+	if(CORREO['isSMTP']) $mail -> isSMTP();
 	$mail ->SMPTDebug = 0;
 	$mail ->Host = $host ;
 	$mail ->Port= $port;
@@ -156,8 +156,7 @@ try
 </html>';
 
 	if (!$mail->send()) {
-		throw new Exception($mail->ErrorInfo);
-		throw new Exception("No se ha podido enviar la solicitud para recuperar las credenciales al Correo solicitado. Por favor Revise");
+		throw new Exception("No se ha podido enviar la solicitud para recuperar las credenciales al Correo solicitado. Por favor Revise.<br>{$mail->ErrorInfo}");
 	}
 }
 catch(Exception $e)

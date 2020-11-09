@@ -137,6 +137,9 @@
     </div>
 </div>
 
+<!--
+    *
+-->
 <div class="modal fade" id="modal-eliminar-pedido">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -167,6 +170,73 @@
                 </button>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!--
+    *
+-->
+<div class="modal fade" id="modal-confirmar-facturacion">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="mb-0">Confirmar facturación</h5>
+            </div>
+
+            <div class="modal-body">
+                <p class="mb-0">¿Esta seguro que desea continuar con la factura de la mesa <b id="confirmarFacturacion-nombreMesa">X</b>?</p>
+            </div>
+
+            <div class="modal-footer bg-light">
+                <button class="btn btn-outline-secondary w-100px" data-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button class="btn btn-primary w-100px" id="confirmarFacturacion-submit">
+                    Facturar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    *
+-->
+<div class="modal fade" id="modal-despues-facturacion">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="mb-0">Facturación exitosa</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Se ha facturado exitosamente, ¿Que desea hacer a continuación?</p>
+
+                <p>
+                    <button class="btn btn-outline-primary w-100" id="despuesFacturacion-MostrarPDF">
+                        Mostrar PDF
+                    </button>
+                </p>
+
+                <p>
+                    <form class="input-group" id="form-envio-correo">
+                        <input type="mail" class="form-control" placeholder="Introduzca el correo electronico..." name="correo" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">
+                                Enviar por correo
+                            </button>
+                        </div>
+                    </form>
+                </p>
+            </div>
+
+            <div class="modal-footer bg-light">
+                <button class="btn btn-outline-secondary w-100px" data-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
         </div>
     </div>
 </div>

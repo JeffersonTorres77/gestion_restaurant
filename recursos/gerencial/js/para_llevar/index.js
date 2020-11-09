@@ -294,8 +294,40 @@ function Pagar()
             formPagar.reset();
             Loader.Ocultar();
             modalPagar.modal("hide");
-            
-            window.open(HOST_GERENCIAL_AJAX+'Facturas/PDF/'+data.idFactura+'/', '_blank');
+
+            ModalDespuesPagar(data.idFactura);
         }
     });
+}
+
+function ModalDespuesPagar(idFactura) {
+    document.getElementById("despuesFacturacion-MostrarPDF").onclick = function() {
+        let url = HOST_GERENCIAL_AJAX+`Facturas/PDF/${idFactura}/`;
+        window.open(url, '_blank');
+    }
+
+    let formEnvioCorreo = document.getElementById('form-envio-correo');
+    formEnvioCorreo.onsubmit = function(e) {
+        e.preventDefault();
+        let url = `${HOST_GERENCIAL_AJAX}Facturas/Enviar_Correo/`;
+        let data = new FormData(formEnvioCorreo);
+        data.append('idFactura', idFactura);
+        AJAX.Enviar({
+            url: url,
+            data: data,
+            antes() {
+                Loader.Mostrar();
+            },
+            error(mensaje) {
+                Loader.Ocultar();
+                Alerta.Danger(mensaje);
+            },
+            ok(data) {
+                Loader.Ocultar();
+                Alerta.Success('Se ha enviado el correo exitosamente.');
+            }
+        });
+    }
+
+    $("#modal-despues-facturacion").modal('show');
 }

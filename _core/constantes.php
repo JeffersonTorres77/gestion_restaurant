@@ -99,6 +99,14 @@ try
     
     if(!isset($config['WebSocket']['url'])) throw new Exception("No existe el parametro <b>url</b> en <b>WebSocket</b>.");
     
+    if(!isset($config['Correo']['correo'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>correo</b>.");
+    if(!isset($config['Correo']['clave'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>clave</b>.");
+    if(!isset($config['Correo']['nombre'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>nombre</b>.");
+    if(!isset($config['Correo']['host'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>host</b>.");
+    if(!isset($config['Correo']['port'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>port</b>.");
+    if(!isset($config['Correo']['SMTPAuth'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>SMTPAuth</b>.");
+    if(!isset($config['Correo']['isSMTP'])) throw new Exception("No existe el parametro <b>Correo</b> en <b>isSMTP</b>.");
+    
     if(!isset($config['Seguridad']['key'])) throw new Exception("No existe el parametro <b>key</b> en <b>Seguridad</b>.");
     if(!isset($config['Seguridad']['auditoria'])) throw new Exception("No existe el parametro <b>auditoria</b> en <b>Seguridad</b>.");
     
@@ -129,6 +137,16 @@ try
     define("BD_NOMBRE", $config["BaseDatos"]['nombre_bd']);
     
     define("WEBSOCKET_URL", $config["WebSocket"]['url']);
+
+    define('CORREO', [
+        'correo' => $config["Correo"]['correo'],
+        'clave' => $config["Correo"]['clave'],
+        'nombre' => $config["Correo"]['nombre'],
+        'host' => $config["Correo"]['host'],
+        'port' => $config["Correo"]['port'],
+        'SMTPAuth' => boolval($config["Correo"]['SMTPAuth']),
+        'isSMTP' => boolval($config["Correo"]['isSMTP'])
+    ]);
     
     define("SEGURIDAD_KEY", $config["Seguridad"]['key']);
     define("SEGURIDAD_AUDITORIA", $config["Seguridad"]['auditoria']);

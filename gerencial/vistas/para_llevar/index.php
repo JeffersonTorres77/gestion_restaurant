@@ -103,3 +103,43 @@
         </div>
     </div>
 </div>
+
+<!--
+    *
+-->
+<div class="modal fade" id="modal-despues-facturacion">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="mb-0">Facturación exitosa</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Se ha facturado exitosamente, ¿Que desea hacer a continuación?</p>
+
+                <p>
+                    <button class="btn btn-outline-primary w-100" id="despuesFacturacion-MostrarPDF">
+                        Mostrar PDF
+                    </button>
+                </p>
+
+                <p>
+                    <form class="input-group" id="form-envio-correo">
+                        <input type="mail" class="form-control" placeholder="Introduzca el correo electronico..." name="correo" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">
+                                Enviar por correo
+                            </button>
+                        </div>
+                    </form>
+                </p>
+            </div>
+
+            <div class="modal-footer bg-light">
+                <button class="btn btn-outline-secondary w-100px" data-dismiss="modal">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

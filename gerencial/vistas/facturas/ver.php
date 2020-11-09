@@ -17,6 +17,10 @@
     }
 ?>
 
+<script>
+    ID_FACTURA = <?php echo $objFactura->getId(); ?>;
+</script>
+
 <div class="m-2 p-2">
     <div class="card">
         <div class="card-header">
@@ -145,9 +149,40 @@
         </div>
 
         <div class="card-footer" center>
-            <a class="btn btn-primary" target="_blank" href="<?php echo HOST_GERENCIAL_AJAX."Facturas/PDF/{$objFactura->getId()}/"; ?>">
+            <a class="btn btn-primary w-200px" target="_blank" href="<?php echo HOST_GERENCIAL_AJAX."Facturas/PDF/{$objFactura->getId()}/"; ?>">
                 Imprimir
             </a>
+
+            <button class="btn btn-success w-200px" data-toggle="modal" data-target="#modal-envio-correo">
+                Enviar por correo
+            </button>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-envio-correo">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <form class="modal-content" id="form-envio-correo">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="mb-0">Enviar factura por correo</h5>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-group mb-0">
+                    <label for="envioCorreo-correo" class="mb-1">Correo:</label>
+                    <input type="mail" class="form-control" required placeholder="Introduzca el correo..." name="correo">
+                </div>
+            </div>
+            
+            <div class="modal-footer bg-light">
+                <button class="btn btn-outline-secondary w-100px" data-dismiss="modal" type="button">
+                    Cerrar
+                </button>
+
+                <button class="btn btn-primary" type="submit">
+                    Enviar
+                </button>
+            </div>
+        </form>
     </div>
 </div>
